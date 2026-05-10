@@ -13,6 +13,9 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# include <math.h>
+# include <limits.h>
+
 # include "vectors.h"
 # include "types.h"
 
