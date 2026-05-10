@@ -14,11 +14,14 @@
 # define TYPES_H
 
 typedef unsigned int	t_uint;
+typedef char *			t_string;
+typedef char **			t_string_tab;
 
 typedef enum e_status
 {
 	SUCCESS,
 	FAILURE,
+	ALLOCATION_FAILURE,
 	OVERFLOW,
 	UNDERFLOW,
 }	t_status;
