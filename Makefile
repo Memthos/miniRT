@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mperrine <mperrine@student.42angouleme.fr  +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/05/10 23:41:09 by mperrine          #+#    #+#              #
+#    Updated: 2026/05/10 23:41:37 by mperrine         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 INCLUDES:=includes
 VPATH:=srcs:srcs/utils
 
@@ -9,7 +21,10 @@ OBJS:=$(addprefix $(OBJSDIR), $(SRCS:.c=.o))
 LIBFTDIR:=libs/libft_tools/
 LIBFT:=$(addprefix $(LIBFTDIR), libft_tools.a)
 
-LIBS:=$(LIBFT)
+MACROLIBXDIR:=libs/MacroLibX/
+MACROLIBX:=$(addprefix $(MACROLIBXDIR), libmlx.so)
+
+LIBS:=$(LIBFT) $(MACROLIBX) -lSDL2 -lm
 
 CC:=cc
 CFLAGS:=-Werror -Wextra -Wall -I$(INCLUDES) -g
@@ -19,13 +34,13 @@ NAME:=miniRT
 all: $(OBJSDIR).manda
 bonus: $(OBJSDIR).bonus
 
-$(OBJSDIR).manda: $(OBJS) | $(LIBFT)
+$(OBJSDIR).manda: $(OBJS) | $(LIBFT) $(MACROLIBX)
 	@rm -rf $(NAME) $(OBJSDIR).bonus
 	@$(CC) $(CFLAGS) $(LIBS) -o $(NAME) $^
 	@touch $(OBJSDIR).manda
 	@echo "Finished compiling miniRT"
 
-$(OBJSDIR).bonus: $(OBJS) | $(LIBFT)
+$(OBJSDIR).bonus: $(OBJS) | $(LIBFT) $(MACROLIBX)
 	@rm -rf $(NAME) $(OBJSDIR).manda
 	@$(CC) $(CFLAGS) $(LIBS) -o $(NAME) $^
 	@touch $(OBJSDIR).bonus
@@ -40,14 +55,19 @@ $(OBJSDIR):
 $(LIBFT):
 	@make -sC $(LIBFTDIR) all
 
+$(MACROLIBX):
+	@make -sC $(MACROLIBXDIR) all -j
+
 clean:
 	@rm -drf $(OBJSDIR)
 	@make -sC $(LIBFTDIR) clean
+	@make -sC $(MACROLIBXDIR) clean
 	@echo "Cleaned miniRT object files"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 	@make -sC $(LIBFTDIR) fclean
+	@make -sC $(MACROLIBXDIR) fclean
 	@echo "Cleaned miniRT"
 
 re: fclean all
