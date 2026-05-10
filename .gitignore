@@ -1,0 +1,4 @@
+minirt
+objs/
+.vscode
+compile_commands.json
