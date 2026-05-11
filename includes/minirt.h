@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/11 14:14:07 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/11 14:19:09 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 # include <stdlib.h> // malloc, free, exit
 # include <string.h> // strerror
 
-# include "vectors.h"
 # include "types.h"
+# include "vectors.h"
+# include "maths.h"
 
 #endif

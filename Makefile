@@ -1,7 +1,7 @@
 INCLUDES:=includes
 VPATH:=srcs:srcs/utils
 
-SRCS:=ft_round.c
+SRCS:=minirt.c ft_round.c
 
 OBJSDIR:=objs/
 OBJS:=$(addprefix $(OBJSDIR), $(SRCS:.c=.o))
