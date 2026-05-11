@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_round.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.fr  +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:52:09 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/11 00:15:56 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/11 14:14:09 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include <float.h>
 
 double	ft_round(double nb, t_uint precision, t_status *status)
 {
