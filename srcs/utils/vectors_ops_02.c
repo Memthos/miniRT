@@ -1,34 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors.h                                          :+:      :+:    :+:   */
+/*   vectors_ops_02.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/10 22:47:50 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/11 16:29:31 by mperrine         ###   ########.fr       */
+/*   Created: 2026/05/11 15:58:14 by mperrine          #+#    #+#             */
+/*   Updated: 2026/05/11 16:21:36 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTORS_H
-# define VECTORS_H
+#include "minirt.h"
 
-# include "types.h"
-
-typedef struct s_vec3
-{
-	double	x;
-	double	y;
-	double	z;
-}			t_vec3;
-
-t_vec3	vec_add(const t_vec3 v1, const t_vec3 v2, t_status *status);
-t_vec3	vec_sub(const t_vec3 v1, const t_vec3 v2, t_status *status);
-t_vec3	vec_scale(const t_vec3 v1, const double lambda);
-double	vec_dot(const t_vec3 v1, const t_vec3 v2, t_status *status);
-t_vec3	vec_cross(const t_vec3 v1, const t_vec3 v2, t_status *status);
 t_vec3	vec_min(const t_vec3 v1, const t_vec3 v2);
 t_vec3	vec_max(const t_vec3 v1, const t_vec3 v2);
 t_vec3	vec_norm(const t_vec3 v1, const t_vec3 v2);
-
-#endif
