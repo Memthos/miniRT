@@ -24,13 +24,13 @@ bonus: $(OBJSDIR).bonus
 
 $(OBJSDIR).manda: $(OBJS) | $(LIBFT) $(MACROLIBX)
 	@rm -rf $(NAME) $(OBJSDIR).bonus
-	@$(CC) $(CFLAGS) $(LIBS) -o $(NAME) $^
+	@$(CC) $(CFLAGS) -o $(NAME) $^ $(LIBS)
 	@touch $(OBJSDIR).manda
 	@echo "Finished compiling miniRT"
 
 $(OBJSDIR).bonus: $(OBJS) | $(LIBFT) $(MACROLIBX)
 	@rm -rf $(NAME) $(OBJSDIR).manda
-	@$(CC) $(CFLAGS) $(LIBS) -o $(NAME) $^
+	@$(CC) $(CFLAGS) -o $(NAME) $^ $(LIBS)
 	@touch $(OBJSDIR).bonus
 	@echo "Finished compiling miniRT bonuses"
 
