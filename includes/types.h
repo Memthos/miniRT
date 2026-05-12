@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.fr  +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:54:48 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/10 22:59:51 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/12 10:02:45 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef enum e_status
 	ALLOCATION_FAILURE,
 	OVERFLOW,
 	UNDERFLOW,
+	ZERO_DIVISION,
 }	t_status;
 
 #endif

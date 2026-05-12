@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/11 14:52:04 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/12 09:27:12 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	check_filename(t_string s)
 {
 	size_t	len;
-	
+
 	len = ft_strlen(s);
 	if (len < 4)
 		return (1);
