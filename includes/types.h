@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:54:48 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/12 10:59:45 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/12 11:20:52 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,12 @@ typedef enum e_status
 	ZERO_DIVISION,
 	COLOR_RANGE,
 }	t_status;
+
+typedef struct	s_minirt
+{
+	double	aspect_ratio;
+	int		screen_wdt;
+	int		screen_hgt;
+}	t_minirt;
 
 #endif
