@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:47:50 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/12 09:45:35 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/12 10:07:36 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ double	vec_dot(const t_vec3 v1, const t_vec3 v2, t_status *status);
 t_vec3	vec_cross(const t_vec3 v1, const t_vec3 v2, t_status *status);
 double	vec_min(const t_vec3 v1);
 double	vec_max(const t_vec3 v1);
+double	vec_squared_magnitude(t_vec3 v1, t_status *status);
 double	vec_magnitude(t_vec3 v1, t_status *status);
 t_vec3	vec_normalize(const t_vec3 v1, t_status *status);
 

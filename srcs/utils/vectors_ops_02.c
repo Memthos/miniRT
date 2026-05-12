@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 15:58:14 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/12 10:04:11 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/12 10:07:12 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,29 @@ double	vec_max(const t_vec3 v1)
 		return (v1.z);
 }
 
-double	vec_magnitude(t_vec3 v1, t_status *status)
+double	vec_squared_magnitude(t_vec3 v1, t_status *status)
 {
 	double	res;
 
-	res = sqrt(v1.x * v1.x + v1.y * v1.y + v1.z * v1.z);
+	res = v1.x * v1.x + v1.y * v1.y + v1.z * v1.z;
+	if (!isfinite(res))
+	{
+		if (status)
+			*status = OVERFLOW;
+		return (0);
+	}
+	return (res);
+}
+
+double	vec_magnitude(t_vec3 v1, t_status *status)
+{
+	double	squared;
+	double	res;
+
+	squared = vec_squared_magnitude(v1, status);
+	if (*status)
+		return (0);
+	res = sqrt(squared);
 	if (!isfinite(res))
 	{
 		if (status)
@@ -52,7 +70,7 @@ t_vec3	vec_normalize(const t_vec3 v1, t_status *status)
 	t_vec3	res;
 
 	magnitude = vec_magnitude(v1, status);
-	if (status)
+	if (*status)
 		return ((t_vec3){0.0, 0.0, 0.0});
 	if (magnitude == 0.0)
 	{
