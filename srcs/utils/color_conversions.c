@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   types.h                                            :+:      :+:    :+:   */
+/*   color_conversion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/10 22:54:48 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/12 10:59:45 by mperrine         ###   ########.fr       */
+/*   Created: 2026/05/12 10:17:26 by mperrine          #+#    #+#             */
+/*   Updated: 2026/05/12 11:01:00 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#include "minirt.h"
 
-typedef unsigned int	t_uint;
-typedef unsigned char	t_uint8;
-typedef char *			t_string;
-typedef char **			t_string_tab;
-
-typedef enum e_status
+uint32_t	parse_color(t_uint channels[4], t_status *status)
 {
-	SUCCESS,
-	FAILURE,
-	ALLOCATION_FAILURE,
-	OVERFLOW,
-	UNDERFLOW,
-	ZERO_DIVISION,
-	COLOR_RANGE,
-}	t_status;
-
-#endif
+	uint32_t	color;
+	if (channels[0] > 255 || channels[1] > 255
+		|| channels[2] > 255 || channels[3] > 255)
+	{
+		if (status)
+			*status = COLOR_RANGE;
+		return (0);
+	}
+	color = channels[0];
+	color = (color << 8) | channels[1];
+	color = (color << 8) | channels[2];
+	color = (color << 8) | channels[3];
+	return (color);
+}
