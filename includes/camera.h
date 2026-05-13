@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   types.h                                            :+:      :+:    :+:   */
+/*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/10 22:54:48 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/13 13:29:52 by mperrine         ###   ########.fr       */
+/*   Created: 2026/05/13 09:19:57 by mperrine          #+#    #+#             */
+/*   Updated: 2026/05/13 13:47:45 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#ifndef CAMERA_H
+# define CAMERA_H
 
-# define M_PI 3.14159265358979323846
+# include "types.h"
+# include "vectors.h"
 
-typedef unsigned int	t_uint;
-typedef unsigned char	t_uint8;
-typedef char *			t_string;
-typedef char **			t_string_tab;
-
-typedef enum e_status
+typedef struct s_camera
 {
-	SUCCESS,
-	FAILURE,
-	ALLOCATION_FAILURE,
-	OVERFLOW,
-	UNDERFLOW,
-	ZERO_DIVISION,
-	COLOR_OVERFLOW,
-	FILE_PERM,
-	INEXISTENT_FILE,
-}	t_status;
+	double	fov;
+	t_vec2	clip_planes;
+	t_vec2	plane;
+	t_vec3	position;
+	t_vec3	rotation;
+}	t_camera;
 
 #endif

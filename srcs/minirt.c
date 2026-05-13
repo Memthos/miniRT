@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/12 12:58:18 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/13 15:02:09 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,29 @@ static int	check_filename(t_string s)
 	return (0);
 }
 
-static t_minirt	init()
+static void	camera_init(t_minirt *minirt)
+{
+	t_vec2		plane;
+	t_camera	*camera;
+
+	camera = &minirt->camera;
+	*camera = (t_camera){
+		.fov = 90.0,
+		.clip_planes = {10.0, 100.0}};
+	plane.y = camera->clip_planes.x * tan(camera->fov * 0.5 * deg_to_rad()) * 2;
+	plane.x = plane.y * minirt->aspect_ratio;
+	camera->plane = plane;
+}
+
+static t_minirt	global_init(void)
 {
 	t_minirt	minirt;
 
+	ft_bzero(&minirt, sizeof(t_minirt));
 	minirt.aspect_ratio = 16.0 / 9.0;
-	minirt.screen_wdt = 1280;
-	minirt.screen_hgt = (int)minirt.screen_wdt / minirt.aspect_ratio;
+	minirt.win.x = 1280.0;
+	minirt.win.y = minirt.win.x / minirt.aspect_ratio;
+	camera_init(&minirt);
 	return (minirt);
 }
 
@@ -43,6 +59,6 @@ int	main(int argc, t_string_tab argv)
 		write(2, "Use: ./miniRT <file.rt>\n", 24);
 		return (1);
 	}
-	minirt = init();
+	minirt = global_init();
 	return (0);
 }

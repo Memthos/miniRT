@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:47:50 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/12 10:07:36 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/13 13:43:11 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ typedef struct s_vec3
 	double	y;
 	double	z;
 }			t_vec3;
+
+typedef struct s_vec2
+{
+	double	x;
+	double	y;
+}			t_vec2;
 
 t_vec3	vec_add(const t_vec3 v1, const t_vec3 v2, t_status *status);
 t_vec3	vec_sub(const t_vec3 v1, const t_vec3 v2, t_status *status);
