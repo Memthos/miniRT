@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 09:24:54 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/12 09:24:55 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/13 13:31:52 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@
 /// @param status The status that will be updated in case of error
 /// @return The number with the wanted precision
 double	ft_round(double nb, t_uint precision, t_status *status);
+
+double	deg_to_rad(void);
 
 #endif

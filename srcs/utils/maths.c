@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_round.c                                         :+:      :+:    :+:   */
+/*   maths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/10 22:52:09 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/11 14:14:09 by mperrine         ###   ########.fr       */
+/*   Created: 2026/05/13 13:26:53 by mperrine          #+#    #+#             */
+/*   Updated: 2026/05/13 13:31:41 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ double	ft_round(double nb, t_uint precision, t_status *status)
 		if (ceil(nb) >= DBL_MAX / 10)
 		{
 			if (status)
-				*status = OVERFLOW;
+			*status = OVERFLOW;
 			return (0);
 		}
 		nb *= 10;
@@ -31,4 +31,9 @@ double	ft_round(double nb, t_uint precision, t_status *status)
 	}
 	res = round(nb) / pow(10.0, precision);
 	return (res);
+}
+
+double	deg_to_rad(void)
+{
+	return (M_PI / 180.0);
 }
