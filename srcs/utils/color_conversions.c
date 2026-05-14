@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 10:17:26 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/13 13:29:21 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/14 17:12:46 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ uint32_t	parse_color(t_uint channels[4], t_status *status)
 		|| channels[2] > 255 || channels[3] > 255)
 	{
 		if (status)
-			*status = COLOR_OVERFLOW;
+			*status = OVERFLOW;
 		return (0);
 	}
 	color = channels[0];
