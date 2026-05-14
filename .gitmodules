@@ -1,6 +1,6 @@
-[submodule "libs/MacroLibX"]
-	path = libs/MacroLibX
-	url = https://github.com/seekrs/MacroLibX.git
 [submodule "libs/lib_tools"]
 	path = libs/lib_tools
 	url = git@github.com:Memthos/lib_tools.git
+[submodule "libs/MacroLibX"]
+	path = libs/MacroLibX
+	url = https://github.com/seekrs/MacroLibX.git
