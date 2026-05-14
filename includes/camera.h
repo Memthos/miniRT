@@ -6,15 +6,12 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 09:19:57 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/13 13:47:45 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/14 16:26:51 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CAMERA_H
 # define CAMERA_H
-
-# include "types.h"
-# include "vectors.h"
 
 typedef struct s_camera
 {
