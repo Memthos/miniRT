@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/14 17:06:59 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/15 13:36:24 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,12 @@
 # include "../libs/MacroLibX/includes/mlx.h" //Macrolibx
 # include "../libs/MacroLibX/includes/mlx_extended.h" //Macrolibx
 
-# include "camera.h"
+# include "parser.h"
 
 typedef struct s_minirt
 {
 	double		aspect_ratio;
 	t_vec2		win;
-	t_camera	camera;
 }	t_minirt;
 
 #endif
