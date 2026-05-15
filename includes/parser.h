@@ -13,6 +13,9 @@
 #ifndef PARSER_H
 # define PARSER_H
 
+# include <stdint.h>
+# include <stdlib.h>
+
 # include "../libs/lib_tools/includes/lib_tools.h"
 
 typedef enum e_obj_type
@@ -77,7 +80,7 @@ typedef struct s_camera
 typedef struct s_obj
 {
 	t_obj_type	type;
-	union u_obj
+	union
 	{
 		t_sphere		sphere;
 		t_plane			plane;
@@ -85,7 +88,7 @@ typedef struct s_obj
 		t_ambient_light	ambient_light;
 		t_point_light	point_light;
 		t_camera		camera;
-	};
+	}	u_obj;
 }	t_obj;
 
 typedef struct s_array
