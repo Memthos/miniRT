@@ -60,4 +60,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+norme:
+	@norminette includes srcs | grep -v OK
+
+.PHONY: all bonus clean fclean re norme
