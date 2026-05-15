@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:00:19 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/15 14:00:20 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/15 16:10:17 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_cylinder
 /*-----------------------------------LIGHT------------------------------------*/
 typedef struct s_ambient_light
 {
-	double		ratio;
+	double		brightness;
 	uint32_t	color;
 }	t_ambient_light;
 
@@ -61,7 +61,6 @@ typedef struct s_point_light
 {
 	t_vec3		position;
 	double		brightness;
-	uint32_t	color;
 }	t_point_light;
 
 /*----------------------------------CAMERA------------------------------------*/
