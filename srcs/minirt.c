@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-static int	check_filename(t_string s)
+static int	check_file(t_string s)
 {
 	size_t	len;
 	int		fd;
@@ -80,5 +80,6 @@ int	main(int argc, t_string_tab argv)
 		return (1);
 	}
 	minirt = global_init();
+	(void)minirt;
 	return (use_status(ERR_GET));
 }
