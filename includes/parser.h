@@ -6,12 +6,15 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:00:19 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/15 16:55:21 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/16 17:35:34 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
+
+# include <stdint.h>
+# include <stdlib.h>
 
 # include "../libs/lib_tools/includes/lib_tools.h"
 
@@ -77,14 +80,14 @@ typedef struct s_camera
 typedef struct s_obj
 {
 	t_obj_type	type;
-	union u_obj
+	union
 	{
 		t_sphere		sphere;
 		t_plane			plane;
 		t_cylinder		cylinder;
 		t_ambient_light	ambient_light;
 		t_point_light	point_light;
-	};
+	}	u_obj;
 }	t_obj;
 
 typedef struct s_array
