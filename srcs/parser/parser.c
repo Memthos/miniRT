@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 21:53:49 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/16 17:37:24 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/16 17:37:45 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ void	parser(const t_string filename, t_minirt *minirt)
 		return ;
 	}
 	line = get_next_line(file);
-	while (line)
+	while (line && use_status(ERR_GET) == SUCCESS)
 		parse_line(line, minirt);
 }
