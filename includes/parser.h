@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:00:19 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/15 16:10:17 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/15 16:55:21 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ typedef struct s_obj
 		t_cylinder		cylinder;
 		t_ambient_light	ambient_light;
 		t_point_light	point_light;
-		t_camera		camera;
 	};
 }	t_obj;
 
