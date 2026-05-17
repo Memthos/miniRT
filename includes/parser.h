@@ -98,4 +98,6 @@ typedef struct s_array
 
 /*-----------------------------------END--------------------------------------*/
 
+t_status	add_array_slot(t_array array);
+
 #endif
