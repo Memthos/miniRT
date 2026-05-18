@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_array_slot.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.fr  +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 13:45:02 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/17 13:52:32 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/18 13:11:05 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ t_status	add_array_slot(t_array array)
 		array.size = 1;
 		return (SUCCESS);
 	}
-	tmp = ft_calloc(ft_array_len(array.objs) + 1, sizeof(t_obj *));
+	tmp = ft_calloc(array.size + 1, sizeof(t_obj *));
 	if (use_status(ERR_GET) != SUCCESS)
 		return (FAILURE);
-	array.size += 1;
 	i = 0;
-	while (i < ft_array_len(array.objs))
+	while (i < array.size)
 	{
 		tmp[i] = array.objs[i];
 		i++;
 	}
 	free(array.objs);
 	array.objs = tmp;
+	array.size += 1;
 	return (SUCCESS);
 }

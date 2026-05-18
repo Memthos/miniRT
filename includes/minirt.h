@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/15 16:55:02 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/18 11:28:13 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_minirt
 	t_array		geos;
 	t_array		lights;
 	t_camera	camera;
-	double	aspect_ratio;
-	t_vec2	win;
+	double		aspect_ratio;
+	t_vec2		win;
 }	t_minirt;
 
 #endif

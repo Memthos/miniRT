@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:00:19 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/16 17:35:34 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/18 12:58:45 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 # include <stdlib.h>
 
 # include "../libs/lib_tools/includes/lib_tools.h"
+
+typedef struct s_minirt	t_minirt;
+
+typedef void (*t_parse_func)(t_string *, t_minirt *);
+
+typedef struct s_parse_func_id
+{
+	t_string		type;
+	t_parse_func	func;
+}	t_parse_func_id;
 
 typedef enum e_obj_type
 {
