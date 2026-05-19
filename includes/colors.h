@@ -3,13 +3,6 @@
 
 # include "types.h"
 
-typedef struct s_rgb
-{
-	t_uint8	r;
-	t_uint8	g;
-	t_uint8	b;
-}	t_rgb;
-
 typedef struct s_rgba
 {
 	t_uint8	r;
