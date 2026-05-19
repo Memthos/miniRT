@@ -61,6 +61,6 @@ fclean: clean
 re: fclean all
 
 norme:
-	@norminette includes srcs | grep -v OK
+	@norminette includes srcs libs/lib_tools | grep -v OK
 
 .PHONY: all bonus clean fclean re norme
