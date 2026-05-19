@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:00:19 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/19 15:44:44 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/19 17:19:09 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 typedef struct s_minirt	t_minirt;
 
-typedef void	(*t_parse_func)(const t_string *, t_minirt *);
+typedef void			(*t_parse_func)(const t_string *, t_minirt *);
 
 typedef struct s_parse_func_id
 {

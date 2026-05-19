@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 21:53:49 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/19 16:37:57 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/19 17:18:19 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ static t_parse_func	get_parse_func(const t_string *line)
 {
 	size_t					i;
 	const t_parse_func_id	data[] = {
-		{"sp", &rt_parse_sphere},
-		{"pl", &rt_parse_plane},
-		{"cy", &rt_parse_cylinder},
-		{"A", &rt_parse_ambient_light},
-		{"L", &rt_parse_point_light},
-		{"C", &rt_parse_camera}};
+	{"sp", &rt_parse_sphere},
+	{"pl", &rt_parse_plane},
+	{"cy", &rt_parse_cylinder},
+	{"A", &rt_parse_ambient_light},
+	{"L", &rt_parse_point_light},
+	{"C", &rt_parse_camera}};
 
 	i = 0;
 	while (i < 6)
@@ -112,9 +112,9 @@ void	rt_parser(const t_string filename, t_minirt *rt)
 		line = get_next_line(file);
 	}
 	close(file);
-	if (use_status(ERR_GET) == SUCCESS
-		&& (objs.camera == 0 || objs.ambient_light == 0 || objs.point_light == 0
-		|| objs.camera > 1 || objs.ambient_light > 1 || objs.point_light > 1))
+	if (use_status(ERR_GET) == SUCCESS && (!objs.camera || !objs.ambient_light
+			|| !objs.point_light || objs.camera > 1
+			|| objs.ambient_light > 1 || objs.point_light > 1))
 	{
 		write(2, "Error\nWrong object in file", 25);
 		use_status(FAILURE);
