@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/15 15:59:39 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/19 15:13:07 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	check_file(t_string s)
 	len = ft_strlen(s);
 	if (len < 4 || ft_strcmp(&s[len - 3], ".rt") != 0)
 		return (FAILURE);
-	fd = open(s, O_RDONLY) == -1;
+	fd = open(s, O_RDONLY);
 	if (fd == -1)
 	{
 		use_status(OPEN_FAILURE);

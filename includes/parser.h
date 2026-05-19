@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:00:19 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/18 12:58:45 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/19 15:44:44 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 typedef struct s_minirt	t_minirt;
 
-typedef void (*t_parse_func)(t_string *, t_minirt *);
+typedef void	(*t_parse_func)(const t_string *, t_minirt *);
 
 typedef struct s_parse_func_id
 {
@@ -74,6 +74,7 @@ typedef struct s_point_light
 {
 	t_vec3		position;
 	double		brightness;
+	uint32_t	color;
 }	t_point_light;
 
 /*----------------------------------CAMERA------------------------------------*/
@@ -107,7 +108,23 @@ typedef struct s_array
 }	t_array;
 
 /*-----------------------------------END--------------------------------------*/
+typedef struct s_unique_obj
+{
+	int	camera;
+	int	ambient_light;
+	int	point_light;
+}	t_unique_obj;
 
-t_status	add_array_slot(t_array array);
+t_status	rt_add_array_slot(t_array *array, t_obj obj);
+
+void		rt_parse_sphere(const t_string *line, t_minirt *rt);
+void		rt_parse_plane(const t_string *line, t_minirt *rt);
+void		rt_parse_cylinder(const t_string *line, t_minirt *rt);
+void		rt_parse_ambient_light(const t_string *line, t_minirt *rt);
+void		rt_parse_point_light(const t_string *line, t_minirt *rt);
+
+void		rt_parse_coords(const t_string *input, t_vec3 *pos);
+void		rt_parse_orientation(const t_string *input, t_vec3 *norm_rot);
+void		rt_parse_color(const t_string *input, uint32_t *color);
 
 #endif
