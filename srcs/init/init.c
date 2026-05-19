@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:24:04 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/19 15:26:58 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/19 16:00:56 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_minirt	rt_init(void)
 
 	ft_bzero(&rt, sizeof(t_minirt));
 	rt.aspect_ratio = 16.0 / 9.0;
-	rt.dimensions = (t_vec2){1280.0, 1280.0 / rt.aspect_ratio};
+	rt.dimensions = (t_vec2){1080.0, 1080.0 / rt.aspect_ratio};
 	rt.context = mlx_init();
 	ft_bzero(&info, sizeof(info));
 	info.title = "miniRT";
