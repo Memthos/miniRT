@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/18 11:28:13 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/19 15:31:11 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@
 # include "../libs/MacroLibX/includes/mlx.h" //Macrolibx
 # include "../libs/MacroLibX/includes/mlx_extended.h" //Macrolibx
 
+# include "init.h"
+# include "quit.h"
 # include "parser.h"
+# include "events.h"
 
 typedef struct s_minirt
 {
@@ -33,7 +36,10 @@ typedef struct s_minirt
 	t_array		lights;
 	t_camera	camera;
 	double		aspect_ratio;
-	t_vec2		win;
+	mlx_context	context;
+	t_vec2		dimensions;
+	mlx_window	window;
+	mlx_image	render;
 }	t_minirt;
 
 #endif
