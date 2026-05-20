@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 21:53:49 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/19 17:18:19 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/20 09:52:54 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	rt_parse_camera(const t_string *line, t_minirt *rt)
 	if (use_status(ERR_GET) == SUCCESS && endptr)
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == FAILURE)
-		write(2, "Error\nError in file camera line", 31);
+		write(2, "Error\nError in file camera line\n", 32);
 	ft_free_tab(&data);
 }
 
@@ -64,7 +64,7 @@ static t_status	contain_chars(const t_string *line)
 	i = 0;
 	while ((*line)[i])
 	{
-		if (ft_isspace((*line)[i]) == FAILURE)
+		if (ft_isspace((*line)[i++]) == FAILURE)
 			return (SUCCESS);
 	}
 	return (FAILURE);
@@ -79,16 +79,22 @@ void	rt_parse_line(const t_string *line, t_minirt *rt, t_unique_obj *objs)
 	func = get_parse_func(line);
 	if (NULL == func)
 	{
-		write(2, "Error\nminiRT: Wrong object in map\n", 34);
+		write(2, "Error\nminiRT: Wrong type of object in map\n", 42);
 		use_status(FAILURE);
 		return ;
 	}
-	if (func == &rt_parse_camera)
+	else if (func == &rt_parse_camera)
 		++objs->camera;
 	else if (func == &rt_parse_ambient_light)
 		++objs->ambient_light;
 	else if (func == &rt_parse_point_light)
 		++objs->point_light;
+	if (objs->camera > 1 || objs->ambient_light > 1 || objs->point_light > 1)
+	{
+		write(2, "Error\nWrong object in file\n", 26);
+		use_status(FAILURE);
+		return ;
+	}
 	func(line, rt);
 }
 
@@ -100,9 +106,10 @@ void	rt_parser(const t_string filename, t_minirt *rt)
 
 	file = open(filename, O_RDONLY);
 	if (file == -1)
+	{
 		use_status(OPEN_FAILURE);
-	if (file == -1)
 		return ;
+	}
 	ft_bzero(&objs, sizeof(t_unique_obj));
 	line = get_next_line(file);
 	while (line)
@@ -112,11 +119,10 @@ void	rt_parser(const t_string filename, t_minirt *rt)
 		line = get_next_line(file);
 	}
 	close(file);
-	if (use_status(ERR_GET) == SUCCESS && (!objs.camera || !objs.ambient_light
-			|| !objs.point_light || objs.camera > 1
-			|| objs.ambient_light > 1 || objs.point_light > 1))
+	if (use_status(ERR_GET) == SUCCESS && (objs.camera == 0
+			|| objs.ambient_light == 0 || objs.point_light == 0))
 	{
-		write(2, "Error\nWrong object in file", 25);
+		write(2, "Error\nMissing object in file\n", 29);
 		use_status(FAILURE);
 	}
 }
