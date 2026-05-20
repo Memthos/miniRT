@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/20 10:02:50 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/20 13:24:50 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,21 @@ static int	check_file(t_string s)
 // 	camera->plane = plane;
 // }
 
-// static t_minirt	global_init(void)
-// {
-// 	t_minirt	minirt;
+static t_minirt	global_init(void)
+{
+	t_minirt	rt;
 
-// 	ft_bzero(&minirt, sizeof(t_minirt));
-// 	minirt.aspect_ratio = 16.0 / 9.0;
-// 	minirt.win.x = 1280.0;
-// 	minirt.win.y = minirt.win.x / minirt.aspect_ratio;
-// 	// camera_init(&minirt);
-// 	return (minirt);
-// }
+	ft_bzero(&rt, sizeof(t_minirt));
+	// rt.aspect_ratio = 16.0 / 9.0;
+	// rt.win.x = 1280.0;
+	// rt.win.y = rt.win.x / rt.aspect_ratio;
+	// camera_init(&rt);
+	return (rt);
+}
 
 int	main(int argc, t_string_tab argv)
 {
-	t_minirt	minirt;
+	t_minirt	rt;
 
 	if (argc != 2 || check_file(argv[1]))
 	{
@@ -79,7 +79,7 @@ int	main(int argc, t_string_tab argv)
 			write(2, "Use: ./miniRT <file.rt>\n", 24);
 		return (1);
 	}
-	// minirt = global_init();
-	(void)minirt;
+	rt = global_init();
+	rt_parser(argv[1], &rt);
 	return (use_status(ERR_GET));
 }
