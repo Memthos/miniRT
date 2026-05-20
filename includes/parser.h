@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:00:19 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/20 11:08:46 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/20 14:35:36 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,6 @@ void		rt_parse_coords(const t_string *input, t_vec3 *pos);
 void		rt_parse_orientation(const t_string *input, t_vec3 *norm_rot);
 void		rt_parse_color(const t_string *input, mlx_color *color);
 
-t_status	rt_add_array_slot(t_array *array, t_obj obj);
+t_status	rt_add_array_slot(t_array *array, t_obj *obj);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 13:45:02 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/19 17:08:38 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/20 15:43:50 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_status	rt_add_array_slot(t_array *array, t_obj obj)
+t_status	rt_add_array_slot(t_array *array, t_obj *obj)
 {
 	t_obj	*tmp;
 	size_t	i;
@@ -21,18 +21,18 @@ t_status	rt_add_array_slot(t_array *array, t_obj obj)
 		return (SUCCESS);
 	if (array->size == 0)
 	{
-		array->objs = ft_calloc(1, sizeof(t_obj *));
+		array->objs = ft_calloc(1, sizeof(t_obj));
 		if (use_status(ERR_GET) != SUCCESS)
 			return (FAILURE);
 		array->size = 1;
-		ft_memcpy(&array[0], &obj, sizeof(t_obj));
+		ft_memcpy(&array->objs[0], obj, sizeof(t_obj));
 		return (SUCCESS);
 	}
-	tmp = ft_calloc(array->size + 1, sizeof(t_obj *));
+	tmp = ft_calloc(array->size + 1, sizeof(t_obj));
 	if (use_status(ERR_GET) != SUCCESS)
 		return (FAILURE);
-	array->size += 1;
-	ft_memcpy(&tmp[array->size - 1], &obj, sizeof(t_obj));
+	++array->size;
+	ft_memcpy(&tmp[array->size - 1], obj, sizeof(t_obj));
 	i = 0;
 	while (i++ < array->size - 1)
 		tmp[i - 1] = array->objs[i - 1];
