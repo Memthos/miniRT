@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 21:53:49 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/20 11:13:33 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/20 13:57:10 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ static t_status	contain_chars(const t_string *line)
 {
 	size_t	i;
 
+	if ((*line)[0] == '#')
+		return (FAILURE);
 	i = 0;
 	while ((*line)[i])
 	{
