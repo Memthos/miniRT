@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 21:53:49 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/20 09:52:54 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/20 11:13:33 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ static t_status	contain_chars(const t_string *line)
 	return (FAILURE);
 }
 
-void	rt_parse_line(const t_string *line, t_minirt *rt, t_unique_obj *objs)
+static void	rt_parse_line(const t_string *line, t_minirt *rt,
+	t_unique_obj *objs_check)
 {
 	t_parse_func	func;
 
@@ -84,12 +85,13 @@ void	rt_parse_line(const t_string *line, t_minirt *rt, t_unique_obj *objs)
 		return ;
 	}
 	else if (func == &rt_parse_camera)
-		++objs->camera;
+		++objs_check->camera;
 	else if (func == &rt_parse_ambient_light)
-		++objs->ambient_light;
+		++objs_check->ambient_light;
 	else if (func == &rt_parse_point_light)
-		++objs->point_light;
-	if (objs->camera > 1 || objs->ambient_light > 1 || objs->point_light > 1)
+		++objs_check->point_light;
+	if (objs_check->camera > 1 || objs_check->ambient_light > 1
+		|| objs_check->point_light > 1)
 	{
 		write(2, "Error\nWrong object in file\n", 26);
 		use_status(FAILURE);
@@ -102,7 +104,7 @@ void	rt_parser(const t_string filename, t_minirt *rt)
 {
 	char			*line;
 	int				file;
-	t_unique_obj	objs;
+	t_unique_obj	objs_check;
 
 	file = open(filename, O_RDONLY);
 	if (file == -1)
@@ -110,17 +112,17 @@ void	rt_parser(const t_string filename, t_minirt *rt)
 		use_status(OPEN_FAILURE);
 		return ;
 	}
-	ft_bzero(&objs, sizeof(t_unique_obj));
+	ft_bzero(&objs_check, sizeof(t_unique_obj));
 	line = get_next_line(file);
 	while (line)
 	{
-		rt_parse_line(&line, rt, &objs);
+		rt_parse_line(&line, rt, &objs_check);
 		free(line);
 		line = get_next_line(file);
 	}
 	close(file);
-	if (use_status(ERR_GET) == SUCCESS && (objs.camera == 0
-			|| objs.ambient_light == 0 || objs.point_light == 0))
+	if (use_status(ERR_GET) == SUCCESS && (objs_check.camera == 0
+			|| objs_check.ambient_light == 0 || objs_check.point_light == 0))
 	{
 		write(2, "Error\nMissing object in file\n", 29);
 		use_status(FAILURE);
