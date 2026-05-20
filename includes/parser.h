@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:00:19 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/19 17:19:09 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/20 11:01:24 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 
 # include "../libs/lib_tools/includes/lib_tools.h"
+# include "../libs/MacroLibX/includes/mlx.h"
 
 typedef struct s_minirt	t_minirt;
 
@@ -43,7 +44,7 @@ typedef struct s_sphere
 {
 	t_vec3		position;
 	double		diameter;
-	uint32_t	color;
+	mlx_color	color;
 }	t_sphere;
 
 typedef struct s_plane
@@ -51,7 +52,7 @@ typedef struct s_plane
 	t_vec3		position;
 	t_vec3		norm_rot;
 	double		diameter;
-	uint32_t	color;
+	mlx_color	color;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -60,21 +61,21 @@ typedef struct s_cylinder
 	t_vec3		norm_rot;
 	double		diameter;
 	double		height;
-	uint32_t	color;
+	mlx_color	color;
 }	t_cylinder;
 
 /*-----------------------------------LIGHT------------------------------------*/
 typedef struct s_ambient_light
 {
 	double		brightness;
-	uint32_t	color;
+	mlx_color	color;
 }	t_ambient_light;
 
 typedef struct s_point_light
 {
 	t_vec3		position;
 	double		brightness;
-	uint32_t	color;
+	mlx_color	color;
 }	t_point_light;
 
 /*----------------------------------CAMERA------------------------------------*/
@@ -125,6 +126,6 @@ void		rt_parse_point_light(const t_string *line, t_minirt *rt);
 
 void		rt_parse_coords(const t_string *input, t_vec3 *pos);
 void		rt_parse_orientation(const t_string *input, t_vec3 *norm_rot);
-void		rt_parse_color(const t_string *input, uint32_t *color);
+void		rt_parse_color(const t_string *input, mlx_color *color);
 
 #endif
