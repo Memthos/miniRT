@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:51:05 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/20 09:53:30 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/20 15:47:18 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	rt_parse_sphere(const t_string *line, t_minirt *rt)
 	if (use_status(ERR_GET) == FAILURE)
 		write(2, "Error\nError in file sphere line\n", 32);
 	else if (use_status(ERR_GET) == SUCCESS)
-		rt_add_array_slot(&rt->geos, obj);
+		rt_add_array_slot(&rt->geos, &obj);
 	ft_free_tab(&data);
 }
 
@@ -58,7 +58,7 @@ void	rt_parse_plane(const t_string *line, t_minirt *rt)
 	if (use_status(ERR_GET) == FAILURE)
 		write(2, "Error\nError in file plane line\n", 31);
 	else if (use_status(ERR_GET) == SUCCESS)
-		rt_add_array_slot(&rt->geos, obj);
+		rt_add_array_slot(&rt->geos, &obj);
 	ft_free_tab(&data);
 }
 
@@ -87,7 +87,7 @@ void	rt_parse_cylinder(const t_string *line, t_minirt *rt)
 	if (use_status(ERR_GET) == FAILURE || endptr)
 		write(2, "Error\nError in file sphere line\n", 32);
 	else if (use_status(ERR_GET) == SUCCESS)
-		rt_add_array_slot(&rt->geos, obj);
+		rt_add_array_slot(&rt->geos, &obj);
 	ft_free_tab(&data);
 }
 
@@ -112,7 +112,7 @@ void	rt_parse_ambient_light(const t_string *line, t_minirt *rt)
 	if (use_status(ERR_GET) == FAILURE)
 		write(2, "Error\nError in file ambient light line\n", 39);
 	else if (use_status(ERR_GET) == SUCCESS)
-		rt_add_array_slot(&rt->lights, obj);
+		rt_add_array_slot(&rt->lights, &obj);
 	ft_free_tab(&data);
 }
 
@@ -139,6 +139,6 @@ void	rt_parse_point_light(const t_string *line, t_minirt *rt)
 	if (use_status(ERR_GET) == FAILURE)
 		write(2, "Error\nError in file ambient light line\n", 39);
 	else if (use_status(ERR_GET) == SUCCESS)
-		rt_add_array_slot(&rt->lights, obj);
+		rt_add_array_slot(&rt->lights, &obj);
 	ft_free_tab(&data);
 }
