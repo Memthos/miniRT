@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:37:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/21 10:23:00 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/21 10:51:53 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ mlx_color	ray_color(t_minirt *rt, t_ray *ray)
 	mlx_color c;
 
 	(void)rt;
-	c = (mlx_color){.r = 0, .b = 0, .b = 0, .a = 0};
+	(void)ray;
+	c = (mlx_color){.r = 0, .g = 0, .b = 0, .a = 0};
 	return (c);
 }
