@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:15:36 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/21 10:43:49 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/21 11:16:51 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,25 @@
 
 typedef struct s_vec3	t_point3;
 
+typedef struct s_viewport
+{
+	double		width;
+	double		height;
+	t_vec3		delta_x;
+	t_vec3		delta_y;
+	t_point3	nw_corner;
+	t_point3	nw_pixel;
+}	t_viewport;
+
 typedef struct s_camera
 {
 	double		focal_length;
 	double		fov;
-	double		width;
-	double		height;
-	t_point3	position;
+	t_point3	pos;
+	t_point3	dir;
+	t_viewport	viewport;
 }	t_camera;
 
-t_camera	camera_init(double fov);
+t_camera	camera_init(double fov, t_vec2 screen);
 
 #endif
