@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/20 13:24:50 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/21 10:49:30 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,6 @@ static int	check_file(t_string s)
 // 	camera->plane = plane;
 // }
 
-static t_minirt	global_init(void)
-{
-	t_minirt	rt;
-
-	ft_bzero(&rt, sizeof(t_minirt));
-	// rt.aspect_ratio = 16.0 / 9.0;
-	// rt.win.x = 1280.0;
-	// rt.win.y = rt.win.x / rt.aspect_ratio;
-	// camera_init(&rt);
-	return (rt);
-}
-
 int	main(int argc, t_string_tab argv)
 {
 	t_minirt	rt;
@@ -79,7 +67,11 @@ int	main(int argc, t_string_tab argv)
 			write(2, "Use: ./miniRT <file.rt>\n", 24);
 		return (1);
 	}
-	rt = global_init();
+	rt = rt_init();
 	rt_parser(argv[1], &rt);
+	rt_render(&rt);
+	mlx_put_image_to_window(rt.context, rt.window, rt.render, 0, 0);
+	mlx_loop(rt.context);
+	rt_quit(&rt);
 	return (use_status(ERR_GET));
 }
