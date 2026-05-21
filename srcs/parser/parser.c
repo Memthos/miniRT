@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 21:53:49 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/20 14:15:06 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/21 11:21:39 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	rt_parse_camera(const t_string *line, t_minirt *rt)
 	if (ft_string_tab_len(data) != 3)
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == SUCCESS)
-		rt_parse_coords(&data[0], &rt->camera.position);
+		rt_parse_coords(&data[0], &rt->camera.pos);
 	if (use_status(ERR_GET) == SUCCESS)
 		rt_parse_orientation(&data[1], &rt->camera.norm_rot);
 	if (use_status(ERR_GET) == SUCCESS)
