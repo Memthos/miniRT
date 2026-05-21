@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:51:05 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/20 15:47:18 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/21 13:17:15 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ void	rt_parse_ambient_light(const t_string *line, t_minirt *rt)
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == SUCCESS)
 		obj.u_obj.ambient_light.brightness = ft_strtod(data[0], &endptr);
-	if (use_status(ERR_GET) == SUCCESS && endptr)
+	if (!use_status(ERR_GET) && (obj.u_obj.ambient_light.brightness < 0.0
+		|| obj.u_obj.ambient_light.brightness > 1.0 || endptr))
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == SUCCESS)
 		rt_parse_color(&data[1], &obj.u_obj.ambient_light.color);
@@ -132,7 +133,8 @@ void	rt_parse_point_light(const t_string *line, t_minirt *rt)
 		rt_parse_coords(&data[0], &obj.u_obj.point_light.position);
 	if (use_status(ERR_GET) == SUCCESS)
 		obj.u_obj.point_light.brightness = ft_strtod(data[1], &endptr);
-	if (use_status(ERR_GET) == SUCCESS && endptr)
+	if (!use_status(ERR_GET) && (obj.u_obj.point_light.brightness < 0.0
+		|| obj.u_obj.point_light.brightness > 1.0 || endptr))
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == SUCCESS)
 		rt_parse_color(&data[2], &obj.u_obj.point_light.color);
