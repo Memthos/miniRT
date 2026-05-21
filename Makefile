@@ -1,7 +1,7 @@
 INCLUDES:=includes
-VPATH:=srcs:srcs/init:srcs/quit:srcs/events:srcs/array:srcs/parser:srcs/utils
+VPATH:=srcs:srcs/init:srcs/quit:srcs/camera:srcs/ray:srcs/rendering:srcs/events:srcs/array:srcs/parser:srcs/utils
 
-SRCS:=minirt.c init.c quit.c events.c color_conversions.c add_array_slot.c parser.c
+SRCS:= minirt.c init.c quit.c camera.c render.c ray.c events.c color_conversions.c add_array_slot.c parser.c
 
 OBJSDIR:=objs/
 OBJS:=$(addprefix $(OBJSDIR), $(SRCS:.c=.o))
