@@ -1,7 +1,8 @@
 INCLUDES:=includes
 VPATH:=srcs:srcs/init:srcs/quit:srcs/camera:srcs/ray:srcs/rendering:srcs/events:srcs/array:srcs/parser:srcs/utils
 
-SRCS:= minirt.c init.c quit.c camera.c render.c ray.c events.c color_conversions.c add_array_slot.c parser.c
+SRCS:=minirt.c init.c quit.c camera.c render.c ray.c events.c events.c color_conversions.c add_array_slot.c \
+	parser.c data_parser.c objects_parser.c
 
 OBJSDIR:=objs/
 OBJS:=$(addprefix $(OBJSDIR), $(SRCS:.c=.o))
@@ -61,6 +62,6 @@ fclean: clean
 re: fclean all
 
 norme:
-	@norminette includes srcs | grep -v OK
+	@norminette includes srcs libs/lib_tools | grep -v OK
 
 .PHONY: all bonus clean fclean re norme

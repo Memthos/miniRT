@@ -6,46 +6,32 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 21:53:49 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/19 11:17:50 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/20 14:15:06 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	parse_coords(const t_string input, t_vec3 *pos);
-void	parse_orientation(const t_string input, t_vec3 *norm_rot);
-
-void	parse_sphere(const t_string *line, t_minirt *minirt);
-void	parse_plane(const t_string *line, t_minirt *minirt);
-void	parse_cylinder(const t_string *line, t_minirt *minirt);
-void	parse_ambient_light(const t_string *line, t_minirt *minirt);
-void	parse_point_light(const t_string *line, t_minirt *minirt);
-
-void	parse_camera(const t_string *line, t_minirt *minirt)
+static void	rt_parse_camera(const t_string *line, t_minirt *rt)
 {
 	t_string_tab	data;
 	t_string		endptr;
 
 	endptr = NULL;
-	data = ft_split(line, "\t\n\v\f\r ");
-	if (use_status(ERR_GET) != SUCCESS)
-		return ;
-	if (!data[0] || !data[1] || !data[2] || !data[3])
-	{
-		write(2, "Error\nminiRT: Wrong object in map\n", 34);
+	ft_bzero(&rt->camera, sizeof(t_camera));
+	data = ft_split(*line + 1, "\t\n\v\f\r ");
+	if (ft_string_tab_len(data) != 3)
 		use_status(FAILURE);
-		return ;
-	}
-	parse_coords(data[1], &minirt->camera.position);
-	parse_orientation(data[2], &minirt->camera.norm_rot);
 	if (use_status(ERR_GET) == SUCCESS)
-		minirt->camera.fov = ft_strtod(data[3], &endptr);
-	if (endptr)
-	{
+		rt_parse_coords(&data[0], &rt->camera.position);
+	if (use_status(ERR_GET) == SUCCESS)
+		rt_parse_orientation(&data[1], &rt->camera.norm_rot);
+	if (use_status(ERR_GET) == SUCCESS)
+		rt->camera.fov = ft_strtod(data[2], &endptr);
+	if (use_status(ERR_GET) == SUCCESS && endptr)
 		use_status(FAILURE);
-		write(2, "Error\nError on camera line", 26);
-		return ;
-	}
+	if (use_status(ERR_GET) == FAILURE)
+		write(2, "Error\nError in file camera line\n", 32);
 	ft_free_tab(&data);
 }
 
@@ -53,12 +39,12 @@ static t_parse_func	get_parse_func(const t_string *line)
 {
 	size_t					i;
 	const t_parse_func_id	data[] = {
-		{"sp", &parse_sphere},
-		{"pl", &parse_plane},
-		{"cy", &parse_cylinder},
-		{"A", &parse_ambient_light},
-		{"L", &parse_point_light},
-		{"C", &parse_camera}};
+	{"sp", &rt_parse_sphere},
+	{"pl", &rt_parse_plane},
+	{"cy", &rt_parse_cylinder},
+	{"A", &rt_parse_ambient_light},
+	{"L", &rt_parse_point_light},
+	{"C", &rt_parse_camera}};
 
 	i = 0;
 	while (i < 6)
@@ -71,38 +57,56 @@ static t_parse_func	get_parse_func(const t_string *line)
 	return (NULL);
 }
 
-void	parse_line(const t_string *line, t_minirt *minirt, int *parsed_cam)
+static t_status	contain_chars(const t_string *line)
+{
+	size_t	i;
+
+	i = 0;
+	if ((*line)[0] == '#')
+		return (FAILURE);
+	while ((*line)[i])
+	{
+		if (ft_isspace((*line)[i++]) == FAILURE)
+			return (SUCCESS);
+	}
+	return (FAILURE);
+}
+
+static void	rt_parse_line(const t_string *line, t_minirt *rt,
+	t_unique_obj *objs_check)
 {
 	t_parse_func	func;
 
-	if (use_status(ERR_GET) != SUCCESS)
+	if (use_status(ERR_GET) != SUCCESS || contain_chars(line) == FAILURE)
 		return ;
 	func = get_parse_func(line);
 	if (NULL == func)
 	{
-		write(2, "Error\nminiRT: Wrong object in map\n", 34);
+		write(2, "Error\nminiRT: Wrong type of object in map\n", 42);
 		use_status(FAILURE);
 		return ;
 	}
-	if (func == &parse_camera)
+	else if (func == &rt_parse_camera)
+		++objs_check->camera;
+	else if (func == &rt_parse_ambient_light)
+		++objs_check->ambient_light;
+	else if (func == &rt_parse_point_light)
+		++objs_check->point_light;
+	if (objs_check->camera > 1 || objs_check->ambient_light > 1
+		|| objs_check->point_light > 1)
 	{
-		if (*parsed_cam == 1)
-		{
-			use_status(FAILURE);
-			write(2, "Error\nMultiple cameras in file", 30);
-			return ;
-		}
-		else
-			*parsed_cam = 1;
+		write(2, "Error\nWrong object in file\n", 26);
+		use_status(FAILURE);
+		return ;
 	}
-	func(line, minirt);
+	func(line, rt);
 }
 
-void	parser(const t_string filename, t_minirt *minirt)
+void	rt_parser(const t_string filename, t_minirt *rt)
 {
-	char	*line;
-	int		file;
-	int		parsed_cam;
+	char			*line;
+	int				file;
+	t_unique_obj	objs_check;
 
 	file = open(filename, O_RDONLY);
 	if (file == -1)
@@ -110,17 +114,19 @@ void	parser(const t_string filename, t_minirt *minirt)
 		use_status(OPEN_FAILURE);
 		return ;
 	}
-	parsed_cam = 0;
+	ft_bzero(&objs_check, sizeof(t_unique_obj));
 	line = get_next_line(file);
 	while (line)
 	{
-		parse_line(&line, minirt, &parsed_cam);
+		rt_parse_line(&line, rt, &objs_check);
+		free(line);
 		line = get_next_line(file);
 	}
 	close(file);
-	if (use_status(ERR_GET) == SUCCESS && parsed_cam == 0)
+	if (use_status(ERR_GET) == SUCCESS && (objs_check.camera == 0
+			|| objs_check.ambient_light == 0 || objs_check.point_light == 0))
 	{
-		write(2, "Error\nNo camera in file", 23);
+		write(2, "Error\nMissing object in file\n", 29);
 		use_status(FAILURE);
 	}
 }
