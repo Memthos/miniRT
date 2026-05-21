@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:00:19 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/18 12:58:45 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/19 17:15:31 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,6 @@ typedef struct s_point_light
 	t_vec3		position;
 	double		brightness;
 }	t_point_light;
-
-/*----------------------------------CAMERA------------------------------------*/
-typedef struct s_camera
-{
-	t_vec3		position;
-	t_vec3		norm_rot;
-	double		fov;
-	t_vec2		clip_planes;
-	t_vec2		plane;
-}	t_camera;
 
 /*-----------------------------------ARRAY------------------------------------*/
 typedef struct s_obj
