@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:26:13 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/21 11:17:30 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/21 14:26:00 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_camera	camera_init(double fov, t_vec2 screen)
 {
 	t_camera	camera;
 
-	ft_bzero(&camera, sizeof(camera));
 	camera.focal_length = 1.0;
 	camera.fov = fov;
 	camera.viewport.height = 2.0;
