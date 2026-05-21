@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:24:04 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/21 10:43:24 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/21 11:20:27 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_minirt	rt_init(void)
 	info.height = rt.dimensions.y;
 	rt.window = mlx_new_window(rt.context, &info);
 	rt.render = mlx_new_image(rt.context, rt.dimensions.x, rt.dimensions.y);
-	rt.camera = camera_init(60);
+	rt.camera = camera_init(60, rt.dimensions);
 	rt_init_events(&rt);
 	return (rt);
 }
