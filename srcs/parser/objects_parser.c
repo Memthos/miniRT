@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects_parser.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:51:05 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/21 15:44:16 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/21 13:17:15 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	rt_parse_sphere(const t_string *line, t_minirt *rt)
 	endptr = NULL;
 	ft_bzero(&obj, sizeof(t_obj));
 	obj.type = SPHERE;
-	data = ft_split(*line + 2, "\t\v\f\r ");
+	data = ft_split(*line + 2, "\t\n\v\f\r ");
 	if (ft_string_tab_len(data) != 3)
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == SUCCESS)
@@ -46,7 +46,7 @@ void	rt_parse_plane(const t_string *line, t_minirt *rt)
 
 	ft_bzero(&obj, sizeof(t_obj));
 	obj.type = PLANE;
-	data = ft_split(*line + 2, "\t\v\f\r ");
+	data = ft_split(*line + 2, "\t\n\v\f\r ");
 	if (ft_string_tab_len(data) != 3)
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == SUCCESS)
@@ -71,7 +71,7 @@ void	rt_parse_cylinder(const t_string *line, t_minirt *rt)
 	endptr = NULL;
 	ft_bzero(&obj, sizeof(t_obj));
 	obj.type = CYLINDER;
-	data = ft_split(*line + 2, "\t\v\f\r ");
+	data = ft_split(*line + 2, "\t\n\v\f\r ");
 	if (ft_string_tab_len(data) != 5)
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == SUCCESS)
@@ -100,7 +100,7 @@ void	rt_parse_ambient_light(const t_string *line, t_minirt *rt)
 	endptr = NULL;
 	ft_bzero(&obj, sizeof(t_obj));
 	obj.type = AMBIENT_LIGHT;
-	data = ft_split(*line + 1, "\t\v\f\r ");
+	data = ft_split(*line + 1, "\t\n\v\f\r ");
 	if (ft_string_tab_len(data) != 2)
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == SUCCESS)
@@ -126,7 +126,7 @@ void	rt_parse_point_light(const t_string *line, t_minirt *rt)
 	endptr = NULL;
 	ft_bzero(&obj, sizeof(t_obj));
 	obj.type = POINT_LIGHT;
-	data = ft_split(*line + 1, "\t\v\f\r ");
+	data = ft_split(*line + 1, "\t\n\v\f\r ");
 	if (ft_string_tab_len(data) != 3)
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == SUCCESS)

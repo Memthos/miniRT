@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 21:53:49 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/21 15:43:56 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/21 15:22:35 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	rt_parse_camera(const t_string *line, t_minirt *rt)
 
 	endptr = NULL;
 	ft_bzero(&rt->camera, sizeof(t_camera));
-	data = ft_split(*line + 1, "\t\v\f\r ");
+	data = ft_split(*line + 1, "\t\n\v\f\r ");
 	if (ft_string_tab_len(data) != 3)
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == SUCCESS)
