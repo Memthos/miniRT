@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 21:53:49 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/21 11:21:39 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/21 15:22:35 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static t_parse_func	get_parse_func(const t_string *line)
 	while (i < 6)
 	{
 		if (ft_strncmp(data[i].type, *line, ft_strlen(data[i].type)) == 0
-			&& ft_isspace((*line)[ft_strlen(data[i].type) + 1]) == SUCCESS)
+			&& ft_isspace((*line)[ft_strlen(data[i].type)]) == SUCCESS)
 			return (data[i].func);
 		i++;
 	}
