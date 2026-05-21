@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:15:36 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/21 11:16:51 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/21 11:22:43 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_camera
 	double		fov;
 	t_point3	pos;
 	t_point3	dir;
+	t_vec3		norm_rot;
 	t_viewport	viewport;
 }	t_camera;
 
