@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:24:04 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/21 11:20:27 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/21 14:12:21 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_minirt	rt_init(void)
 	t_minirt				rt;
 	mlx_window_create_info	info;
 
-	ft_bzero(&rt, sizeof(t_minirt));
 	rt.aspect_ratio = 16.0 / 9.0;
 	rt.dimensions = (t_vec2){1280, 1280 / rt.aspect_ratio};
 	rt.context = mlx_init();

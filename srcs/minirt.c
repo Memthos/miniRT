@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/21 12:53:02 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/21 14:16:29 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,11 @@ int	main(int argc, t_string_tab argv)
 			write(2, "Use: ./miniRT <file.rt>\n", 24);
 		return (1);
 	}
-	rt = rt_init();
+	ft_bzero(&rt, sizeof(rt));
 	rt_parser(argv[1], &rt);
+	if (SUCCESS != use_status(ERR_GET))
+		return (use_status(ERR_GET));
+	rt = rt_init();
 	rt_render(&rt);
 	mlx_put_image_to_window(rt.context, rt.window, rt.render, 0, 0);
 	mlx_loop(rt.context);
