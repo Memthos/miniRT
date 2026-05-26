@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:37:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/26 13:19:02 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/26 13:48:06 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static bool	ray_hit_object(t_minirt *rt, t_ray *ray, double min, double max, t_h
 	index = 0;
 	while (index < objects->size)
 	{
-		if ((objects->objs + index)->hit(rt, ray, &(objects->objs + index)->u_obj.sphere, min, _max, &tmp))
+		if ((objects->objs + index)->hit(rt, ray, objects->objs + index, min, _max, &tmp))
 		{
 			hit = true;
 			_max = tmp.t;
@@ -49,6 +49,7 @@ mlx_color	ray_color(t_minirt *rt, t_ray *ray)
 	mlx_color	c;
 	t_hit_point	p;
 
+	(void)rt;
 	if (ray_hit_object(rt, ray, 0, 1000, &p))
 	{
 		c = (mlx_color){.r = (p.normal.x + 1) * 127.5, .g = (p.normal.y + 1) * 127.5, .b = (p.normal.z + 1) * 127.5, .a = 255};
