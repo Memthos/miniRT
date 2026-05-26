@@ -6,16 +6,14 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:00:19 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/21 10:47:51 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/26 13:14:29 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include <stdint.h>
-# include <stdlib.h>
-
+# include "objects.h"
 # include "../libs/lib_tools/includes/lib_tools.h"
 # include "../libs/MacroLibX/includes/mlx.h"
 
@@ -29,68 +27,7 @@ typedef struct s_parse_func_id
 	t_parse_func	func;
 }	t_parse_func_id;
 
-typedef enum e_obj_type
-{
-	SPHERE,
-	PLANE,
-	CYLINDER,
-	AMBIENT_LIGHT,
-	POINT_LIGHT,
-	CAMERA,
-}	t_obj_type;
-
-/*-----------------------------------GEO--------------------------------------*/
-typedef struct s_sphere
-{
-	t_vec3		position;
-	double		diameter;
-	mlx_color	color;
-}	t_sphere;
-
-typedef struct s_plane
-{
-	t_vec3		position;
-	t_vec3		norm_rot;
-	double		diameter;
-	mlx_color	color;
-}	t_plane;
-
-typedef struct s_cylinder
-{
-	t_vec3		position;
-	t_vec3		norm_rot;
-	double		diameter;
-	double		height;
-	mlx_color	color;
-}	t_cylinder;
-
-/*-----------------------------------LIGHT------------------------------------*/
-typedef struct s_ambient_light
-{
-	double		brightness;
-	mlx_color	color;
-}	t_ambient_light;
-
-typedef struct s_point_light
-{
-	t_vec3		position;
-	double		brightness;
-	mlx_color	color;
-}	t_point_light;
-
 /*-----------------------------------ARRAY------------------------------------*/
-typedef struct s_obj
-{
-	t_obj_type	type;
-	union
-	{
-		t_sphere		sphere;
-		t_plane			plane;
-		t_cylinder		cylinder;
-		t_ambient_light	ambient_light;
-		t_point_light	point_light;
-	}	u_obj;
-}	t_obj;
 
 typedef struct s_array
 {
