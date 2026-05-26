@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/26 13:14:35 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/26 14:52:20 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include "quit.h"
 # include "parser.h"
 # include "camera.h"
+# include "interval.h"
 # include "ray.h"
 # include "objects.h"
 # include "rendering.h"
