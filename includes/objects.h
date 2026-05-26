@@ -1,0 +1,90 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   objects.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/26 13:02:44 by juperrin          #+#    #+#             */
+/*   Updated: 2026/05/26 13:14:56 by juperrin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef OBJECTS_H
+# define OBJECTS_H
+
+#include "ray.h"
+
+typedef struct s_minirt		t_minirt;
+typedef struct s_hit_point	t_hit_point;
+
+typedef enum e_obj_type
+{
+	SPHERE,
+	PLANE,
+	CYLINDER,
+	AMBIENT_LIGHT,
+	POINT_LIGHT,
+	CAMERA,
+}	t_obj_type;
+
+typedef struct s_ambient_light
+{
+	double		brightness;
+	mlx_color	color;
+}	t_ambient_light;
+
+typedef struct s_point_light
+{
+	t_vec3		position;
+	double		brightness;
+	mlx_color	color;
+}	t_point_light;
+
+typedef struct s_sphere
+{
+	t_vec3		position;
+	double		diameter;
+	mlx_color	color;
+}	t_sphere;
+
+typedef struct s_plane
+{
+	t_vec3		position;
+	t_vec3		norm_rot;
+	double		diameter;
+	mlx_color	color;
+}	t_plane;
+
+typedef struct s_cylinder
+{
+	t_vec3		position;
+	t_vec3		norm_rot;
+	double		diameter;
+	double		height;
+	mlx_color	color;
+}	t_cylinder;
+
+typedef bool	(*t_hit_func)(t_minirt *rt, t_ray *ray, t_sphere *sp, double min, double max, t_hit_point *p);
+
+typedef struct s_obj
+{
+	t_obj_type	type;
+	union
+	{
+		t_sphere		sphere;
+		t_plane			plane;
+		t_cylinder		cylinder;
+		t_ambient_light	ambient_light;
+		t_point_light	point_light;
+	}	u_obj;
+	t_hit_func	hit;
+}	t_obj;
+
+bool	hit_sphere(t_minirt *rt, t_ray *ray, t_sphere *sp, double min, double max, t_hit_point *p);
+
+bool	hit_cylinder(t_minirt *rt, t_ray *ray, t_cylinder *cy, double min, double max, t_hit_point *p);
+
+bool	hit_plane(t_minirt *rt, t_ray *ray, t_plane *pl, double min, double max, t_hit_point *p);
+
+#endif
