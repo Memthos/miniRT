@@ -6,14 +6,15 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 13:02:44 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/26 13:44:08 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/26 15:13:01 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
-#include "ray.h"
+# include "ray.h"
+# include "interval.h"
 
 typedef struct s_minirt		t_minirt;
 typedef struct s_hit_point	t_hit_point;
@@ -66,7 +67,7 @@ typedef struct s_cylinder
 	mlx_color	color;
 }	t_cylinder;
 
-typedef bool	(*t_hit_func)(t_minirt *, t_ray *, t_obj *, double, double, t_hit_point *);
+typedef bool	(*t_hit_func)(t_minirt *, t_ray *, t_obj *, t_interval, t_hit_point *);
 
 typedef struct s_obj
 {
@@ -82,10 +83,10 @@ typedef struct s_obj
 	t_hit_func	hit;
 }	t_obj;
 
-bool	hit_sphere(t_minirt *rt, t_ray *ray, t_obj *sphere, double min, double max, t_hit_point *p);
+bool	hit_sphere(t_minirt *rt, t_ray *ray, t_obj *sphere, t_interval i, t_hit_point *p);
 
-bool	hit_cylinder(t_minirt *rt, t_ray *ray, t_obj *cylinder, double min, double max, t_hit_point *p);
+bool	hit_cylinder(t_minirt *rt, t_ray *ray, t_obj *cylinder, t_interval i, t_hit_point *p);
 
-bool	hit_plane(t_minirt *rt, t_ray *ray, t_obj *plane, double min, double max, t_hit_point *p);
+bool	hit_plane(t_minirt *rt, t_ray *ray, t_obj *plane, t_interval i, t_hit_point *p);
 
 #endif
