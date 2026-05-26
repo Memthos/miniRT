@@ -1,10 +1,11 @@
 INCLUDES:=includes
-VPATH:=srcs:srcs/init:srcs/quit:srcs/camera:srcs/ray:srcs/rendering:srcs/events:srcs/array:srcs/parser:srcs/utils
+VPATH:=srcs:srcs/init:srcs/quit:srcs/camera:srcs/ray:srcs/rendering:srcs/objects:srcs/events:srcs/array:srcs/parser:srcs/utils
 
 SRCS:=	minirt.c init.c quit.c \
 		events.c \
 		camera.c \
 		ray.c render.c \
+		sphere.c cylinder.c plane.c \
 		add_array_slot.c \
 		parser.c data_parser.c objects_parser.c \
 
