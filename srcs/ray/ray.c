@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:37:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/26 13:48:06 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/26 15:11:26 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,23 @@ t_point3	ray_at(t_ray *ray, double delta)
 	return (point);
 }
 
-static bool	ray_hit_object(t_minirt *rt, t_ray *ray, double min, double max, t_hit_point *p)
+static bool	ray_hit_object(t_minirt *rt, t_ray *ray, const t_interval i, t_hit_point *p)
 {
 	bool			hit;
-	double			_max;
+	t_interval		_i;
 	t_hit_point		tmp;
 	t_uint			index;
 	const t_array	*objects = &rt->geos;
 
 	hit = false;
-	_max = max;
+	_i = i;
 	index = 0;
 	while (index < objects->size)
 	{
-		if ((objects->objs + index)->hit(rt, ray, objects->objs + index, min, _max, &tmp))
+		if ((objects->objs + index)->hit(rt, ray, objects->objs + index, _i, &tmp))
 		{
 			hit = true;
-			_max = tmp.t;
+			_i.max = tmp.t;
 			*p = tmp;
 		}
 		++index;
@@ -48,9 +48,10 @@ mlx_color	ray_color(t_minirt *rt, t_ray *ray)
 {
 	mlx_color	c;
 	t_hit_point	p;
+	const t_interval	i = {0, 100};
 
 	(void)rt;
-	if (ray_hit_object(rt, ray, 0, 1000, &p))
+	if (ray_hit_object(rt, ray, i, &p))
 	{
 		c = (mlx_color){.r = (p.normal.x + 1) * 127.5, .g = (p.normal.y + 1) * 127.5, .b = (p.normal.z + 1) * 127.5, .a = 255};
 		return (c);
