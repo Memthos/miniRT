@@ -6,20 +6,21 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/19 17:26:32 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/26 13:14:35 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# include <stdio.h> // printf, perror
+# include <stdlib.h> // malloc, free, exit
+# include <stdint.h>
+# include <string.h> // strerror
+# include <unistd.h> // close, read, write
 # include <sys/time.h> // gettimeofday
 # include <sys/stat.h> // open
 # include <fcntl.h> // open
-# include <unistd.h> // close, read, write
-# include <stdio.h> // printf, perror
-# include <stdlib.h> // malloc, free, exit
-# include <string.h> // strerror
 
 # include "../libs/lib_tools/includes/lib_tools.h" //Lib_tools
 # include "../libs/MacroLibX/includes/mlx.h" //Macrolibx
@@ -30,6 +31,7 @@
 # include "parser.h"
 # include "camera.h"
 # include "ray.h"
+# include "objects.h"
 # include "rendering.h"
 # include "events.h"
 
