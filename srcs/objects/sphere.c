@@ -6,13 +6,13 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 11:20:46 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/26 13:43:35 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/26 15:12:10 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-bool	hit_sphere(t_minirt *rt, t_ray *ray, t_obj *obj, double min, double max, t_hit_point *p)
+bool	hit_sphere(t_minirt *rt, t_ray *ray, t_obj *obj, t_interval i, t_hit_point *p)
 {
 	(void)rt;
 	t_vec3	oc = vec_sub(obj->u_obj.sphere.position, ray->origin);//vector between camera origin and sphere center
@@ -24,10 +24,10 @@ bool	hit_sphere(t_minirt *rt, t_ray *ray, t_obj *obj, double min, double max, t_
 		return (false);
 	double	sqrtd = sqrt(d);
 	double	root = (h - sqrtd) / a;
-	if (root < min || root > max)
+	if (root < i.min || root > i.max)
 	{
 		root = (h + sqrtd) / a;
-		if (root < min || root > max)
+		if (root < i.min || root > i.max)
 			return (false);
 	}
 	p->t = root;
