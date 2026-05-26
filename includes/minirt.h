@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/26 14:52:20 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/26 16:35:59 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@
 
 typedef struct s_minirt
 {
+	double		aspect_ratio;
+	t_vec2		dimensions;
+	mlx_context	context;
+	mlx_window	window;
+	mlx_image	render;
 	t_array		geos;
 	t_array		lights;
 	t_camera	camera;
-	double		aspect_ratio;
-	mlx_context	context;
-	t_vec2		dimensions;
-	mlx_window	window;
-	mlx_image	render;
 }	t_minirt;
 
 #endif
