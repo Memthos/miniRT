@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects_parser.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:51:05 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/26 13:30:57 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/26 13:39:06 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	rt_parse_sphere(const t_string *line, t_minirt *rt)
 	t_string		endptr;
 
 	endptr = NULL;
-	obj = (t_obj){.type = SPHERE, .hit = &hit_sphere, NULL};
+	obj = (t_obj){.type = SPHERE, .hit = &hit_sphere, .u_obj = {0}};
 	data = ft_split(*line + 2, "\t\n\v\f\r ");
 	if (ft_string_tab_len(data) != 3)
 		use_status(FAILURE);
@@ -43,7 +43,7 @@ void	rt_parse_plane(const t_string *line, t_minirt *rt)
 	t_obj			obj;
 	t_string_tab	data;
 
-	obj = (t_obj){.type = PLANE, .hit = &hit_plane, NULL};
+	obj = (t_obj){.type = PLANE, .hit = &hit_plane, .u_obj = {0}};
 	data = ft_split(*line + 2, "\t\n\v\f\r ");
 	if (ft_string_tab_len(data) != 3)
 		use_status(FAILURE);
@@ -67,7 +67,7 @@ void	rt_parse_cylinder(const t_string *line, t_minirt *rt)
 	t_string		endptr;
 
 	endptr = NULL;
-	obj = (t_obj){.type = CYLINDER, .hit = &hit_cylinder, NULL};
+	obj = (t_obj){.type = CYLINDER, .hit = &hit_cylinder, .u_obj = {0}};
 	data = ft_split(*line + 2, "\t\n\v\f\r ");
 	if (ft_string_tab_len(data) != 5)
 		use_status(FAILURE);
