@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:26:13 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/27 10:47:56 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/27 15:56:01 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ t_camera	*camera_init(t_camera *cam, t_vec2 screen)
 	cam->viewport.nw_corner = vec_sub(cam->pos, (t_vec3){0, 0, cam->focal_length});
 	cam->viewport.nw_corner = vec_sub(cam->viewport.nw_corner, vec_scale((t_vec3){cam->viewport.width, 0, 0}, 0.5));
 	cam->viewport.nw_corner = vec_sub(cam->viewport.nw_corner, vec_scale((t_vec3){0, -cam->viewport.height, 0}, 0.5));
-	cam->viewport.nw_pixel = vec_add(cam->viewport.nw_corner, vec_scale(vec_add(cam->viewport.delta_x, cam->viewport.delta_y), 0.5));
+	cam->viewport.nw_pixel = cam->viewport.nw_corner;
 	return (cam);
 }
