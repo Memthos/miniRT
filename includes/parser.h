@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:00:19 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/26 13:14:29 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/27 10:54:22 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void		rt_parse_point_light(const t_string *line, t_minirt *rt);
 
 void		rt_parse_coords(const t_string *input, t_vec3 *pos);
 void		rt_parse_orientation(const t_string *input, t_vec3 *norm_rot);
-void		rt_parse_color(const t_string *input, mlx_color *color);
+void		rt_parse_color(const t_string *input, t_rgb *color);
 
 t_status	rt_add_array_slot(t_array *array, t_obj *obj);
 
