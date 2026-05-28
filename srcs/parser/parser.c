@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 21:53:49 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/27 16:04:30 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/28 08:44:41 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	rt_parse_camera(const t_string *line, t_minirt *rt)
 	if (use_status(ERR_GET) == SUCCESS)
 		rt_parse_orientation(&data[1], &rt->camera.norm_rot);
 	if (use_status(ERR_GET) == SUCCESS)
-		rt->camera.vfov = ft_strtod(data[2], &endptr);
+		rt->camera.hfov = ft_strtod(data[2], &endptr);
 	if (use_status(ERR_GET) == SUCCESS && endptr)
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == FAILURE)
