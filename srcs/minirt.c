@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/21 15:06:31 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/29 15:19:48 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,31 @@ static int	check_file(t_string s)
 	return (use_status(SUCCESS));
 }
 
-int	main(int argc, t_string_tab argv)
+void	rt_loop(void *param)
+{
+	t_minirt *rt;
+
+	rt = param;
+	rt_render(rt);
+	return ;
+}
+
+t_status	minirt(const t_string file)
 {
 	t_minirt	rt;
 
+	rt = (t_minirt){0};
+	rt_parser(file, &rt);
+	if (SUCCESS != use_status(ERR_GET))
+		return (use_status(ERR_GET));
+	rt_init(&rt);
+	mlx_loop(rt.context);
+	rt_quit(&rt);
+	return (SUCCESS);
+}
+
+int	main(int argc, t_string_tab argv)
+{
 	if (argc != 2 || check_file(argv[1]))
 	{
 		write(2 ,"Error\n", 6);
@@ -53,14 +74,6 @@ int	main(int argc, t_string_tab argv)
 			write(2, "Use: ./miniRT <file.rt>\n", 24);
 		return (1);
 	}
-	ft_bzero(&rt, sizeof(rt));
-	rt_parser(argv[1], &rt);
-	if (SUCCESS != use_status(ERR_GET))
-		return (use_status(ERR_GET));
-	rt_init(&rt);
-	rt_render(&rt);
-	mlx_put_image_to_window(rt.context, rt.window, rt.render, 0, 0);
-	mlx_loop(rt.context);
-	rt_quit(&rt);
+	minirt(argv[1]);
 	return (use_status(ERR_GET));
 }
