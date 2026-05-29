@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/28 11:11:04 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/29 15:11:01 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,24 @@
 
 static void	key_hook(int key, void *param)
 {
-	t_minirt	rt;
+	t_minirt	*rt;
 
-	rt = *(t_minirt *)param;
-	if (41 == key)
-		mlx_loop_end(rt.context);
+	rt = (t_minirt *)param;
+	if (KEY_ESCAPE == key)
+		mlx_loop_end(rt->context);
+	if (KEY_A == key)
+		rt->camera.pos.x -= 0.01;
+	if (KEY_D == key)
+		rt->camera.pos.x += 0.01;
+	if (KEY_W == key)
+		rt->camera.pos.z += 0.01;
+	if (KEY_S == key)
+		rt->camera.pos.z -= 0.01;
+	if (KEY_E == key)
+		rt->camera.pos.y += 0.01;
+	if (KEY_Q == key)
+		rt->camera.pos.y -= 0.01;
+	camera_update(&rt->camera, rt->dimensions);
 	return ;
 }
 
@@ -78,5 +91,6 @@ void	rt_init_events(t_minirt *rt)
 	mlx_on_event(rt->context, rt->window, MLX_KEYDOWN, &key_hook, rt);
 	mlx_on_event(rt->context, rt->window, MLX_WINDOW_EVENT, &window_hook, rt);
 	mlx_on_event(rt->context, rt->window, MLX_MOUSEDOWN, &select_hook, rt);
+	mlx_add_loop_hook(rt->context, &minirt, rt);
 	return ;
 }
