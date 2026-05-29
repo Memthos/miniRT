@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/29 10:11:31 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/29 15:15:44 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ typedef struct s_minirt
 	t_camera	camera;
 	t_obj		*selected;
 }	t_minirt;
+
+void	rt_loop(void *param);
 
 #endif
