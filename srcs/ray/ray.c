@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:37:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/29 10:09:41 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/29 10:10:54 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_ray	ray_gen(t_camera *cam, int x, int y, int delta_x, int delta_y)
 				vec_scale(cam->viewport.delta_x, x + delta_x * offset),
 				vec_scale(cam->viewport.delta_y, y + delta_y * offset)));
 
-	ray = (t_ray){cam->pos, vec_sub(pixel_point, cam->pos)};
+	ray = (t_ray){cam->pos, vec_normalize(vec_sub(pixel_point, cam->pos))};
 	return (ray);
 }
 
