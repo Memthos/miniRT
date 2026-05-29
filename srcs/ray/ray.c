@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:37:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/26 15:11:26 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/29 10:06:36 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static bool	ray_hit_object(t_minirt *rt, t_ray *ray, const t_interval i, t_hit_p
 	index = 0;
 	while (index < objects->size)
 	{
-		if ((objects->objs + index)->hit(rt, ray, objects->objs + index, _i, &tmp))
+		if ((objects->objs + index)->hit(ray, objects->objs + index, _i, &tmp))
 		{
 			hit = true;
 			_i.max = tmp.t;
@@ -56,7 +56,7 @@ mlx_color	ray_color(t_minirt *rt, t_ray *ray)
 		c = (mlx_color){.r = (p.normal.x + 1) * 127.5, .g = (p.normal.y + 1) * 127.5, .b = (p.normal.z + 1) * 127.5, .a = 255};
 		return (c);
 	}
-	double	f = (vec_normalize(ray->dir).y + 1) * 0.5;
+	double	f = (ray->dir.y + 1) * 0.5;
 	t_vec3	col = vec_add(vec_scale((t_vec3){1, 1, 1}, 1 - f), vec_scale((t_vec3){0.5, 0.7, 1}, f));
 	c = (mlx_color){.r = col.x * 255, .g = col.y * 255, .b = col.z * 255, .a = 255};
 	return (c);

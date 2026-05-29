@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:04:09 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/21 14:24:54 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/28 10:45:25 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	rt_render(t_minirt *rt)
 		while (x < rt->dimensions.x)
 		{
 			t_point3	pixel_point = vec_add(rt->camera.viewport.nw_pixel, vec_add(vec_scale(rt->camera.viewport.delta_x, x), vec_scale(rt->camera.viewport.delta_y, y)));
-			t_ray		ray = {rt->camera.pos, vec_sub(pixel_point, rt->camera.pos)};
+			t_ray		ray = {rt->camera.pos, vec_normalize(vec_sub(pixel_point, rt->camera.pos))};
 			mlx_set_image_pixel(rt->context, rt->render, x, y, ray_color(rt, &ray));
 			++x;
 		}
