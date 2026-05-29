@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:26:13 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/28 09:34:49 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/29 09:59:06 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_camera	*camera_init(t_camera *cam, t_vec2 screen)
 
 	cam->aa.size = 2;
 	cam->aa.scale = 1.0 / (double)(cam->aa.size * cam->aa.size);
-	cam->dir = (t_vec3){0, 0, 1};
 	cam->focal_length = vec_magnitude(cam->dir);
 	cam->viewport.width = 2.0 * tan(cam->hfov * deg_to_rad() / 2);
 	cam->viewport.height = cam->viewport.width / (16.0 / 9.0);
