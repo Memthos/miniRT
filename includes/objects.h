@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 13:02:44 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/28 11:03:44 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/29 10:08:22 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,21 @@ typedef enum e_obj_type
 typedef struct s_ambient_light
 {
 	double		brightness;
-	mlx_color	color;
+	t_rgb	color;
 }	t_ambient_light;
 
 typedef struct s_point_light
 {
 	t_vec3		position;
 	double		brightness;
-	mlx_color	color;
+	t_rgb	color;
 }	t_point_light;
 
 typedef struct s_sphere
 {
 	t_vec3		position;
 	double		diameter;
-	mlx_color	color;
+	t_rgb	color;
 }	t_sphere;
 
 typedef struct s_plane
@@ -55,7 +55,7 @@ typedef struct s_plane
 	t_vec3		position;
 	t_vec3		norm_rot;
 	double		diameter;
-	mlx_color	color;
+	t_rgb	color;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -64,7 +64,7 @@ typedef struct s_cylinder
 	t_vec3		norm_rot;
 	double		diameter;
 	double		height;
-	mlx_color	color;
+	t_rgb	color;
 }	t_cylinder;
 
 typedef bool	(*t_hit_func)(t_ray *, t_obj *, t_interval, t_hit_point *);

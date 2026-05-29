@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:26:13 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/21 14:59:10 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/28 09:34:49 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,30 @@
 
 t_camera	*camera_init(t_camera *cam, t_vec2 screen)
 {
-	cam->focal_length = 1.0;
-	cam->viewport.height = 2.0;
-	cam->viewport.width = cam->viewport.height * (16.0 / 9.0);
-	cam->viewport.delta_x = (t_vec3){cam->viewport.width / screen.x, 0, 0};
-	cam->viewport.delta_y = (t_vec3){0, -cam->viewport.height / screen.y, 0};
-	cam->viewport.nw_corner = vec_sub(cam->pos, (t_vec3){0, 0, cam->focal_length});
-	cam->viewport.nw_corner = vec_sub(cam->viewport.nw_corner, vec_scale((t_vec3){cam->viewport.width, 0, 0}, 0.5));
-	cam->viewport.nw_corner = vec_sub(cam->viewport.nw_corner, vec_scale((t_vec3){0, -cam->viewport.height, 0}, 0.5));
-	cam->viewport.nw_pixel = vec_add(cam->viewport.nw_corner, vec_scale(vec_add(cam->viewport.delta_x, cam->viewport.delta_y), 0.5));
+	const t_vec3	vup = {0, 1, 0};
+
+	cam->aa.size = 2;
+	cam->aa.scale = 1.0 / (double)(cam->aa.size * cam->aa.size);
+	cam->dir = (t_vec3){0, 0, 1};
+	cam->focal_length = vec_magnitude(cam->dir);
+	cam->viewport.width = 2.0 * tan(cam->hfov * deg_to_rad() / 2);
+	cam->viewport.height = cam->viewport.width / (16.0 / 9.0);
+	t_vec3	u = vec_normalize(vec_cross(vup, cam->dir));
+	t_vec3	v = vec_cross(cam->dir, u);
+	t_vec3	vx = vec_scale(u, cam->viewport.width);
+	t_vec3	vy = vec_scale(v, -cam->viewport.height);
+	cam->viewport.delta_x = vec_scale(vx, 1 / screen.x);
+	cam->viewport.delta_y =  vec_scale(vy, 1 / screen.y);
+	cam->viewport.nw_corner = vec_add(cam->pos, cam->dir);
+	cam->viewport.nw_corner = vec_sub(cam->viewport.nw_corner, vec_scale(vx, 0.5));
+	cam->viewport.nw_corner = vec_sub(cam->viewport.nw_corner, vec_scale(vy, 0.5));
+	cam->viewport.nw_pixel = cam->viewport.nw_corner;
+	// printf("Camera direction : [%f, %f, %f]\n", cam->dir.x, cam->dir.y, cam->dir.z);
+	// printf("focal length : %f\n", cam->focal_length);
+	// printf("Viewport dimensions : [%f, %f]\n", cam->viewport.width, cam->viewport.height);
+	// printf("u : [%f, %f, %f]\n", u.x, u.y, u.z);
+	// printf("v : [%f, %f, %f]\n", v.x, v.y, v.z);
+	// printf("delta : [%f, %f]\n", cam->viewport.delta_x.x, cam->viewport.delta_y.y);
+	// printf("north-west corner position : [%f, %f, %f]\n", cam->viewport.nw_corner.x, cam->viewport.nw_corner.y, cam->viewport.nw_corner.z);
 	return (cam);
 }

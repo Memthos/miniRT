@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:52:14 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/21 13:12:22 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/27 10:59:19 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	rt_parse_orientation(const t_string *input, t_vec3 *norm_rot)
 	ft_free_tab(&data);
 }
 
-void	rt_parse_color(const t_string *input, mlx_color *color)
+void	rt_parse_color(const t_string *input, t_rgb *color)
 {
 	t_string_tab	data;
 	int				value;
@@ -68,7 +68,6 @@ void	rt_parse_color(const t_string *input, mlx_color *color)
 	data = ft_split(*input, ",");
 	if (ft_string_tab_len(data) != 3)
 		use_status(FAILURE);
-	color->a = 0xFF;
 	i = 0;
 	while (i < 3 && use_status(ERR_GET) == SUCCESS)
 	{
@@ -78,11 +77,11 @@ void	rt_parse_color(const t_string *input, mlx_color *color)
 		else if (value < 0 || value > 255)
 			use_status(FAILURE);
 		else if (i == 1)
-			color->r = value;
+			color->x = value;
 		else if (i == 2)
-			color->g = value;
+			color->y = value;
 		else
-			color->b = value;
+			color->z = value;
 	}
 	ft_free_tab(&data);
 }

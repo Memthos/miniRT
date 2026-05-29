@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/27 13:58:37 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/29 10:08:07 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@
 
 typedef struct s_minirt
 {
+	double		aspect_ratio;
+	t_vec2		dimensions;
+	mlx_context	context;
+	mlx_window	window;
+	mlx_image	render;
 	t_array		geos;
 	t_array		lights;
 	t_camera	camera;
