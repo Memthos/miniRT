@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:52:14 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/27 10:59:19 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/29 10:04:04 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	rt_parse_coords(const t_string *input, t_vec3 *pos)
 	ft_free_tab(&data);
 }
 
-void	rt_parse_orientation(const t_string *input, t_vec3 *norm_rot)
+void	rt_parse_orientation(const t_string *input, t_vec3 *dir)
 {
 	t_string_tab	data;
 	t_string		endptr;
@@ -50,11 +50,11 @@ void	rt_parse_orientation(const t_string *input, t_vec3 *norm_rot)
 		else if (value < -1.0 || value > 1.0 || endptr)
 			use_status(FAILURE);
 		else if (i == 1)
-			norm_rot->x = value;
+			dir->x = value;
 		else if (i == 2)
-			norm_rot->y = value;
+			dir->y = value;
 		else
-			norm_rot->z = value;
+			dir->z = value;
 	}
 	ft_free_tab(&data);
 }
