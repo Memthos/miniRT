@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/29 10:46:08 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/29 10:54:37 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdint.h>
 # include <string.h> // strerror
 # include <unistd.h> // close, read, write
-# include <sys/time.h> // gettimeofday
 # include <sys/stat.h> // open
 # include <fcntl.h> // open
 
@@ -35,6 +34,7 @@
 # include "objects.h"
 # include "rendering.h"
 # include "events.h"
+# include "random.h"
 
 typedef struct s_minirt
 {
@@ -46,7 +46,6 @@ typedef struct s_minirt
 	t_array		geos;
 	t_array		lights;
 	t_camera	camera;
-	long int	seed;
 }	t_minirt;
 
 #endif
