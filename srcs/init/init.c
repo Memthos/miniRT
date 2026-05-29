@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:24:04 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/29 10:50:21 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/29 10:53:42 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@ t_minirt	*rt_init(t_minirt *rt)
 {
 	mlx_window_create_info	info;
 
-	struct timeval	time;
-	gettimeofday(&time, NULL);
-	rt->seed = time.tv_sec;
-	if (time.tv_usec)
-		rt->seed = time.tv_sec * time.tv_usec;
 	rt->aspect_ratio = 16.0 / 9.0;
 	rt->dimensions = (t_vec2){1280, 1280 / rt->aspect_ratio};
 	rt->context = mlx_init();
