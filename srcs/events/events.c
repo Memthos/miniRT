@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/29 15:11:01 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/29 15:17:13 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ void	rt_init_events(t_minirt *rt)
 	mlx_on_event(rt->context, rt->window, MLX_KEYDOWN, &key_hook, rt);
 	mlx_on_event(rt->context, rt->window, MLX_WINDOW_EVENT, &window_hook, rt);
 	mlx_on_event(rt->context, rt->window, MLX_MOUSEDOWN, &select_hook, rt);
-	mlx_add_loop_hook(rt->context, &minirt, rt);
+	mlx_add_loop_hook(rt->context, &rt_loop, rt);
 	return ;
 }
