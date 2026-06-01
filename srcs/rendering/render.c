@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:04:09 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/01 13:54:04 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/01 18:00:32 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ static void	set_pixel_color(t_minirt *rt, int x, int y, t_rgb color)
 	int	_x;
 
 	_y = 0;
-	while (_y < 1 / rt->scale)
+	while (_y < 1 / rt->cur_quality->quality)
 	{
 		_x = 0;
-		while (_x < 1 / rt->scale)
+		while (_x < 1 / rt->cur_quality->quality)
 		{
 			mlx_set_image_pixel(rt->context, rt->render, x + _x, y + _y, (mlx_color){
 				.r = 255 * color.x,
@@ -61,27 +61,50 @@ static void	set_pixel_color(t_minirt *rt, int x, int y, t_rgb color)
 	return ;
 }
 
-void	rt_render(t_minirt *rt)
+static void	render_region(t_minirt *rt, t_vec2 pos)
 {
 	int		x;
 	int		y;
 	t_rgb	pixel_c;
 
-	if (NULL == rt)
-		return ;
 	y = 0;
-	while (y < rt->dimensions.y)
+	while (y < rt->cur_quality->region.y)
 	{
 		x = 0;
-		while (x < rt->dimensions.x)
+		while (x < rt->cur_quality->region.x)
 		{
-			pixel_c = get_pixel_color(rt, x, y);
-			set_pixel_color(rt, x, y, pixel_c);
-			x += 1.0 / rt->scale;
+			pixel_c = get_pixel_color(rt, x + pos.x * rt->cur_quality->region.x, y + pos.y * rt->cur_quality->region.y);
+			set_pixel_color(rt, x + pos.x * rt->cur_quality->region.x, y + pos.y * rt->cur_quality->region.y, pixel_c);
+			x += 1 / rt->cur_quality->quality;
 		}
-		y += 1.0 / rt->scale;
+		y += 1 / rt->cur_quality->quality;
 	}
-	mlx_clear_window(rt->context, rt->window, (mlx_color){.rgba = 0x000000FF});
-	mlx_put_image_to_window(rt->context, rt->window, rt->render, 0, 0);
+	return ;
+}
+
+void	rt_render(t_minirt *rt, bool restart)
+{
+	static t_vec2	pos;
+
+	if (restart)
+	{
+		pos.x = 0;
+		pos.y = 0;
+	}
+	render_region(rt, pos);
+	++pos.x;
+	if (pos.x * rt->cur_quality->region.x >= rt->dimensions.x)
+	{
+		pos.x = 0;
+		++pos.y;
+	}
+	if (pos.y * rt->cur_quality->region.y >= rt->dimensions.y)
+	{
+		pos.x = 0;
+		pos.y = 0;
+		rt->should_render = false;
+		mlx_clear_window(rt->context, rt->window, (mlx_color){.rgba = 0x000000FF});
+		mlx_put_image_to_window(rt->context, rt->window, rt->render, 0, 0);
+	}
 	return ;
 }
