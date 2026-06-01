@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/29 10:54:37 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/01 09:53:43 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ typedef struct s_minirt
 	t_array		geos;
 	t_array		lights;
 	t_camera	camera;
+	t_obj		*selected;
 }	t_minirt;
+
+void	rt_loop(void *param);
 
 #endif

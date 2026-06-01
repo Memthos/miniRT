@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:04:09 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/27 14:32:15 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/29 15:06:47 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,7 @@ void	rt_render(t_minirt *rt)
 		}
 		++y;
 	}
+	mlx_clear_window(rt->context, rt->window, (mlx_color){.rgba = 0x000000FF});
+	mlx_put_image_to_window(rt->context, rt->window, rt->render, 0, 0);
 	return ;
 }

@@ -1,5 +1,5 @@
 INCLUDES:=includes
-VPATH:=srcs:srcs/init:srcs/quit:srcs/camera:srcs/interval:srcs/ray:srcs/rendering:srcs/objects:srcs/events:srcs/array:srcs/parser:srcs/utils
+VPATH:=srcs:srcs/init:srcs/quit:srcs/camera:srcs/interval:srcs/ray:srcs/rendering:srcs/objects:srcs/events:srcs/array:srcs/parser:srcs/random:srcs/utils
 
 SRCS:=	minirt.c init.c quit.c \
 		events.c \
@@ -8,6 +8,7 @@ SRCS:=	minirt.c init.c quit.c \
 		sphere.c cylinder.c plane.c \
 		add_array_slot.c \
 		parser.c data_parser.c objects_parser.c \
+		random.c \
 
 OBJSDIR:=objs/
 OBJS:=$(addprefix $(OBJSDIR), $(SRCS:.c=.o))

@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.h                                           :+:      :+:    :+:   */
+/*   random.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/19 15:21:42 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/29 15:10:15 by juperrin         ###   ########.fr       */
+/*   Created: 2026/05/29 10:51:43 by juperrin          #+#    #+#             */
+/*   Updated: 2026/05/29 11:34:23 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EVENTS_H
-# define EVENTS_H
+# include <sys/time.h>
 
-typedef struct s_minirt	t_minirt;
-
-enum e_keys
+long int	seed(void)
 {
-	KEY_ESCAPE = 41,
-	KEY_A = 4,
-	KEY_D = 7,
-	KEY_W = 26,
-	KEY_S = 22,
-	KEY_Q = 20,
-	KEY_E = 8,
-};
+	struct timeval	time;
+	static long int	seed = 0;
 
-/**
- * @brief Initialises hook events for the window, keyboard, and mouse.
- */
-void	rt_init_events(t_minirt *rt);
-
-#endif
+	if (0 == seed)
+	{
+		gettimeofday(&time, 0);
+		seed = time.tv_sec * time.tv_usec + 1;
+	}
+	return (seed);
+}
+double	random_double(void)
+{
+	static double	num = 0;
+	return (num);
+}

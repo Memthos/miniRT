@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:37:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/27 15:54:58 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/05/29 10:10:54 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_ray	ray_gen(t_camera *cam, int x, int y, int delta_x, int delta_y)
 				vec_scale(cam->viewport.delta_x, x + delta_x * offset),
 				vec_scale(cam->viewport.delta_y, y + delta_y * offset)));
 
-	ray = (t_ray){cam->pos, vec_sub(pixel_point, cam->pos)};
+	ray = (t_ray){cam->pos, vec_normalize(vec_sub(pixel_point, cam->pos))};
 	return (ray);
 }
 
@@ -47,7 +47,7 @@ static bool	ray_hit_object(t_minirt *rt, t_ray *ray, const t_interval i, t_hit_p
 	index = 0;
 	while (index < objects->size)
 	{
-		if ((objects->objs + index)->hit(rt, ray, objects->objs + index, _i, &tmp))
+		if ((objects->objs + index)->hit(ray, objects->objs + index, _i, &tmp))
 		{
 			hit = true;
 			_i.max = tmp.t;
