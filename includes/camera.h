@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:15:36 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/01 13:21:18 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/01 17:01:06 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ typedef struct s_camera
 	t_viewport	viewport;
 }	t_camera;
 
-t_camera	*camera_init(t_camera *cam, t_vec2 screen);
+t_camera	*camera_init(t_camera *cam, t_aa aa, t_vec2 screen);
 
-t_camera	*camera_update(t_camera *cam, const t_vec2 screen);
+t_camera	*camera_update(t_camera *cam, t_aa aa, const t_vec2 screen);
 
 bool		camera_is_moving(t_camera *cam);
 
