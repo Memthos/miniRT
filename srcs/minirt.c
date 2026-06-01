@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/29 15:19:48 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/01 13:21:40 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,12 @@ static int	check_file(t_string s)
 
 void	rt_loop(void *param)
 {
-	t_minirt *rt;
+	t_minirt	*rt;
 
 	rt = param;
+	if (!camera_is_moving(&rt->camera))
+		return ;
+	camera_update(&rt->camera, rt->dimensions);
 	rt_render(rt);
 	return ;
 }
@@ -58,6 +61,7 @@ t_status	minirt(const t_string file)
 	if (SUCCESS != use_status(ERR_GET))
 		return (use_status(ERR_GET));
 	rt_init(&rt);
+	rt_render(&rt);
 	mlx_loop(rt.context);
 	rt_quit(&rt);
 	return (SUCCESS);

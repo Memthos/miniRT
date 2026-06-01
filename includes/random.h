@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.h                                           :+:      :+:    :+:   */
+/*   random.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/19 15:21:42 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/01 10:33:07 by juperrin         ###   ########.fr       */
+/*   Created: 2026/05/29 10:51:41 by juperrin          #+#    #+#             */
+/*   Updated: 2026/05/29 11:01:18 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EVENTS_H
-# define EVENTS_H
+#ifndef RANDOM_H
+# define RANDOM_H
 
-typedef struct s_minirt	t_minirt;
-
-enum e_keys
-{
-	KEY_ESCAPE = 41,
-	KEY_A = 4,
-	KEY_D = 7,
-	KEY_W = 26,
-	KEY_S = 22,
-	KEY_SPACE = 44,
-	KEY_CTRL = 224,
-};
-
-/**
- * @brief Initialises hook events for the window, keyboard, and mouse.
- */
-void	rt_init_events(t_minirt *rt);
+double	random_double(void);
 
 #endif
