@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:04:09 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/29 15:06:47 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/01 13:54:04 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,29 @@ static t_rgb	get_pixel_color(t_minirt *rt, int x, int y)
 	return (pixel_c);
 }
 
+static void	set_pixel_color(t_minirt *rt, int x, int y, t_rgb color)
+{
+	int	_y;
+	int	_x;
+
+	_y = 0;
+	while (_y < 1 / rt->scale)
+	{
+		_x = 0;
+		while (_x < 1 / rt->scale)
+		{
+			mlx_set_image_pixel(rt->context, rt->render, x + _x, y + _y, (mlx_color){
+				.r = 255 * color.x,
+				.g = 255 * color.y,
+				.b = 255 * color.z,
+				.a = 255});
+			++_x;
+		}
+		++_y;
+	}
+	return ;
+}
+
 void	rt_render(t_minirt *rt)
 {
 	int		x;
@@ -53,14 +76,10 @@ void	rt_render(t_minirt *rt)
 		while (x < rt->dimensions.x)
 		{
 			pixel_c = get_pixel_color(rt, x, y);
-			mlx_set_image_pixel(rt->context, rt->render, x, y, (mlx_color){
-				.r = 255 * pixel_c.x,
-				.g = 255 * pixel_c.y,
-				.b = 255 * pixel_c.z,
-				.a = 255});
-			++x;
+			set_pixel_color(rt, x, y, pixel_c);
+			x += 1.0 / rt->scale;
 		}
-		++y;
+		y += 1.0 / rt->scale;
 	}
 	mlx_clear_window(rt->context, rt->window, (mlx_color){.rgba = 0x000000FF});
 	mlx_put_image_to_window(rt->context, rt->window, rt->render, 0, 0);
