@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:15:36 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/29 14:55:37 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/01 10:51:54 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,23 @@
 # include "../libs/lib_tools/includes/math_ops.h"
 
 typedef struct s_vec3	t_point3;
+
+enum	e_moving_index
+{
+	MOVING_LEFT,
+	MOVING_RIGHT,
+	MOVING_FORWARD,
+	MOVING_BACKWARD,
+	MOVING_UP,
+	MOVING_DOWN
+};
+
+typedef struct s_movement
+{
+	bool	moving[6];
+	double	speed;
+	t_vec3	velocity;
+}	t_move;
 
 typedef struct s_antialiasing
 {
@@ -40,6 +57,7 @@ typedef struct s_camera
 	t_aa		aa;
 	t_point3	pos;
 	t_point3	dir;
+	t_move		move;
 	t_viewport	viewport;
 }	t_camera;
 
