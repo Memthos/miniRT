@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/01 10:54:11 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/01 13:21:40 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ void	rt_loop(void *param)
 	t_minirt	*rt;
 
 	rt = param;
-	if (!(rt->camera.move.moving[0] || rt->camera.move.moving[1]
-		|| rt->camera.move.moving[2] || rt->camera.move.moving[3]
-		|| rt->camera.move.moving[4] || rt->camera.move.moving[5]))
+	if (!camera_is_moving(&rt->camera))
 		return ;
 	camera_update(&rt->camera, rt->dimensions);
 	rt_render(rt);
