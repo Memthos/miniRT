@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:26:13 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/01 10:47:11 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/01 13:21:08 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,13 @@ t_camera	*camera_update(t_camera *cam, const t_vec2 screen)
 	cam->viewport.nw_corner = vec_sub(cam->viewport.nw_corner, vec_scale(vy, 0.5));
 	cam->viewport.nw_pixel = cam->viewport.nw_corner;
 	return (cam);
+}
+
+bool	camera_is_moving(t_camera *cam)
+{
+	if (NULL == cam)
+		return (false);
+	return (cam->move.moving[0] || cam->move.moving[1]
+		|| cam->move.moving[2] || cam->move.moving[3]
+		|| cam->move.moving[4] || cam->move.moving[5]);
 }
