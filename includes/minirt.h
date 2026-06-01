@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/01 09:53:43 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/01 13:29:19 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 typedef struct s_minirt
 {
 	double		aspect_ratio;
+	double		scale;
 	t_vec2		dimensions;
 	mlx_context	context;
 	mlx_window	window;
