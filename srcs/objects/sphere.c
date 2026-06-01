@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 11:20:46 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/28 11:13:49 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/05/29 10:29:22 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static bool	is_between_i(double *root, double h, double b, t_interval i)
 	return (true);
 }
 
-bool	hit_sphere(t_ray *ray, t_obj *obj, t_interval i, t_hit_point *p)
+bool	hit_sphere(t_ray *ray, t_obj *sphere, t_interval i, t_hit_point *p)
 {
 	t_vec3	oc;
 	double	b;
@@ -35,9 +35,9 @@ bool	hit_sphere(t_ray *ray, t_obj *obj, t_interval i, t_hit_point *p)
 	double	root;
 	t_vec3	normal;
 
-	oc = vec_sub(obj->u_obj.sphere.position, ray->origin);
+	oc = vec_sub(sphere->u_obj.sphere.position, ray->origin);
 	b = vec_dot(ray->dir, oc);
-	h = obj->u_obj.sphere.diameter * obj->u_obj.sphere.diameter * 0.25
+	h = sphere->u_obj.sphere.diameter * sphere->u_obj.sphere.diameter * 0.25
 		- vec_squared_magnitude(vec_sub(oc, vec_scale(ray->dir, b)));
 	if (h < 0)
 		return (false);
@@ -46,8 +46,8 @@ bool	hit_sphere(t_ray *ray, t_obj *obj, t_interval i, t_hit_point *p)
 		return (false);
 	p->t = root;
 	p->point = ray_at(ray, p->t);
-	normal = vec_scale(vec_sub(p->point, obj->u_obj.sphere.position),
-		2.0 / obj->u_obj.sphere.diameter);
+	normal = vec_scale(vec_sub(p->point, sphere->u_obj.sphere.position),
+		2.0 / sphere->u_obj.sphere.diameter);
 	p->front = vec_dot(ray->dir, normal) < 0;
 	if (p->front)
 		p->normal = normal;
