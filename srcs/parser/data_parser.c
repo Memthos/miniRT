@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:52:14 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/29 10:04:04 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/01 13:10:37 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	rt_parse_orientation(const t_string *input, t_vec3 *dir)
 {
 	t_string_tab	data;
 	t_string		endptr;
-	double			value;
+	double			*values[3];
 	size_t			i;
 
 	endptr = NULL;
@@ -42,20 +42,20 @@ void	rt_parse_orientation(const t_string *input, t_vec3 *dir)
 	if (ft_string_tab_len(data) != 3)
 		use_status(FAILURE);
 	i = 0;
-	while (i < 3 && use_status(ERR_GET) == SUCCESS)
+	values[0] = &dir->x;
+	values[1] = &dir->y;
+	values[2] = &dir->z;
+	while (i++ < 3 && use_status(ERR_GET) == SUCCESS)
 	{
-		value = ft_strtod(data[i++], &endptr);
-		if (use_status(ERR_GET) != SUCCESS)
-			break ;
-		else if (value < -1.0 || value > 1.0 || endptr)
+		(*values)[i - 1] = ft_strtod(data[i - 1], &endptr);
+		if (!use_status(ERR_GET) && ((*values)[i - 1] < -1.0
+			|| (*values)[i - 1] > 1.0 || endptr))
 			use_status(FAILURE);
-		else if (i == 1)
-			dir->x = value;
-		else if (i == 2)
-			dir->y = value;
-		else
-			dir->z = value;
 	}
+	if (dir->x == 0.0 && dir->y == 0.0 && dir->z == 0.0 && !use_status(ERR_GET))
+		use_status(FAILURE);
+	if (use_status(ERR_GET) == SUCCESS)
+		*dir = vec_normalize(*dir);
 	ft_free_tab(&data);
 }
 
