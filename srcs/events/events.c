@@ -6,32 +6,87 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/29 15:17:13 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/01 10:33:26 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	key_hook(int key, void *param)
+static void	keydown_hook(int key, void *param)
 {
 	t_minirt	*rt;
 
 	rt = (t_minirt *)param;
 	if (KEY_ESCAPE == key)
 		mlx_loop_end(rt->context);
-	if (KEY_A == key)
-		rt->camera.pos.x -= 0.01;
-	if (KEY_D == key)
-		rt->camera.pos.x += 0.01;
-	if (KEY_W == key)
-		rt->camera.pos.z += 0.01;
-	if (KEY_S == key)
-		rt->camera.pos.z -= 0.01;
-	if (KEY_E == key)
-		rt->camera.pos.y += 0.01;
-	if (KEY_Q == key)
-		rt->camera.pos.y -= 0.01;
-	camera_update(&rt->camera, rt->dimensions);
+	if (KEY_A == key && !rt->camera.move.moving[MOVING_LEFT])
+	{
+		rt->camera.move.moving[MOVING_LEFT] = true;
+		rt->camera.move.velocity.x -= 1.0;
+	}
+	if (KEY_D == key && !rt->camera.move.moving[MOVING_RIGHT])
+	{
+		rt->camera.move.moving[MOVING_RIGHT] = true;
+		rt->camera.move.velocity.x += 1.0;
+	}
+	if (KEY_W == key && !rt->camera.move.moving[MOVING_FORWARD])
+	{
+		rt->camera.move.moving[MOVING_FORWARD] = true;
+		rt->camera.move.velocity.z += 1.0;
+	}
+	if (KEY_S == key && !rt->camera.move.moving[MOVING_BACKWARD])
+	{
+		rt->camera.move.moving[MOVING_BACKWARD] = true;
+		rt->camera.move.velocity.z -= 1.0;
+	}
+	if (KEY_SPACE == key && !rt->camera.move.moving[MOVING_UP])
+	{
+		rt->camera.move.moving[MOVING_UP] = true;
+		rt->camera.move.velocity.y += 1.0;
+	}
+	if (KEY_CTRL == key && !rt->camera.move.moving[MOVING_DOWN])
+	{
+		rt->camera.move.moving[MOVING_DOWN] = true;
+		rt->camera.move.velocity.y -= 1.0;
+	}
+	return ;
+}
+
+static void	keyup_hook(int key, void *param)
+{
+	t_minirt	*rt;
+
+	rt = (t_minirt *)param;
+	if (KEY_A == key && rt->camera.move.moving[MOVING_LEFT])
+	{
+		rt->camera.move.moving[MOVING_LEFT] = false;
+		rt->camera.move.velocity.x += 1.0;
+	}
+	if (KEY_D == key && rt->camera.move.moving[MOVING_RIGHT])
+	{
+		rt->camera.move.moving[MOVING_RIGHT] = false;
+		rt->camera.move.velocity.x -= 1.0;
+	}
+	if (KEY_W == key && rt->camera.move.moving[MOVING_FORWARD])
+	{
+		rt->camera.move.moving[MOVING_FORWARD] = false;
+		rt->camera.move.velocity.z -= 1.0;
+	}
+	if (KEY_S == key && rt->camera.move.moving[MOVING_BACKWARD])
+	{
+		rt->camera.move.moving[MOVING_BACKWARD] = false;
+		rt->camera.move.velocity.z += 1.0;
+	}
+	if (KEY_SPACE == key && rt->camera.move.moving[MOVING_UP])
+	{
+		rt->camera.move.moving[MOVING_UP] = false;
+		rt->camera.move.velocity.y -= 1.0;
+	}
+	if (KEY_CTRL == key && rt->camera.move.moving[MOVING_DOWN])
+	{
+		rt->camera.move.moving[MOVING_DOWN] = false;
+		rt->camera.move.velocity.y += 1.0;
+	}
 	return ;
 }
 
@@ -88,7 +143,8 @@ static void	select_hook(int event, void *param)
 
 void	rt_init_events(t_minirt *rt)
 {
-	mlx_on_event(rt->context, rt->window, MLX_KEYDOWN, &key_hook, rt);
+	mlx_on_event(rt->context, rt->window, MLX_KEYDOWN, &keydown_hook, rt);
+	mlx_on_event(rt->context, rt->window, MLX_KEYUP, &keyup_hook, rt);
 	mlx_on_event(rt->context, rt->window, MLX_WINDOW_EVENT, &window_hook, rt);
 	mlx_on_event(rt->context, rt->window, MLX_MOUSEDOWN, &select_hook, rt);
 	mlx_add_loop_hook(rt->context, &rt_loop, rt);
