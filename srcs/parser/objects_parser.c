@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects_parser.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:51:05 by mperrine          #+#    #+#             */
-/*   Updated: 2026/05/26 13:39:06 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/01 13:11:12 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	rt_parse_plane(const t_string *line, t_minirt *rt)
 	if (use_status(ERR_GET) == SUCCESS)
 		rt_parse_orientation(&data[1], &obj.u_obj.plane.norm_rot);
 	if (use_status(ERR_GET) == SUCCESS)
-		rt_parse_color(&data[2], &obj.u_obj.sphere.color);
+		rt_parse_color(&data[2], &obj.u_obj.plane.color);
 	if (use_status(ERR_GET) == FAILURE)
 		write(2, "Error\nError in file plane line\n", 31);
 	else if (use_status(ERR_GET) == SUCCESS)
@@ -72,15 +72,15 @@ void	rt_parse_cylinder(const t_string *line, t_minirt *rt)
 	if (ft_string_tab_len(data) != 5)
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == SUCCESS)
-		rt_parse_coords(&data[0], &obj.u_obj.sphere.position);
+		rt_parse_coords(&data[0], &obj.u_obj.cylinder.position);
 	if (use_status(ERR_GET) == SUCCESS)
-		rt_parse_orientation(&data[1], &obj.u_obj.plane.norm_rot);
+		rt_parse_orientation(&data[1], &obj.u_obj.cylinder.norm_rot);
 	if (use_status(ERR_GET) == SUCCESS)
 		obj.u_obj.cylinder.diameter = ft_strtod(data[2], &endptr);
 	if (use_status(ERR_GET) == SUCCESS && endptr == NULL)
 		obj.u_obj.cylinder.height = ft_strtod(data[3], &endptr);
 	if (use_status(ERR_GET) == SUCCESS && endptr == NULL)
-		rt_parse_color(&data[4], &obj.u_obj.sphere.color);
+		rt_parse_color(&data[4], &obj.u_obj.cylinder.color);
 	if (use_status(ERR_GET) == FAILURE || endptr)
 		write(2, "Error\nError in file sphere line\n", 32);
 	else if (use_status(ERR_GET) == SUCCESS)
@@ -103,7 +103,7 @@ void	rt_parse_ambient_light(const t_string *line, t_minirt *rt)
 	if (use_status(ERR_GET) == SUCCESS)
 		obj.u_obj.ambient_light.brightness = ft_strtod(data[0], &endptr);
 	if (!use_status(ERR_GET) && (obj.u_obj.ambient_light.brightness < 0.0
-		|| obj.u_obj.ambient_light.brightness > 1.0 || endptr))
+			|| obj.u_obj.ambient_light.brightness > 1.0 || endptr))
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == SUCCESS)
 		rt_parse_color(&data[1], &obj.u_obj.ambient_light.color);
@@ -131,7 +131,7 @@ void	rt_parse_point_light(const t_string *line, t_minirt *rt)
 	if (use_status(ERR_GET) == SUCCESS)
 		obj.u_obj.point_light.brightness = ft_strtod(data[1], &endptr);
 	if (!use_status(ERR_GET) && (obj.u_obj.point_light.brightness < 0.0
-		|| obj.u_obj.point_light.brightness > 1.0 || endptr))
+			|| obj.u_obj.point_light.brightness > 1.0 || endptr))
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == SUCCESS)
 		rt_parse_color(&data[2], &obj.u_obj.point_light.color);
