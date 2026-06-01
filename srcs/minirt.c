@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/01 13:21:40 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/01 14:19:35 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,19 @@ void	rt_loop(void *param)
 
 	rt = param;
 	if (!camera_is_moving(&rt->camera))
+	{
+		if (1 != rt->scale)
+		{
+			rt->scale = 1;
+			rt->camera.aa.size = 3;
+			rt->camera.aa.scale = 1.0 / (double)(rt->camera.aa.size * rt->camera.aa.size);
+			rt_render(rt);
+		}
 		return ;
+	}
+	rt->scale = 0.1;
+	rt->camera.aa.size = 1;
+	rt->camera.aa.scale = 1.0 / (double)(rt->camera.aa.size * rt->camera.aa.size);
 	camera_update(&rt->camera, rt->dimensions);
 	rt_render(rt);
 	return ;
