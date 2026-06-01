@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/01 14:19:35 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/01 18:00:23 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,18 @@ void	rt_loop(void *param)
 	rt = param;
 	if (!camera_is_moving(&rt->camera))
 	{
-		if (1 != rt->scale)
+		if (rt->cur_quality == &rt->min_quality || rt->should_render)
 		{
-			rt->scale = 1;
-			rt->camera.aa.size = 3;
-			rt->camera.aa.scale = 1.0 / (double)(rt->camera.aa.size * rt->camera.aa.size);
-			rt_render(rt);
+			rt->should_render = true;
+			rt->cur_quality = &rt->max_quality;
+			camera_update(&rt->camera, rt->cur_quality->aa, rt->dimensions);
+			rt_render(rt, false);
 		}
 		return ;
 	}
-	rt->scale = 0.1;
-	rt->camera.aa.size = 1;
-	rt->camera.aa.scale = 1.0 / (double)(rt->camera.aa.size * rt->camera.aa.size);
-	camera_update(&rt->camera, rt->dimensions);
-	rt_render(rt);
+	rt->cur_quality = &rt->min_quality;
+	camera_update(&rt->camera, rt->cur_quality->aa, rt->dimensions);
+	rt_render(rt, true);
 	return ;
 }
 
@@ -73,7 +71,6 @@ t_status	minirt(const t_string file)
 	if (SUCCESS != use_status(ERR_GET))
 		return (use_status(ERR_GET));
 	rt_init(&rt);
-	rt_render(&rt);
 	mlx_loop(rt.context);
 	rt_quit(&rt);
 	return (SUCCESS);
