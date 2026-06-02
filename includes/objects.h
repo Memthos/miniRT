@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 13:02:44 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/02 09:49:15 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/02 10:03:22 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ typedef struct s_cylinder
 	t_rgb	color;
 }	t_cylinder;
 
-typedef bool	(*t_hit_func)(t_ray *, t_obj *, t_interval, t_hit_point *);
+typedef bool				(*t_hit_func)(t_ray *, t_obj *, t_interval,
+								t_hit_point *);
 
 typedef struct s_obj
 {

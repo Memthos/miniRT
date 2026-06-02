@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/01 18:00:23 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/02 10:06:28 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	main(int argc, t_string_tab argv)
 {
 	if (argc != 2 || check_file(argv[1]))
 	{
-		write(2 ,"Error\n", 6);
+		write(2, "Error\n", 6);
 		if (use_status(ERR_GET) != SUCCESS)
 			print_status("miniRT");
 		else

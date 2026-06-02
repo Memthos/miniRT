@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 11:20:52 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/02 09:58:35 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/02 10:09:29 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ static t_obj_ret	is_between_i(double a, double b, double h, t_interval i)
 	return ((t_obj_ret){root, true});
 }
 
-static t_obj_ret	does_hit(t_ray *ray, t_cylinder cyl, t_interval i,
-	t_hit_point *p)
+static t_obj_ret	does_hit(t_ray *ray, t_cylinder cyl, t_interval i)
 {
 	t_vec3		rdc;
 	t_vec3		occ;
@@ -55,7 +54,7 @@ static bool	hit_body(t_ray *ray, t_cylinder cyl, t_interval i, t_hit_point *p)
 	t_obj_ret	ret;
 	t_vec3		normal;
 
-	ret = does_hit(ray, cyl, i, p);
+	ret = does_hit(ray, cyl, i);
 	if (false == ret.ret)
 		return (false);
 	p->t = ret.val;
@@ -105,7 +104,6 @@ bool	hit_cylinder(t_ray *ray, t_obj *cylinder, t_interval i, t_hit_point *p)
 	bool		has_hit;
 	t_cylinder	*c;
 	t_cylinder	cp;
-	t_vec3		cap_pos;
 
 	c = &cylinder->u_obj.cylinder;
 	cp = *c;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:04:09 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/01 18:00:32 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/02 10:09:57 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static t_rgb	get_pixel_color(t_minirt *rt, int x, int y)
 		delta_x = 0;
 		while (delta_x < rt->camera.aa.size)
 		{
-			ray = ray_gen(&rt->camera, x, y, delta_x, delta_y);
+			ray = ray_gen(&rt->camera, (int[2]){x, y},
+				(int[2]){delta_x, delta_y});
 			ray_c = ray_color(rt, &ray);
 			pixel_c = vec_add(pixel_c, ray_c);
 			++delta_x;
@@ -49,7 +50,8 @@ static void	set_pixel_color(t_minirt *rt, int x, int y, t_rgb color)
 		_x = 0;
 		while (_x < 1 / rt->cur_quality->quality)
 		{
-			mlx_set_image_pixel(rt->context, rt->render, x + _x, y + _y, (mlx_color){
+			mlx_set_image_pixel(rt->context, rt->render, x + _x, y + _y,
+				(mlx_color){
 				.r = 255 * color.x,
 				.g = 255 * color.y,
 				.b = 255 * color.z,

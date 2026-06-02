@@ -6,21 +6,21 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:37:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/29 10:10:54 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/02 10:04:40 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_ray	ray_gen(t_camera *cam, int x, int y, int delta_x, int delta_y)
+t_ray	ray_gen(t_camera *cam, int pos[2], int delta[2])
 {
 	t_ray			ray;
 	const double	offset = 1.0 / (double)(cam->aa.size + 1);
 	const t_point3	pixel_point = vec_add(
 			cam->viewport.nw_pixel,
 			vec_add(
-				vec_scale(cam->viewport.delta_x, x + delta_x * offset),
-				vec_scale(cam->viewport.delta_y, y + delta_y * offset)));
+				vec_scale(cam->viewport.delta_x, pos[0] + delta[0] * offset),
+				vec_scale(cam->viewport.delta_y, pos[1] + delta[1] * offset)));
 
 	ray = (t_ray){cam->pos, vec_normalize(vec_sub(pixel_point, cam->pos))};
 	return (ray);

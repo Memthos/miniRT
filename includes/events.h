@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:42 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/01 10:33:07 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/02 10:18:45 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,8 @@ enum e_keys
  * @brief Initialises hook events for the window, keyboard, and mouse.
  */
 void	rt_init_events(t_minirt *rt);
+
+void	keyup_hook(int key, void *param);
+void	keydown_hook(int key, void *param);
 
 #endif

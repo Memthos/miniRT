@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:24:04 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/01 17:48:16 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/02 10:20:42 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_minirt	*rt_init(t_minirt *rt)
 	rt->should_render = true;
 	rt->aspect_ratio = 16.0 / 9.0;
 	rt->dimensions = (t_vec2){width, width / rt->aspect_ratio};
-	rt->max_quality = (t_quality){1, (t_vec2){width / 10, rt->dimensions.y / 10}, (t_aa){3, 1 / 9.0}};
+	rt->max_quality = (t_quality){1, (t_vec2){width / 10,
+		rt->dimensions.y / 10}, (t_aa){3, 1 / 9.0}};
 	rt->min_quality = (t_quality){0.1, rt->dimensions, (t_aa){1, 1}};
 	rt->cur_quality = &rt->max_quality;
 	rt->context = mlx_init();

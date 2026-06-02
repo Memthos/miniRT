@@ -2,7 +2,7 @@ INCLUDES:=includes
 VPATH:=srcs:srcs/init:srcs/quit:srcs/camera:srcs/interval:srcs/ray:srcs/rendering:srcs/objects:srcs/events:srcs/array:srcs/parser:srcs/random:srcs/utils
 
 SRCS:=	minirt.c init.c quit.c \
-		events.c \
+		events.c move_events.c\
 		camera.c interval.c\
 		ray.c render.c \
 		sphere.c cylinder.c plane.c \

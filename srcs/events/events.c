@@ -3,92 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/01 10:33:26 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/02 10:20:22 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-static void	keydown_hook(int key, void *param)
-{
-	t_minirt	*rt;
-
-	rt = (t_minirt *)param;
-	if (KEY_ESCAPE == key)
-		mlx_loop_end(rt->context);
-	if (KEY_A == key && !rt->camera.move.moving[MOVING_LEFT])
-	{
-		rt->camera.move.moving[MOVING_LEFT] = true;
-		rt->camera.move.velocity.x -= 1.0;
-	}
-	if (KEY_D == key && !rt->camera.move.moving[MOVING_RIGHT])
-	{
-		rt->camera.move.moving[MOVING_RIGHT] = true;
-		rt->camera.move.velocity.x += 1.0;
-	}
-	if (KEY_W == key && !rt->camera.move.moving[MOVING_FORWARD])
-	{
-		rt->camera.move.moving[MOVING_FORWARD] = true;
-		rt->camera.move.velocity.z += 1.0;
-	}
-	if (KEY_S == key && !rt->camera.move.moving[MOVING_BACKWARD])
-	{
-		rt->camera.move.moving[MOVING_BACKWARD] = true;
-		rt->camera.move.velocity.z -= 1.0;
-	}
-	if (KEY_SPACE == key && !rt->camera.move.moving[MOVING_UP])
-	{
-		rt->camera.move.moving[MOVING_UP] = true;
-		rt->camera.move.velocity.y += 1.0;
-	}
-	if (KEY_CTRL == key && !rt->camera.move.moving[MOVING_DOWN])
-	{
-		rt->camera.move.moving[MOVING_DOWN] = true;
-		rt->camera.move.velocity.y -= 1.0;
-	}
-	return ;
-}
-
-static void	keyup_hook(int key, void *param)
-{
-	t_minirt	*rt;
-
-	rt = (t_minirt *)param;
-	if (KEY_A == key && rt->camera.move.moving[MOVING_LEFT])
-	{
-		rt->camera.move.moving[MOVING_LEFT] = false;
-		rt->camera.move.velocity.x += 1.0;
-	}
-	if (KEY_D == key && rt->camera.move.moving[MOVING_RIGHT])
-	{
-		rt->camera.move.moving[MOVING_RIGHT] = false;
-		rt->camera.move.velocity.x -= 1.0;
-	}
-	if (KEY_W == key && rt->camera.move.moving[MOVING_FORWARD])
-	{
-		rt->camera.move.moving[MOVING_FORWARD] = false;
-		rt->camera.move.velocity.z -= 1.0;
-	}
-	if (KEY_S == key && rt->camera.move.moving[MOVING_BACKWARD])
-	{
-		rt->camera.move.moving[MOVING_BACKWARD] = false;
-		rt->camera.move.velocity.z += 1.0;
-	}
-	if (KEY_SPACE == key && rt->camera.move.moving[MOVING_UP])
-	{
-		rt->camera.move.moving[MOVING_UP] = false;
-		rt->camera.move.velocity.y -= 1.0;
-	}
-	if (KEY_CTRL == key && rt->camera.move.moving[MOVING_DOWN])
-	{
-		rt->camera.move.moving[MOVING_DOWN] = false;
-		rt->camera.move.velocity.y += 1.0;
-	}
-	return ;
-}
 
 static void	window_hook(int event, void *param)
 {
@@ -131,11 +53,12 @@ static void	select_hook(int event, void *param)
 	rt = (t_minirt *)param;
 	if (1 != event)
 		return ;
-	ft_bzero(&mouse_pos, sizeof(int[2]));
+	ft_bzero(&mouse_pos, sizeof(int [2]));
 	mlx_mouse_get_pos(rt->context, &mouse_pos[0], &mouse_pos[1]);
 	pixel_point = vec_add(rt->camera.viewport.nw_pixel,
-		vec_add(vec_scale(rt->camera.viewport.delta_x, (double)mouse_pos[0]),
-		vec_scale(rt->camera.viewport.delta_y, (double)mouse_pos[1])));
+			vec_add(vec_scale(rt->camera.viewport.delta_x,
+					(double)mouse_pos[0]),
+				vec_scale(rt->camera.viewport.delta_y, (double)mouse_pos[1])));
 	ray = (t_ray){rt->camera.pos, vec_sub(pixel_point, rt->camera.pos)};
 	rt->selected = NULL;
 	get_hit_obj(rt, &ray, i);
