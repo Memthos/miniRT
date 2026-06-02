@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 11:21:13 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/01 13:22:55 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/02 09:58:58 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	hit_plane(t_ray *ray, t_obj *plane, t_interval i, t_hit_point *p)
 	if (fabs(denom) < 1e-6)
 		return (false);
 	t = vec_dot(plane->u_obj.plane.norm_rot,
-		vec_sub(plane->u_obj.plane.position, ray->origin)) / denom;
+			vec_sub(plane->u_obj.plane.position, ray->origin)) / denom;
 	if (t < i.min || t > i.max)
 		return (false);
 	p->t = t;

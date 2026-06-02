@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 13:02:44 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/29 10:08:22 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/02 09:49:15 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,38 +32,38 @@ typedef enum e_obj_type
 
 typedef struct s_ambient_light
 {
-	double		brightness;
+	double	brightness;
 	t_rgb	color;
 }	t_ambient_light;
 
 typedef struct s_point_light
 {
-	t_vec3		position;
-	double		brightness;
+	t_vec3	position;
+	double	brightness;
 	t_rgb	color;
 }	t_point_light;
 
 typedef struct s_sphere
 {
-	t_vec3		position;
-	double		diameter;
+	t_vec3	position;
+	double	diameter;
 	t_rgb	color;
 }	t_sphere;
 
 typedef struct s_plane
 {
-	t_vec3		position;
-	t_vec3		norm_rot;
-	double		diameter;
+	t_vec3	position;
+	t_vec3	norm_rot;
+	double	diameter;
 	t_rgb	color;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	t_vec3		position;
-	t_vec3		norm_rot;
-	double		diameter;
-	double		height;
+	t_vec3	position;
+	t_vec3	norm_rot;
+	double	diameter;
+	double	height;
 	t_rgb	color;
 }	t_cylinder;
 
@@ -82,6 +82,12 @@ typedef struct s_obj
 	}	u_obj;
 	t_hit_func	hit;
 }	t_obj;
+
+typedef struct s_obj_ret
+{
+	double	val;
+	bool	ret;
+}	t_obj_ret;
 
 bool	hit_sphere(t_ray *ray, t_obj *sphere, t_interval i, t_hit_point *p);
 
