@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:24:04 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/01 17:48:16 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/02 11:26:36 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_minirt	*rt_init(t_minirt *rt)
 	info.height = rt->dimensions.y;
 	rt->window = mlx_new_window(rt->context, &info);
 	rt->render = mlx_new_image(rt->context, rt->dimensions.x, rt->dimensions.y);
+	mouse_init(rt);
 	camera_init(&rt->camera, rt->cur_quality->aa, rt->dimensions);
 	rt_init_events(rt);
 	return (rt);
