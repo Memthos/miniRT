@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/01 10:33:26 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/02 10:12:46 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,28 @@ static void	keyup_hook(int key, void *param)
 	return ;
 }
 
+static void	mousedown_hook(int button, void *param)
+{
+	t_minirt	*rt;
+
+	rt = param;
+	if (2 != button)
+		return ;
+	mlx_mouse_hide(rt->context);
+	return ;
+}
+
+static void	mouseup_hook(int button, void *param)
+{
+	t_minirt	*rt;
+
+	rt = param;
+	if (2 != button)
+		return ;
+	mlx_mouse_show(rt->context);
+	return ;
+}
+
 static void	window_hook(int event, void *param)
 {
 	t_minirt	rt;
@@ -145,6 +167,8 @@ void	rt_init_events(t_minirt *rt)
 {
 	mlx_on_event(rt->context, rt->window, MLX_KEYDOWN, &keydown_hook, rt);
 	mlx_on_event(rt->context, rt->window, MLX_KEYUP, &keyup_hook, rt);
+	mlx_on_event(rt->context, rt->window, MLX_MOUSEDOWN, &mousedown_hook, rt);
+	mlx_on_event(rt->context, rt->window, MLX_MOUSEUP, &mouseup_hook, rt);
 	mlx_on_event(rt->context, rt->window, MLX_WINDOW_EVENT, &window_hook, rt);
 	mlx_on_event(rt->context, rt->window, MLX_MOUSEDOWN, &select_hook, rt);
 	mlx_add_loop_hook(rt->context, &rt_loop, rt);
