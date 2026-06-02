@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/02 10:12:46 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/02 10:46:43 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ static void	mousedown_hook(int button, void *param)
 	if (2 != button)
 		return ;
 	mlx_mouse_hide(rt->context);
+	rt->mouse.rotating = true;
 	return ;
 }
 
@@ -109,6 +110,7 @@ static void	mouseup_hook(int button, void *param)
 	if (2 != button)
 		return ;
 	mlx_mouse_show(rt->context);
+	rt->mouse.rotating = false;
 	return ;
 }
 
