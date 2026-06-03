@@ -6,13 +6,13 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:47:57 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/03 10:58:44 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/03 12:01:00 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TIMEE_H
 # define TIMEE_H
 
-time_t	get_time(void);
+time_t	get_utime(void);
 
 #endif
