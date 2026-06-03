@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:15:36 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/01 17:01:06 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/03 12:17:30 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CAMERA_H
 
 # include "../libs/lib_tools/includes/math_ops.h"
+# include "utime.h"
 
 typedef struct s_vec3	t_point3;
 
@@ -63,7 +64,7 @@ typedef struct s_camera
 
 t_camera	*camera_init(t_camera *cam, t_aa aa, t_vec2 screen);
 
-t_camera	*camera_update(t_camera *cam, t_aa aa, const t_vec2 screen);
+t_camera	*camera_update(t_camera *cam, t_aa aa, t_utime delta, const t_vec2 screen);
 
 bool		camera_is_moving(t_camera *cam);
 
