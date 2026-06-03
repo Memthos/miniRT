@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:42 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/03 10:50:00 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/03 11:02:30 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ enum e_keys
 	KEY_F = 9,
 	KEY_SPACE = 44,
 	KEY_CTRL = 224,
+};
+
+enum e_mode_mode
+{
+	NONE,
+	ROTATE,
+	SCALE,
+	MOVE,
 };
 
 typedef struct	s_move_obj
