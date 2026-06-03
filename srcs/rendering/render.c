@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:04:09 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/03 10:14:55 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/03 10:49:41 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ void	rt_render(t_minirt *rt, bool restart)
 		pos.x = 0;
 		pos.y = 0;
 		rt->should_render = false;
-		rt->mv_params.should_update = false;
 		mlx_clear_window(rt->context, rt->window, (mlx_color){.rgba = 0x000000FF});
 		mlx_put_image_to_window(rt->context, rt->window, rt->render, 0, 0);
 	}

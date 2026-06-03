@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:42 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/03 10:12:28 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/03 10:50:00 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ enum e_keys
 
 typedef struct	s_move_obj
 {
-	bool	should_update;
 	int		move_mode;
 	t_obj	*selected;
 	int		last_mouse_pos[2];

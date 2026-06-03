@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/03 10:30:08 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/03 10:49:51 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	mouseup_hook(int key, void *param)
 	if (key == RIGHT_MOUSE)
 	{
 		rt->mv_params.moving = 0;
-		rt->mv_params.should_update = true;
+		rt->should_render = true;
 		return ;
 	}
 	if (key != LEFT_MOUSE)

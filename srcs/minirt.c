@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/03 10:38:36 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/03 10:50:59 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,10 @@ void	rt_loop(void *param)
 	rt = (t_minirt *)param;
 	if (rt->mv_params.moving)
 		move_object(rt);
-	if (!camera_is_moving(&rt->camera) && true == rt->mv_params.should_update)
+	if (!camera_is_moving(&rt->camera) && !rt->mv_params.moving)
 	{
 		if (rt->cur_quality == &rt->min_quality || rt->should_render)
 		{
-			rt->should_render = true;
 			rt->cur_quality = &rt->max_quality;
 			camera_update(&rt->camera, rt->cur_quality->aa, rt->dimensions);
 			rt_render(rt, false);
