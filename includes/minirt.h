@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/03 14:43:34 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/03 16:25:57 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <string.h> // strerror
 # include <unistd.h> // close, read, write
 # include <sys/stat.h> // open
-# include <sys/time.h> // gettimeofday
+# include <sys/time.h> //gettimeofday
 # include <fcntl.h> // open
 
 # include "../libs/lib_tools/includes/lib_tools.h" //Lib_tools
@@ -36,11 +36,13 @@
 # include "rendering.h"
 # include "events.h"
 # include "random.h"
+# include "utime.h"
 
 typedef struct s_minirt
 {
 	bool		should_render;
 	double		aspect_ratio;
+	t_utime		delta_t;
 	double		sensibility;
 	t_vec2		dimensions;
 	t_quality	max_quality;
