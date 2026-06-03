@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/01 17:47:34 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/03 10:52:09 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <string.h> // strerror
 # include <unistd.h> // close, read, write
 # include <sys/stat.h> // open
+# include <sys/time.h> //gettimeofday
 # include <fcntl.h> // open
 
 # include "../libs/lib_tools/includes/lib_tools.h" //Lib_tools
@@ -35,6 +36,7 @@
 # include "rendering.h"
 # include "events.h"
 # include "random.h"
+# include "timee.h"
 
 typedef struct s_minirt
 {
