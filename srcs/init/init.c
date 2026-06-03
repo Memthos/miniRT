@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:24:04 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/02 10:20:42 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/03 10:37:11 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_minirt	*rt_init(t_minirt *rt)
 	const int				width = 1280;
 	mlx_window_create_info	info;
 
+	rt->mv_params.should_update = true;
 	rt->should_render = true;
 	rt->aspect_ratio = 16.0 / 9.0;
 	rt->dimensions = (t_vec2){width, width / rt->aspect_ratio};

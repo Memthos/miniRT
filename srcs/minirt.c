@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/02 10:06:28 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/03 10:38:36 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,32 @@ static int	check_file(t_string s)
 	return (use_status(SUCCESS));
 }
 
+void	move_object(t_minirt *rt)
+{
+	int					mouse_pos[2];
+	int					mouse_delta[2];
+	double				scale;
+
+	ft_bzero(&mouse_pos, sizeof(int [2]));
+	mlx_mouse_get_pos(rt->context, &mouse_pos[0], &mouse_pos[1]);
+	mouse_delta[0] = mouse_pos[0] - rt->mv_params.last_mouse_pos[0];
+	mouse_delta[1] = mouse_pos[1] - rt->mv_params.last_mouse_pos[1];
+	scale = vec_magnitude(vec_sub(rt->mv_params.selected->u_obj.plane.position, rt->camera.pos)) / rt->camera.focal_length;
+	rt->mv_params.selected->u_obj.plane.position = vec_add(rt->mv_params.selected->u_obj.plane.position,
+		vec_add(vec_scale(rt->camera.right, mouse_delta[0] * scale),
+				vec_scale(rt->camera.up, -mouse_delta[1] * scale)));
+	rt->mv_params.last_mouse_pos[0] = mouse_pos[0];
+	rt->mv_params.last_mouse_pos[1] = mouse_pos[1];
+}
+
 void	rt_loop(void *param)
 {
 	t_minirt	*rt;
 
-	rt = param;
-	if (!camera_is_moving(&rt->camera))
+	rt = (t_minirt *)param;
+	if (rt->mv_params.moving)
+		move_object(rt);
+	if (!camera_is_moving(&rt->camera) && true == rt->mv_params.should_update)
 	{
 		if (rt->cur_quality == &rt->min_quality || rt->should_render)
 		{

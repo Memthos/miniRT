@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:15:36 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/01 17:01:06 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/03 09:15:04 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_camera
 	t_aa		aa;
 	t_point3	pos;
 	t_point3	dir;
+	t_vec3		right;
+	t_vec3		up;
 	t_move		move;
 	t_viewport	viewport;
 }	t_camera;
