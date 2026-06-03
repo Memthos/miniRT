@@ -21,7 +21,7 @@ MACROLIBX:=$(addprefix $(MACROLIBXDIR), libmlx.so)
 
 LIBS:=$(LIBTOOL) $(MACROLIBX) -lSDL2 -lm
 
-CC:=cc
+CC:=clang
 CFLAGS:=-Werror -Wextra -Wall -I$(INCLUDES) -g
 
 NAME:=miniRT

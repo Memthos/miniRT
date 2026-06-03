@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 10:17:36 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/02 10:17:57 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/03 11:05:26 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,14 @@ void	keyup_hook(int key, void *param)
 		rt->camera.move.moving[MOVING_DOWN] = false;
 		rt->camera.move.velocity.y += 1.0;
 	}
+	else if (KEY_Q == key)
+		rt->mv_params.move_mode = MOVE;
+	else if (KEY_E == key)
+		rt->mv_params.move_mode = ROTATE;
+	else if (KEY_R == key)
+		rt->mv_params.move_mode = SCALE;
+	else if (KEY_F == key)
+		rt->mv_params.move_mode = NONE;
 	else
 		keyup_move(key, rt);
 }

@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:26:13 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/03 12:12:08 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/03 12:24:50 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_camera	*camera_init(t_camera *cam, t_aa aa, const t_vec2 screen)
 {
-	cam->focal_length = vec_magnitude(cam->dir);
+	cam->focal_length = (screen.x / 2.0) / tan(cam->hfov * deg_to_rad() / 2);
 	cam->viewport.width = 2.0 * tan(cam->hfov * deg_to_rad() / 2);
 	cam->viewport.height = cam->viewport.width / (16.0 / 9.0);
 	cam->move.speed = 1;
@@ -32,10 +32,13 @@ t_camera	*camera_init(t_camera *cam, t_aa aa, const t_vec2 screen)
 t_camera	*camera_update(t_camera *cam, t_aa aa, t_utime delta, const t_vec2 screen)
 {
 	const t_vec3	vup = {0, 1, 0};
-	const t_vec3	u = vec_normalize(vec_cross(vup, cam->dir));
-	const t_vec3	v = vec_cross(cam->dir, u);
-	const t_vec3	vx = vec_scale(u, cam->viewport.width);
-	const t_vec3	vy = vec_scale(v, -cam->viewport.height);
+	t_vec3			vx;
+	t_vec3			vy;
+
+	cam->right = vec_normalize(vec_cross(vup, cam->dir));
+	cam->up = vec_cross(cam->dir, cam->right);
+	vx = vec_scale(cam->right, cam->viewport.width);
+	vy = vec_scale(cam->up, -cam->viewport.height);
 
 	cam->aa = aa;
 	cam->pos = vec_add(cam->pos, vec_scale(cam->move.velocity, cam->move.speed * (delta * 0.000001)));

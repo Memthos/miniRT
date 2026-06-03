@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/02 10:20:22 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/03 10:49:51 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static void	get_hit_obj(t_minirt *rt, t_ray *ray, const t_interval i)
 		if (objects->objs[index].hit(ray, &objects->objs[index], _i, &tmp))
 		{
 			_i.max = tmp.t;
-			rt->selected = &objects->objs[index];
+			rt->mv_params.selected = &objects->objs[index];
 		}
 		++index;
 	}
 }
 
-static void	select_hook(int event, void *param)
+static void	mouseup_hook(int key, void *param)
 {
 	t_minirt			*rt;
 	int					mouse_pos[2];
@@ -51,7 +51,13 @@ static void	select_hook(int event, void *param)
 	t_ray				ray;
 
 	rt = (t_minirt *)param;
-	if (1 != event)
+	if (key == RIGHT_MOUSE)
+	{
+		rt->mv_params.moving = 0;
+		rt->should_render = true;
+		return ;
+	}
+	if (key != LEFT_MOUSE)
 		return ;
 	ft_bzero(&mouse_pos, sizeof(int [2]));
 	mlx_mouse_get_pos(rt->context, &mouse_pos[0], &mouse_pos[1]);
@@ -60,8 +66,20 @@ static void	select_hook(int event, void *param)
 					(double)mouse_pos[0]),
 				vec_scale(rt->camera.viewport.delta_y, (double)mouse_pos[1])));
 	ray = (t_ray){rt->camera.pos, vec_sub(pixel_point, rt->camera.pos)};
-	rt->selected = NULL;
+	rt->mv_params.selected = NULL;
 	get_hit_obj(rt, &ray, i);
+}
+
+static void	mousedown_hook(int key, void *param)
+{
+	t_minirt			*rt;
+
+	rt = (t_minirt *)param;
+	if (RIGHT_MOUSE != key || NULL == rt->mv_params.selected)
+		return ;
+	rt->mv_params.moving = 1;
+	mlx_mouse_get_pos(rt->context, &rt->mv_params.last_mouse_pos[0],
+		&rt->mv_params.last_mouse_pos[1]);
 }
 
 void	rt_init_events(t_minirt *rt)
@@ -69,7 +87,8 @@ void	rt_init_events(t_minirt *rt)
 	mlx_on_event(rt->context, rt->window, MLX_KEYDOWN, &keydown_hook, rt);
 	mlx_on_event(rt->context, rt->window, MLX_KEYUP, &keyup_hook, rt);
 	mlx_on_event(rt->context, rt->window, MLX_WINDOW_EVENT, &window_hook, rt);
-	mlx_on_event(rt->context, rt->window, MLX_MOUSEDOWN, &select_hook, rt);
+	mlx_on_event(rt->context, rt->window, MLX_MOUSEUP, &mouseup_hook, rt);
+	mlx_on_event(rt->context, rt->window, MLX_MOUSEDOWN, &mousedown_hook, rt);
 	mlx_add_loop_hook(rt->context, &rt_loop, rt);
 	return ;
 }
