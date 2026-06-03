@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/02 10:06:28 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/03 12:10:07 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,23 @@ static int	check_file(t_string s)
 
 void	rt_loop(void *param)
 {
-	t_minirt	*rt;
+	t_minirt		*rt;
 
 	rt = param;
+	rt->delta_t = get_delta_time();
 	if (!camera_is_moving(&rt->camera))
 	{
 		if (rt->cur_quality == &rt->min_quality || rt->should_render)
 		{
 			rt->should_render = true;
 			rt->cur_quality = &rt->max_quality;
-			camera_update(&rt->camera, rt->cur_quality->aa, rt->dimensions);
+			camera_update(&rt->camera, rt->cur_quality->aa, rt->delta_t, rt->dimensions);
 			rt_render(rt, false);
 		}
 		return ;
 	}
 	rt->cur_quality = &rt->min_quality;
-	camera_update(&rt->camera, rt->cur_quality->aa, rt->dimensions);
+	camera_update(&rt->camera, rt->cur_quality->aa, rt->delta_t, rt->dimensions);
 	rt_render(rt, true);
 	return ;
 }
