@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/03 10:49:51 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/03 16:12:29 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	mouseup_hook(int key, void *param)
 	rt = (t_minirt *)param;
 	if (key == RIGHT_MOUSE)
 	{
-		rt->mv_params.moving = 0;
+		rt->mv_params.moving = false;
 		rt->should_render = true;
 		return ;
 	}
@@ -75,11 +75,15 @@ static void	mousedown_hook(int key, void *param)
 	t_minirt			*rt;
 
 	rt = (t_minirt *)param;
-	if (RIGHT_MOUSE != key || NULL == rt->mv_params.selected)
+	if (RIGHT_MOUSE != key || NULL == rt->mv_params.selected
+		|| rt->mv_params.move_mode == NONE)
 		return ;
-	rt->mv_params.moving = 1;
-	mlx_mouse_get_pos(rt->context, &rt->mv_params.last_mouse_pos[0],
-		&rt->mv_params.last_mouse_pos[1]);
+	rt->mv_params.moving = true;
+	mlx_mouse_get_pos(rt->context, &rt->mv_params.mouse_pressed_pos[0],
+		&rt->mv_params.mouse_pressed_pos[1]);
+	rt->mv_params.last_mouse_pos[0] = rt->mv_params.mouse_pressed_pos[0];
+	rt->mv_params.last_mouse_pos[1] = rt->mv_params.mouse_pressed_pos[1];
+	rt->mv_params.start_norm_rot = rt->mv_params.selected->u_obj.plane.norm_rot;
 }
 
 void	rt_init_events(t_minirt *rt)

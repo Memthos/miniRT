@@ -5,7 +5,7 @@ SRCS:=	minirt.c init.c quit.c \
 		events.c move_events.c\
 		camera.c interval.c\
 		ray.c render.c \
-		sphere.c cylinder.c plane.c \
+		sphere.c cylinder.c plane.c movements.c \
 		add_array_slot.c \
 		parser.c data_parser.c objects_parser.c \
 		random.c \

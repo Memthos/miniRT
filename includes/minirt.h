@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/03 09:45:43 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/03 14:43:34 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_minirt
 {
 	bool		should_render;
 	double		aspect_ratio;
+	double		sensibility;
 	t_vec2		dimensions;
 	t_quality	max_quality;
 	t_quality	min_quality;

@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:24:04 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/03 10:50:09 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/03 14:44:07 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_minirt	*rt_init(t_minirt *rt)
 
 	rt->should_render = true;
 	rt->aspect_ratio = 16.0 / 9.0;
+	rt->sensibility = 0.005;
 	rt->dimensions = (t_vec2){width, width / rt->aspect_ratio};
 	rt->max_quality = (t_quality){1, (t_vec2){width / 10,
 		rt->dimensions.y / 10}, (t_aa){3, 1 / 9.0}};

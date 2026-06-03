@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:42 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/03 11:02:30 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/03 15:55:20 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ typedef struct	s_move_obj
 	int		move_mode;
 	t_obj	*selected;
 	int		last_mouse_pos[2];
-	int		moving;
+	bool	moving;
+	int		mouse_pressed_pos[2];
+	t_vec3	start_norm_rot;
 }	t_move_obj;
 
 /**
