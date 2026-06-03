@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/03 10:52:09 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/03 12:17:11 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@
 # include "rendering.h"
 # include "events.h"
 # include "random.h"
-# include "timee.h"
+# include "utime.h"
 
 typedef struct s_minirt
 {
 	bool		should_render;
 	double		aspect_ratio;
+	t_utime		delta_t;
 	t_vec2		dimensions;
 	t_quality	max_quality;
 	t_quality	min_quality;
