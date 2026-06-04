@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/04 10:09:00 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/04 17:08:54 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,17 @@ static int	check_file(t_string s)
 
 void	rt_loop(void *param)
 {
-	t_minirt		*rt;
+	t_minirt	*rt;
+	t_vec2		delta;
 
 	rt = (t_minirt *)param;
 	rt->delta_t = get_delta_time();
+	delta = mouse_get_delta(rt);
+	if (rt->mouse.rotating)
+	{
+		rt->camera.dir = vec_rotate(rt->camera.dir, (t_vec3){0, 1, 0}, delta.x * deg_to_rad());
+		rt->camera.dir = vec_rotate(rt->camera.dir, rt->camera.right, delta.y * deg_to_rad());
+	}
 	if (true == rt->mv_params.moving && NULL != rt->mv_params.selected)
 	{
 		if (MOVE == rt->mv_params.move_mode)
@@ -55,7 +62,7 @@ void	rt_loop(void *param)
 		else if (SCALE == rt->mv_params.move_mode)
 			scale_object(rt);
 	}
-	if (false == camera_is_moving(&rt->camera) && false == rt->mv_params.moving)
+	if (false == camera_is_moving(&rt->camera) && false == rt->mv_params.moving && !rt->mouse.rotating)
 	{
 		if (rt->cur_quality == &rt->min_quality || rt->should_render)
 		{

@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/04 09:17:18 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/04 17:08:46 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # include "objects.h"
 # include "rendering.h"
 # include "events.h"
+# include "mouse.h"
 # include "random.h"
 # include "utime.h"
 
@@ -46,6 +47,7 @@ typedef struct s_minirt
 	t_utime		delta_t;
 	double		sensibility;
 	t_vec2		dimensions;
+	t_mouse_state	mouse;
 	t_quality	max_quality;
 	t_quality	min_quality;
 	t_quality	*cur_quality;

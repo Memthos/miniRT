@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:42 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/04 09:30:03 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/04 17:08:42 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ typedef struct s_minirt	t_minirt;
 
 enum e_keys
 {
-	LEFT_MOUSE = 1,
-	RIGHT_MOUSE = 3,
+	KEY_LEFT_MOUSE = 1,
+	KEY_MOUSE_WHEEL = 2,
+	KEY_RIGHT_MOUSE = 3,
 	KEY_ESCAPE = 41,
 	KEY_Q = 20,
 	KEY_W = 26,
