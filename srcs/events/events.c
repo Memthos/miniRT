@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/04 10:10:22 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/04 10:21:54 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void	mouseup_hook(int key, void *param)
 	if (KEY_MOUSE_WHEEL == key)
 	{
 		mlx_mouse_show(rt->context);
+		rt->mouse.rotating = false;
 	}
 	if (key == KEY_RIGHT_MOUSE)
 	{
@@ -82,6 +83,7 @@ static void	mousedown_hook(int key, void *param)
 	if (KEY_MOUSE_WHEEL == key)
 	{
 		mlx_mouse_hide(rt->context);
+		rt->mouse.rotating = true;
 	}
 	if (KEY_RIGHT_MOUSE != key || NULL == rt->mv_params.selected
 		|| rt->mv_params.move_mode == NONE)
