@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:26:13 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/03 12:24:50 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/04 10:46:25 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@ t_camera	*camera_init(t_camera *cam, t_aa aa, const t_vec2 screen)
 	cam->viewport.height = cam->viewport.width / (16.0 / 9.0);
 	cam->move.speed = 1;
 	camera_update(cam, aa, 0, screen);
-	// printf("Camera direction : [%f, %f, %f]\n", cam->dir.x, cam->dir.y, cam->dir.z);
-	// printf("focal length : %f\n", cam->focal_length);
-	// printf("Viewport dimensions : [%f, %f]\n", cam->viewport.width, cam->viewport.height);
-	// printf("u : [%f, %f, %f]\n", u.x, u.y, u.z);
-	// printf("v : [%f, %f, %f]\n", v.x, v.y, v.z);
-	// printf("delta : [%f, %f]\n", cam->viewport.delta_x.x, cam->viewport.delta_y.y);
-	// printf("north-west corner position : [%f, %f, %f]\n", cam->viewport.nw_corner.x, cam->viewport.nw_corner.y, cam->viewport.nw_corner.z);
 	return (cam);
 }
 
