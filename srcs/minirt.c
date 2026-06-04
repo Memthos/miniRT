@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/04 10:30:33 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/04 14:24:06 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	rt_loop(void *param)
 	if (rt->mouse.rotating)
 	{
 		rt->camera.dir = vec_rotate(rt->camera.dir, (t_vec3){0, 1, 0}, delta.x * deg_to_rad());
-		rt->camera.dir = vec_rotate(rt->camera.dir, (t_vec3){1, 0, 0}, delta.y * deg_to_rad());
+		rt->camera.dir = vec_rotate(rt->camera.dir, rt->camera.right, delta.y * deg_to_rad());
 	}
 	if (true == rt->mv_params.moving && NULL != rt->mv_params.selected)
 	{
