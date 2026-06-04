@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quit.h                                             :+:      :+:    :+:   */
+/*   utime.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/19 15:30:27 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/02 10:01:36 by mperrine         ###   ########.fr       */
+/*   Created: 2026/06/03 10:47:57 by juperrin          #+#    #+#             */
+/*   Updated: 2026/06/03 12:16:50 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef QUIT_H
-# define QUIT_H
+#ifndef UTIME_H
+# define UTIME_H
 
-# include "minirt.h"
+typedef unsigned long	t_utime;
 
-/**
- * @brief Destroys allocated ressources in rt.
- */
-void	rt_quit(t_minirt *rt);
+t_utime	get_utime(void);
+
+t_utime	get_delta_time(void);
 
 #endif

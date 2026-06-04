@@ -1,14 +1,15 @@
 INCLUDES:=includes
-VPATH:=srcs:srcs/init:srcs/quit:srcs/camera:srcs/interval:srcs/ray:srcs/rendering:srcs/objects:srcs/events:srcs/mouse:srcs/array:srcs/parser:srcs/random:srcs/utils
+
+VPATH:=srcs:srcs/init:srcs/quit:srcs/camera:srcs/interval:srcs/ray:srcs/rendering:srcs/objects:srcs/events:srcs/mouse:srcs/array:srcs/parser:srcs/random:srcs/utime:srcs/utils
 
 SRCS:=	minirt.c init.c quit.c \
-		events.c mouse.c\
+		events.c mouse.c move_events.c\
 		camera.c interval.c\
 		ray.c render.c \
-		sphere.c cylinder.c plane.c \
+		sphere.c cylinder.c plane.c movements.c \
 		add_array_slot.c \
 		parser.c data_parser.c objects_parser.c \
-		random.c \
+		random.c utime.c\
 
 OBJSDIR:=objs/
 OBJS:=$(addprefix $(OBJSDIR), $(SRCS:.c=.o))
@@ -21,7 +22,7 @@ MACROLIBX:=$(addprefix $(MACROLIBXDIR), libmlx.so)
 
 LIBS:=$(LIBTOOL) $(MACROLIBX) -lSDL2 -lm
 
-CC:=cc
+CC:=clang
 CFLAGS:=-Werror -Wextra -Wall -I$(INCLUDES) -g
 
 NAME:=miniRT

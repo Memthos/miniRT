@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 11:20:46 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/29 10:29:22 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/02 09:59:11 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ bool	hit_sphere(t_ray *ray, t_obj *sphere, t_interval i, t_hit_point *p)
 	p->t = root;
 	p->point = ray_at(ray, p->t);
 	normal = vec_scale(vec_sub(p->point, sphere->u_obj.sphere.position),
-		2.0 / sphere->u_obj.sphere.diameter);
+			2.0 / sphere->u_obj.sphere.diameter);
 	p->front = vec_dot(ray->dir, normal) < 0;
 	if (p->front)
 		p->normal = normal;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/01 18:00:23 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/03 16:26:32 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,30 @@ static int	check_file(t_string s)
 
 void	rt_loop(void *param)
 {
-	t_minirt	*rt;
+	t_minirt		*rt;
 
-	rt = param;
-	if (!camera_is_moving(&rt->camera))
+	rt = (t_minirt *)param;
+	rt->delta_t = get_delta_time();
+	if (true == rt->mv_params.moving && NULL != rt->mv_params.selected)
+	{
+		if (MOVE == rt->mv_params.move_mode)
+			move_object(rt);
+		else if (ROTATE == rt->mv_params.move_mode)
+			rotate_object(rt);
+	}
+	if (false == camera_is_moving(&rt->camera) && false == rt->mv_params.moving)
 	{
 		if (rt->cur_quality == &rt->min_quality || rt->should_render)
 		{
 			rt->should_render = true;
 			rt->cur_quality = &rt->max_quality;
-			camera_update(&rt->camera, rt->cur_quality->aa, rt->dimensions);
+			camera_update(&rt->camera, rt->cur_quality->aa, rt->delta_t, rt->dimensions);
 			rt_render(rt, false);
 		}
 		return ;
 	}
 	rt->cur_quality = &rt->min_quality;
-	camera_update(&rt->camera, rt->cur_quality->aa, rt->dimensions);
+	camera_update(&rt->camera, rt->cur_quality->aa, rt->delta_t, rt->dimensions);
 	rt_render(rt, true);
 	return ;
 }
@@ -80,7 +88,7 @@ int	main(int argc, t_string_tab argv)
 {
 	if (argc != 2 || check_file(argv[1]))
 	{
-		write(2 ,"Error\n", 6);
+		write(2, "Error\n", 6);
 		if (use_status(ERR_GET) != SUCCESS)
 			print_status("miniRT");
 		else
