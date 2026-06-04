@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/04 10:02:59 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/04 10:10:22 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,17 @@ static void	mouseup_hook(int key, void *param)
 	t_ray				ray;
 
 	rt = (t_minirt *)param;
-	if (key == RIGHT_MOUSE)
+	if (KEY_MOUSE_WHEEL == key)
+	{
+		mlx_mouse_show(rt->context);
+	}
+	if (key == KEY_RIGHT_MOUSE)
 	{
 		rt->mv_params.moving = false;
 		rt->should_render = true;
 		return ;
 	}
-	if (key != LEFT_MOUSE)
+	if (key != KEY_LEFT_MOUSE)
 		return ;
 	ft_bzero(&mouse_pos, sizeof(int [2]));
 	mlx_mouse_get_pos(rt->context, &mouse_pos[0], &mouse_pos[1]);
@@ -75,7 +79,11 @@ static void	mousedown_hook(int key, void *param)
 	t_minirt			*rt;
 
 	rt = (t_minirt *)param;
-	if (RIGHT_MOUSE != key || NULL == rt->mv_params.selected
+	if (KEY_MOUSE_WHEEL == key)
+	{
+		mlx_mouse_hide(rt->context);
+	}
+	if (KEY_RIGHT_MOUSE != key || NULL == rt->mv_params.selected
 		|| rt->mv_params.move_mode == NONE)
 		return ;
 	rt->mv_params.moving = true;
