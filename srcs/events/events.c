@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/03 16:12:29 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/04 10:05:51 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ static void	mousedown_hook(int key, void *param)
 	rt->mv_params.last_mouse_pos[0] = rt->mv_params.mouse_pressed_pos[0];
 	rt->mv_params.last_mouse_pos[1] = rt->mv_params.mouse_pressed_pos[1];
 	rt->mv_params.start_norm_rot = rt->mv_params.selected->u_obj.plane.norm_rot;
+	rt->mv_params.screen_pos = project_to_screen(rt,
+		rt->mv_params.selected->u_obj.plane.position);
 }
 
 void	rt_init_events(t_minirt *rt)

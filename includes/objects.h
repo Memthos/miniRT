@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 13:02:44 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/03 14:44:41 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/03 16:37:23 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_plane
 {
 	t_vec3	position;
 	t_vec3	norm_rot;
-	double	diameter;
 	t_rgb	color;
 }	t_plane;
 
@@ -96,5 +95,6 @@ bool	hit_plane(t_ray *ray, t_obj *plane, t_interval i, t_hit_point *p);
 
 void	move_object(t_minirt *rt);
 void	rotate_object(t_minirt *rt);
+void	scale_object(t_minirt *rt);
 
 #endif

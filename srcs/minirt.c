@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/03 16:26:32 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/04 10:09:00 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	rt_loop(void *param)
 			move_object(rt);
 		else if (ROTATE == rt->mv_params.move_mode)
 			rotate_object(rt);
+		else if (SCALE == rt->mv_params.move_mode)
+			scale_object(rt);
 	}
 	if (false == camera_is_moving(&rt->camera) && false == rt->mv_params.moving)
 	{
@@ -62,6 +64,7 @@ void	rt_loop(void *param)
 			camera_update(&rt->camera, rt->cur_quality->aa, rt->delta_t, rt->dimensions);
 			rt_render(rt, false);
 		}
+
 		return ;
 	}
 	rt->cur_quality = &rt->min_quality;
