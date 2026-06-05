@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/04 17:09:03 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/05 14:14:48 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,26 @@ static void	get_hit_obj(t_minirt *rt, t_ray *ray, const t_interval i)
 		}
 		++index;
 	}
+}
+
+void mousewheel_hook(int key, void *param)
+{
+	t_minirt	*rt;
+
+	rt = param;
+	if (1 == key)
+	{
+		rt->camera.move.speed += 1;
+		if (rt->camera.move.speed >= INT_MAX)
+			rt->camera.move.speed = INT_MAX;
+	}
+	if (2 == key)
+	{
+		rt->camera.move.speed -= 1;
+		if (rt->camera.move.speed < 1)
+			rt->camera.move.speed = 1;
+	}
+	return ;
 }
 
 static void	mouseup_hook(int key, void *param)
@@ -105,6 +125,7 @@ void	rt_init_events(t_minirt *rt)
 	mlx_on_event(rt->context, rt->window, MLX_WINDOW_EVENT, &window_hook, rt);
 	mlx_on_event(rt->context, rt->window, MLX_MOUSEUP, &mouseup_hook, rt);
 	mlx_on_event(rt->context, rt->window, MLX_MOUSEDOWN, &mousedown_hook, rt);
+	mlx_on_event(rt->context, rt->window, MLX_MOUSEWHEEL, &mousewheel_hook, rt);
 	mlx_add_loop_hook(rt->context, &rt_loop, rt);
 	return ;
 }
