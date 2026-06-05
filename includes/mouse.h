@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 10:21:37 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/02 11:26:29 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/05 09:27:05 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ typedef struct s_mouse_state
 void	mouse_init(t_minirt *rt);
 
 t_vec2	mouse_get_delta(t_minirt *rt);
+
+void	mouse_update(t_minirt *rt);
 
 #endif
