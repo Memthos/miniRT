@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:24:04 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/05 09:29:06 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/05 09:56:26 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_minirt	*rt_init(t_minirt *rt)
 	rt->should_render = true;
 	rt->aspect_ratio = 16.0 / 9.0;
 	rt->sensibility = 0.1;
+	rt->sensibility_rot = 0.005;
 	rt->dimensions = (t_vec2){width, width / rt->aspect_ratio};
 	rt->max_quality = (t_quality){1, (t_vec2){width / 10,
 		rt->dimensions.y / 10}, (t_aa){3, 1 / 9.0}};
