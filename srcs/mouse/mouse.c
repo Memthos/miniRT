@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 10:34:23 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/05 10:18:10 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/05 10:49:10 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,15 @@ t_vec2	mouse_get_delta(t_minirt *rt)
 		{
 			if (x <= border.x)
 				mlx_mouse_move(rt->context, rt->window, rt->dimensions.x - border.x - 2, y);
-			if (y <= border.x)
+			if (y <= border.y)
 				mlx_mouse_move(rt->context, rt->window, x, rt->dimensions.y - border.y - 2);
 			if (x >= rt->dimensions.x - border.x - 1)
 				mlx_mouse_move(rt->context, rt->window, border.x + 1, y);
 			if (y >= rt->dimensions.y - border.y - 1)
-				mlx_mouse_move(rt->context, rt->window,x,  border.y + 1);
+				mlx_mouse_move(rt->context, rt->window, x, border.y + 1);
+			mlx_mouse_get_pos(rt->context, &x, &y);
+			rt->mouse.oldpos.x = x;
+			rt->mouse.oldpos.y = y;
 			return ((t_vec2){0, 0});
 		}
 	}
