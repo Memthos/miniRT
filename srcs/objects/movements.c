@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 11:11:05 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/04 17:06:07 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/05 09:57:20 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	rotate_object(t_minirt *rt)
 				-(mouse_pos[0] - rt->mv_params.mouse_pressed_pos[0])),
 			vec_scale(rt->camera.right,
 				-(mouse_pos[1] - rt->mv_params.mouse_pressed_pos[1])));
-	angle = vec_magnitude(axis) * rt->sensibility;
+	angle = vec_magnitude(axis) * rt->sensibility_rot;
 	if (angle > 0.0001)
 		rt->mv_params.selected->u_obj.plane.norm_rot = vec_normalize(
 				vec_rotate(rt->mv_params.start_norm_rot,

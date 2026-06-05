@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/04 17:08:46 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/05 09:57:09 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_minirt
 	bool		should_render;
 	double		aspect_ratio;
 	t_utime		delta_t;
+	double		sensibility_rot;
 	double		sensibility;
 	t_vec2		dimensions;
 	t_mouse_state	mouse;
