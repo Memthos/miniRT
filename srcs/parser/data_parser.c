@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:52:14 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/01 13:10:37 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/06 15:25:11 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ void	rt_parse_color(const t_string *input, t_rgb *color)
 		else if (value < 0 || value > 255)
 			use_status(FAILURE);
 		else if (i == 1)
-			color->x = value;
+			color->x = value / 255.0;
 		else if (i == 2)
-			color->y = value;
+			color->y = value / 255.0;
 		else
-			color->z = value;
+			color->z = value / 255.0;
 	}
 	ft_free_tab(&data);
 }
