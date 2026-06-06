@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 10:51:43 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/06 09:17:55 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/06 09:21:10 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,9 @@ double	random_normed_double(void)
 	const double	r = random_double();
 
 	return (r / pow(10, (long)log10(r) + 1));
+}
+
+double	random_double2(double min, double max)
+{
+	return (min + (max - min) * random_normed_double());
 }
