@@ -6,11 +6,12 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 10:51:43 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/06 09:21:10 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/06 09:25:28 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
+#include "../libs/lib_tools/includes/math_ops.h"
 #include <sys/time.h>
 
 long int	seed(void)
@@ -49,4 +50,11 @@ double	random_normed_double(void)
 double	random_double2(double min, double max)
 {
 	return (min + (max - min) * random_normed_double());
+}
+
+t_vec3	random_vec3(double min, double max)
+{
+	return ((t_vec3){random_double2(min, max),
+			random_double2(min, max),
+			random_double2(min, max)});	
 }

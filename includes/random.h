@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 10:51:41 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/06 09:21:56 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/06 09:25:50 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ double	random_double2(double min, double max);
 
 double	random_normed_double(void);
 
+t_vec3	random_vec3(double min, double max);
 
 #endif
