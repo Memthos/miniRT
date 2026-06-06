@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:37:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/06 11:35:22 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/06 15:34:25 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,12 @@ t_rgb	ray_color(t_minirt *rt, t_ray *ray, t_uint max_depth)
 		return ((t_rgb){0, 0, 0});
 	if (ray_hit_object(rt, ray, i, &p))
 	{
-		reflect.origin = p.point;
-		reflect.dir = random_surface_vec3(p.normal);
-		c = ray_color(rt, &reflect, --max_depth);
-		return (vec_scale(c, 0.5));
+		if (p.mat.scatter(ray, &reflect, &p))
+		{
+			c = ray_color(rt, &reflect, --max_depth);
+			return ((t_rgb){c.x * p.mat.col.x, c.y * p.mat.col.y, c.z * p.mat.col.z});
+		}
+		return ((t_rgb){0, 0, 0});
 	}
 	c = vec_add(
 			vec_scale((t_vec3){1, 1, 1}, 1 - f),
