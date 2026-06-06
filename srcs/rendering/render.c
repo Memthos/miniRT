@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:04:09 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/06 11:22:53 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/06 13:59:41 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_rgb	get_pixel_color(t_minirt *rt, int x, int y)
 		{
 			ray = ray_gen(&rt->camera, (int[2]){x, y},
 				(int[2]){delta_x, delta_y});
-			ray_c = ray_color(rt, &ray, 10);
+			ray_c = ray_color(rt, &ray, 2);
 			pixel_c = vec_add(pixel_c, ray_c);
 			++delta_x;
 		}
