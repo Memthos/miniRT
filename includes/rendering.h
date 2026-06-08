@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:05:03 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/01 16:56:58 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/08 15:41:15 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct s_minirt	t_minirt;
 
 typedef struct s_render_quality
 {
+	t_uint	ray_depth;
 	double	quality;
 	t_vec2	region;
 	t_aa	aa;
