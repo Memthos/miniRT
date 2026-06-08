@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:37:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/08 09:37:17 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/08 15:02:12 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static bool	ray_hit_object(t_minirt *rt, t_ray *ray, const t_interval i, t_hit_p
 		{
 			hit = true;
 			_i.max = tmp.t;
+			tmp.mat = (objects->objs + index)->mat;
 			*p = tmp;
 		}
 		++index;
