@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:24:04 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/05 11:12:40 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/08 15:41:54 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ t_minirt	*rt_init(t_minirt *rt)
 	rt->sensibility = 0.1;
 	rt->sensibility_rot = 0.005;
 	rt->dimensions = (t_vec2){width, width / rt->aspect_ratio};
-	rt->max_quality = (t_quality){1, (t_vec2){width / 10,
+	rt->max_quality = (t_quality){100, 1, (t_vec2){width / 10,
 		rt->dimensions.y / 10}, (t_aa){3, 1 / 9.0}};
-	rt->min_quality = (t_quality){0.1, rt->dimensions, (t_aa){1, 1}};
+	rt->min_quality = (t_quality){2, 0.1, rt->dimensions, (t_aa){1, 1}};
 	rt->cur_quality = &rt->max_quality;
 	rt->context = mlx_init();
 	ft_bzero(&info, sizeof(info));
