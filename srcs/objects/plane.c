@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 11:21:13 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/06 15:48:55 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/08 10:52:14 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ bool	hit_plane(t_ray *ray, t_obj *plane, t_interval i, t_hit_point *p)
 		return (false);
 	p->t = t;
 	p->point = ray_at(ray, p->t);
-	p->mat = mat_lambertian(plane->u_obj.plane.color);
 	normal = plane->u_obj.plane.norm_rot;
 	p->front = vec_dot(ray->dir, normal) < 0;
 	if (p->front)
