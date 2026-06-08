@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:51:05 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/08 11:01:29 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/08 15:00:36 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ void	rt_parse_sphere(const t_string *line, t_minirt *rt)
 	if (use_status(ERR_GET) == FAILURE)
 		write(2, "Error\nError in file sphere line\n", 32);
 	else if (use_status(ERR_GET) == SUCCESS)
+	{
+		obj.mat = mat_lambertian(obj.mat.col);
 		rt_add_array_slot(&rt->geos, &obj);
+	}
 	ft_free_tab(&data);
-	obj.mat = mat_lambertian(obj.mat.col);
 }
 
 void	rt_parse_plane(const t_string *line, t_minirt *rt)
@@ -57,9 +59,11 @@ void	rt_parse_plane(const t_string *line, t_minirt *rt)
 	if (use_status(ERR_GET) == FAILURE)
 		write(2, "Error\nError in file plane line\n", 31);
 	else if (use_status(ERR_GET) == SUCCESS)
+	{
+		obj.mat = mat_lambertian(obj.mat.col);
 		rt_add_array_slot(&rt->geos, &obj);
+	}
 	ft_free_tab(&data);
-	obj.mat = mat_lambertian(obj.mat.col);
 }
 
 void	rt_parse_cylinder(const t_string *line, t_minirt *rt)
@@ -86,9 +90,11 @@ void	rt_parse_cylinder(const t_string *line, t_minirt *rt)
 	if (use_status(ERR_GET) == FAILURE || endptr)
 		write(2, "Error\nError in file sphere line\n", 32);
 	else if (use_status(ERR_GET) == SUCCESS)
+	{
+		obj.mat = mat_lambertian(obj.mat.col);
 		rt_add_array_slot(&rt->geos, &obj);
+	}
 	ft_free_tab(&data);
-	obj.mat = mat_lambertian(obj.mat.col);
 }
 
 void	rt_parse_ambient_light(const t_string *line, t_minirt *rt)
@@ -112,8 +118,6 @@ void	rt_parse_ambient_light(const t_string *line, t_minirt *rt)
 		rt_parse_color(&data[1], &rt->ambient_light.color);
 	if (use_status(ERR_GET) == FAILURE)
 		write(2, "Error\nError in file ambient light line\n", 39);
-	else if (use_status(ERR_GET) == SUCCESS)
-		rt_add_array_slot(&rt->lights, &obj);
 	ft_free_tab(&data);
 	rt->ambient_light.color = vec_scale(
 		rt->ambient_light.color,
@@ -144,7 +148,9 @@ void	rt_parse_point_light(const t_string *line, t_minirt *rt)
 	if (use_status(ERR_GET) == FAILURE)
 		write(2, "Error\nError in file ambient light line\n", 39);
 	else if (use_status(ERR_GET) == SUCCESS)
+	{
+		obj.mat.scatter = NULL;
 		rt_add_array_slot(&rt->lights, &obj);
+	}
 	ft_free_tab(&data);
-	obj.mat.scatter = NULL;
 }
