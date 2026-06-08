@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/05 09:30:39 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/08 15:36:27 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,11 @@ void	rt_loop(void *param)
 		if (rt->cur_quality == &rt->min_quality || rt->should_render)
 		{
 			rt->should_render = true;
-			rt->cur_quality = &rt->max_quality;
-			camera_update(&rt->camera, rt->cur_quality->aa, rt->delta_t, rt->dimensions);
+			if (rt->cur_quality == &rt->min_quality)
+			{
+				rt->cur_quality = &rt->max_quality;
+				camera_update(&rt->camera, rt->cur_quality->aa, rt->delta_t, rt->dimensions);
+			}
 			rt_render(rt, false);
 		}
 
