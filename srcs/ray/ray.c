@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:37:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/06 15:34:25 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/08 09:37:17 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ t_rgb	ray_color(t_minirt *rt, t_ray *ray, t_uint max_depth)
 	t_rgb				c;
 	t_hit_point			p;
 	const t_interval	i = {0.001, 1000};
-	const double		f = (vec_normalize(ray->dir).y + 1) * 0.5;
 
 	if (0 == max_depth)
 		return ((t_rgb){0, 0, 0});
@@ -77,8 +76,6 @@ t_rgb	ray_color(t_minirt *rt, t_ray *ray, t_uint max_depth)
 		}
 		return ((t_rgb){0, 0, 0});
 	}
-	c = vec_add(
-			vec_scale((t_vec3){1, 1, 1}, 1 - f),
-			vec_scale((t_vec3){0.5, 0.7, 1}, f));
+	c = rt->ambient_light.color;
 	return (c);
 }
