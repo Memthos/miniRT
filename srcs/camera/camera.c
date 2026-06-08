@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:26:13 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/08 15:25:33 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/08 16:37:48 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_camera	*camera_update(t_camera *cam, t_aa aa, t_utime delta, const t_vec2 scre
 			vec_scale(cam->dir, cam->move.velocity.z),
 			vec_add(
 				vec_scale(cam->right, cam->move.velocity.x),
-				vec_scale(vup, cam->move.velocity.y)));
+				vec_scale(cam->up, cam->move.velocity.y)));
 	t_vec3			vx;
 	t_vec3			vy;
 
