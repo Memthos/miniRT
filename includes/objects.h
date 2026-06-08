@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 13:02:44 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/03 16:37:23 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/08 09:31:51 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ typedef struct s_obj
 		t_sphere		sphere;
 		t_plane			plane;
 		t_cylinder		cylinder;
-		t_ambient_light	ambient_light;
 		t_point_light	point_light;
 	}	u_obj;
 	t_hit_func	hit;

@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/05 09:57:09 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/08 09:32:18 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,24 @@
 
 typedef struct s_minirt
 {
-	bool		should_render;
-	double		aspect_ratio;
-	t_utime		delta_t;
-	double		sensibility_rot;
-	double		sensibility;
-	t_vec2		dimensions;
+	bool			should_render;
+	double			aspect_ratio;
+	t_utime			delta_t;
+	double			sensibility_rot;
+	double			sensibility;
+	t_vec2			dimensions;
 	t_mouse_state	mouse;
-	t_quality	max_quality;
-	t_quality	min_quality;
-	t_quality	*cur_quality;
-	mlx_context	context;
-	mlx_window	window;
-	mlx_image	render;
-	t_array		geos;
-	t_array		lights;
-	t_camera	camera;
-	t_move_obj	mv_params;
+	t_quality		max_quality;
+	t_quality		min_quality;
+	t_quality		*cur_quality;
+	mlx_context		context;
+	mlx_window		window;
+	mlx_image		render;
+	t_array			geos;
+	t_array			lights;
+	t_ambient_light	ambient_light;
+	t_camera		camera;
+	t_move_obj		mv_params;
 }	t_minirt;
 
 void	rt_loop(void *param);
