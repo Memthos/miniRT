@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 13:02:44 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/08 09:31:51 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/08 10:51:48 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,18 @@ typedef struct s_point_light
 {
 	t_vec3	position;
 	double	brightness;
-	t_rgb	color;
 }	t_point_light;
 
 typedef struct s_sphere
 {
 	t_vec3	position;
 	double	diameter;
-	t_rgb	color;
 }	t_sphere;
 
 typedef struct s_plane
 {
 	t_vec3	position;
 	t_vec3	norm_rot;
-	t_rgb	color;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -63,7 +60,6 @@ typedef struct s_cylinder
 	t_vec3	norm_rot;
 	double	diameter;
 	double	height;
-	t_rgb	color;
 }	t_cylinder;
 
 typedef bool				(*t_hit_func)(t_ray *, t_obj *, t_interval,
@@ -79,6 +75,7 @@ typedef struct s_obj
 		t_cylinder		cylinder;
 		t_point_light	point_light;
 	}	u_obj;
+	t_material	mat;
 	t_hit_func	hit;
 }	t_obj;
 
