@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects_parser.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:51:05 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/08 09:34:07 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/08 09:40:29 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,9 @@ void	rt_parse_ambient_light(const t_string *line, t_minirt *rt)
 	else if (use_status(ERR_GET) == SUCCESS)
 		rt_add_array_slot(&rt->lights, &obj);
 	ft_free_tab(&data);
+	rt->ambient_light.color = vec_scale(
+		rt->ambient_light.color,
+		rt->ambient_light.brightness);
 }
 
 void	rt_parse_point_light(const t_string *line, t_minirt *rt)
