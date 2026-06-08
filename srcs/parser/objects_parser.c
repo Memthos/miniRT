@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:51:05 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/08 09:40:29 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/08 11:01:29 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ void	rt_parse_sphere(const t_string *line, t_minirt *rt)
 	if (endptr)
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == SUCCESS)
-		rt_parse_color(&data[2], &obj.u_obj.sphere.color);
+		rt_parse_color(&data[2], &obj.mat.col);
 	if (use_status(ERR_GET) == FAILURE)
 		write(2, "Error\nError in file sphere line\n", 32);
 	else if (use_status(ERR_GET) == SUCCESS)
 		rt_add_array_slot(&rt->geos, &obj);
 	ft_free_tab(&data);
+	obj.mat = mat_lambertian(obj.mat.col);
 }
 
 void	rt_parse_plane(const t_string *line, t_minirt *rt)
@@ -52,12 +53,13 @@ void	rt_parse_plane(const t_string *line, t_minirt *rt)
 	if (use_status(ERR_GET) == SUCCESS)
 		rt_parse_orientation(&data[1], &obj.u_obj.plane.norm_rot);
 	if (use_status(ERR_GET) == SUCCESS)
-		rt_parse_color(&data[2], &obj.u_obj.plane.color);
+		rt_parse_color(&data[2], &obj.mat.col);
 	if (use_status(ERR_GET) == FAILURE)
 		write(2, "Error\nError in file plane line\n", 31);
 	else if (use_status(ERR_GET) == SUCCESS)
 		rt_add_array_slot(&rt->geos, &obj);
 	ft_free_tab(&data);
+	obj.mat = mat_lambertian(obj.mat.col);
 }
 
 void	rt_parse_cylinder(const t_string *line, t_minirt *rt)
@@ -80,12 +82,13 @@ void	rt_parse_cylinder(const t_string *line, t_minirt *rt)
 	if (use_status(ERR_GET) == SUCCESS && endptr == NULL)
 		obj.u_obj.cylinder.height = ft_strtod(data[3], &endptr);
 	if (use_status(ERR_GET) == SUCCESS && endptr == NULL)
-		rt_parse_color(&data[4], &obj.u_obj.cylinder.color);
+		rt_parse_color(&data[4], &obj.mat.col);
 	if (use_status(ERR_GET) == FAILURE || endptr)
 		write(2, "Error\nError in file sphere line\n", 32);
 	else if (use_status(ERR_GET) == SUCCESS)
 		rt_add_array_slot(&rt->geos, &obj);
 	ft_free_tab(&data);
+	obj.mat = mat_lambertian(obj.mat.col);
 }
 
 void	rt_parse_ambient_light(const t_string *line, t_minirt *rt)
@@ -137,10 +140,11 @@ void	rt_parse_point_light(const t_string *line, t_minirt *rt)
 			|| obj.u_obj.point_light.brightness > 1.0 || endptr))
 		use_status(FAILURE);
 	if (use_status(ERR_GET) == SUCCESS)
-		rt_parse_color(&data[2], &obj.u_obj.point_light.color);
+		rt_parse_color(&data[2], &obj.mat.col);
 	if (use_status(ERR_GET) == FAILURE)
 		write(2, "Error\nError in file ambient light line\n", 39);
 	else if (use_status(ERR_GET) == SUCCESS)
 		rt_add_array_slot(&rt->lights, &obj);
 	ft_free_tab(&data);
+	obj.mat.scatter = NULL;
 }
