@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:24:04 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/05 09:56:26 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/05 11:12:40 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_minirt	*rt_init(t_minirt *rt)
 	info.title = "miniRT";
 	info.width = rt->dimensions.x;
 	info.height = rt->dimensions.y;
+	info.is_resizable = true;
 	rt->window = mlx_new_window(rt->context, &info);
 	rt->render = mlx_new_image(rt->context, rt->dimensions.x, rt->dimensions.y);
 	mouse_init(rt);

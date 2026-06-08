@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/08 09:32:18 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/08 09:35:28 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include "camera.h"
 # include "interval.h"
 # include "ray.h"
+# include "material.h"
 # include "projection.h"
 # include "objects.h"
 # include "rendering.h"

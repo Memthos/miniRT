@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   random.h                                           :+:      :+:    :+:   */
+/*   lambertian.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/29 10:51:41 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/06 11:34:00 by juperrin         ###   ########.fr       */
+/*   Created: 2026/06/06 14:34:20 by juperrin          #+#    #+#             */
+/*   Updated: 2026/06/06 15:42:31 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RANDOM_H
-# define RANDOM_H
+#include "minirt.h"
 
-double	random_double(void);
+static bool	lambertian_scatter(t_ray *in, t_ray *out, t_hit_point *p)
+{
+	const t_vec3	scatter_dir = random_surface_vec3(p->normal);
 
-double	random_double2(double min, double max);
+	(void)in;
+	*out = (t_ray){p->point, scatter_dir};
+	return (true);
+}
 
-double	random_normed_double(void);
+t_material	mat_lambertian(t_rgb col)
+{
+	t_material	m;
 
-t_vec3	random_vec3(double min, double max);
-
-t_vec3	random_unit_vec3(void);
-
-t_vec3	random_surface_vec3(const t_vec3	normal);
-
-#endif
+	m.col = col;
+	m.scatter = &lambertian_scatter;
+	return (m);
+}

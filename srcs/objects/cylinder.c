@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 11:20:52 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/02 10:09:29 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/06 15:49:26 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static bool	hit_body(t_ray *ray, t_cylinder cyl, t_interval i, t_hit_point *p)
 		return (false);
 	p->t = ret.val;
 	p->point = ray_at(ray, p->t);
+	p->mat = mat_lambertian(cyl.color);
 	y = vec_dot(vec_sub(p->point, cyl.position), cyl.norm_rot);
 	if (y < -cyl.height * 0.5 || y > cyl.height * 0.5)
 		return (false);

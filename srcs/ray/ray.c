@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:37:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/02 10:04:40 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/06 15:34:25 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,24 @@ static bool	ray_hit_object(t_minirt *rt, t_ray *ray, const t_interval i, t_hit_p
 	return (hit);
 }
 
-t_rgb	ray_color(t_minirt *rt, t_ray *ray)
+t_rgb	ray_color(t_minirt *rt, t_ray *ray, t_uint max_depth)
 {
+	t_ray				reflect;
 	t_rgb				c;
 	t_hit_point			p;
-	const t_interval	i = {0, 100};
+	const t_interval	i = {0.001, 1000};
 	const double		f = (vec_normalize(ray->dir).y + 1) * 0.5;
 
+	if (0 == max_depth)
+		return ((t_rgb){0, 0, 0});
 	if (ray_hit_object(rt, ray, i, &p))
 	{
-		c = (t_rgb){
-			.x = (p.normal.x + 1) * 0.5,
-			.y = (p.normal.y + 1) * 0.5,
-			.z = (p.normal.z + 1) * 0.5
-		};
-		return (c);
+		if (p.mat.scatter(ray, &reflect, &p))
+		{
+			c = ray_color(rt, &reflect, --max_depth);
+			return ((t_rgb){c.x * p.mat.col.x, c.y * p.mat.col.y, c.z * p.mat.col.z});
+		}
+		return ((t_rgb){0, 0, 0});
 	}
 	c = vec_add(
 			vec_scale((t_vec3){1, 1, 1}, 1 - f),

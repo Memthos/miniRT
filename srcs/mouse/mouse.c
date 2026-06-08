@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 10:34:23 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/05 09:30:15 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/05 10:49:10 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,30 @@ void	mouse_init(t_minirt *rt)
 
 t_vec2	mouse_get_delta(t_minirt *rt)
 {
-	t_vec2	delta;
-	int		x;
-	int		y;
+	const t_vec2	border = {10, 10};
+	t_vec2			delta;
+	int				x;
+	int				y;
 
 	mlx_mouse_get_pos(rt->context, &x, &y);
+	if (rt->mouse.rotating || rt->mv_params.moving)
+	{
+		if (x <= border.x || y <= border.y || x >= rt->dimensions.x - border.x - 1 || y >= rt->dimensions.y - border.y - 1)
+		{
+			if (x <= border.x)
+				mlx_mouse_move(rt->context, rt->window, rt->dimensions.x - border.x - 2, y);
+			if (y <= border.y)
+				mlx_mouse_move(rt->context, rt->window, x, rt->dimensions.y - border.y - 2);
+			if (x >= rt->dimensions.x - border.x - 1)
+				mlx_mouse_move(rt->context, rt->window, border.x + 1, y);
+			if (y >= rt->dimensions.y - border.y - 1)
+				mlx_mouse_move(rt->context, rt->window, x, border.y + 1);
+			mlx_mouse_get_pos(rt->context, &x, &y);
+			rt->mouse.oldpos.x = x;
+			rt->mouse.oldpos.y = y;
+			return ((t_vec2){0, 0});
+		}
+	}
 	delta.x = x - rt->mouse.oldpos.x;
 	delta.y = y - rt->mouse.oldpos.y;
 	rt->mouse.oldpos.x = x;
