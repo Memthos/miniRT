@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/05 14:14:48 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/09 11:21:39 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ static void	mousedown_hook(int key, void *param)
 	rt->mv_params.moving = true;
 	mlx_mouse_get_pos(rt->context, &rt->mv_params.mouse_pressed_pos[0],
 		&rt->mv_params.mouse_pressed_pos[1]);
-	rt->mv_params.last_mouse_pos[0] = rt->mv_params.mouse_pressed_pos[0];
-	rt->mv_params.last_mouse_pos[1] = rt->mv_params.mouse_pressed_pos[1];
+	rt->mv_params.last_ms_pos[0] = rt->mv_params.mouse_pressed_pos[0];
+	rt->mv_params.last_ms_pos[1] = rt->mv_params.mouse_pressed_pos[1];
 	rt->mv_params.start_norm_rot = rt->mv_params.selected->u_obj.plane.norm_rot;
 	rt->mv_params.screen_pos = project_to_screen(rt,
 		rt->mv_params.selected->u_obj.plane.position);
