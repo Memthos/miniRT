@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:52:14 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/06 15:25:11 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/09 11:09:59 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	rt_parse_coords(const t_string *input, t_vec3 *pos)
 	t_string_tab	data;
 	t_string		endptr;
 
+	if (use_status(ERR_GET) != SUCCESS)
+		return ;
 	endptr = NULL;
 	data = ft_split(*input, ",");
 	if (ft_string_tab_len(data) != 3)
@@ -34,17 +36,16 @@ void	rt_parse_orientation(const t_string *input, t_vec3 *dir)
 {
 	t_string_tab	data;
 	t_string		endptr;
-	double			*values[3];
+	double *const	values[3] = {&dir->x, &dir->y, &dir->z};
 	size_t			i;
 
+	if (use_status(ERR_GET) != SUCCESS)
+		return ;
 	endptr = NULL;
 	data = ft_split(*input, ",");
 	if (ft_string_tab_len(data) != 3)
 		use_status(FAILURE);
 	i = 0;
-	values[0] = &dir->x;
-	values[1] = &dir->y;
-	values[2] = &dir->z;
 	while (i++ < 3 && use_status(ERR_GET) == SUCCESS)
 	{
 		(*values)[i - 1] = ft_strtod(data[i - 1], &endptr);
@@ -65,6 +66,8 @@ void	rt_parse_color(const t_string *input, t_rgb *color)
 	int				value;
 	size_t			i;
 
+	if (use_status(ERR_GET) != SUCCESS)
+		return ;
 	data = ft_split(*input, ",");
 	if (ft_string_tab_len(data) != 3)
 		use_status(FAILURE);
