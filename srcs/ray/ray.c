@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:37:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/08 15:02:12 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/11 17:06:32 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,12 @@ t_rgb	ray_color(t_minirt *rt, t_ray *ray, t_uint max_depth)
 
 	if (0 == max_depth)
 		return ((t_rgb){0, 0, 0});
-	if (ray_hit_object(rt, ray, i, &p))
+	if (!ray_hit_object(rt, ray, i, &p))
+		return (rt->ambient_light.color);
+	if (p.mat.scatter(ray, &reflect, &p))
 	{
-		if (p.mat.scatter(ray, &reflect, &p))
-		{
-			c = ray_color(rt, &reflect, --max_depth);
-			return ((t_rgb){c.x * p.mat.col.x, c.y * p.mat.col.y, c.z * p.mat.col.z});
-		}
-		return ((t_rgb){0, 0, 0});
+		c = ray_color(rt, &reflect, --max_depth);
+		return ((t_rgb){c.x * p.mat.col.x, c.y * p.mat.col.y, c.z * p.mat.col.z});
 	}
-	c = rt->ambient_light.color;
-	return (c);
+	return ((t_rgb){0, 0, 0});
 }
