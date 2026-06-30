@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:37:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/11 17:06:32 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/29 11:15:11 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ static bool	ray_hit_object(t_minirt *rt, t_ray *ray, const t_interval i, t_hit_p
 		}
 		++index;
 	}
+	if (rt->lights.objs->hit(ray, rt->lights.objs, _i, p))
+	{
+		hit = true;
+		p->mat = rt->lights.objs->mat;
+	}
 	return (hit);
 }
 
@@ -63,17 +68,19 @@ t_rgb	ray_color(t_minirt *rt, t_ray *ray, t_uint max_depth)
 {
 	t_ray				reflect;
 	t_rgb				c;
+	t_rgb				emission_c;
 	t_hit_point			p;
 	const t_interval	i = {0.001, 1000};
 
 	if (0 == max_depth)
 		return ((t_rgb){0, 0, 0});
 	if (!ray_hit_object(rt, ray, i, &p))
-		return (rt->ambient_light.color);
+		return (vec_scale(rt->ambient_light.color, 0));
+	emission_c = p.mat.emit(&p);
 	if (p.mat.scatter(ray, &reflect, &p))
 	{
 		c = ray_color(rt, &reflect, --max_depth);
-		return ((t_rgb){c.x * p.mat.col.x, c.y * p.mat.col.y, c.z * p.mat.col.z});
+		return (vec_add(emission_c, (t_rgb){c.x * p.mat.col.x, c.y * p.mat.col.y, c.z * p.mat.col.z}));
 	}
-	return ((t_rgb){0, 0, 0});
+	return (emission_c);
 }
