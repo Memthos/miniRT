@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:37:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/29 11:15:11 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 13:33:31 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_rgb	ray_color(t_minirt *rt, t_ray *ray, t_uint max_depth)
 	emission_c = p.mat.emit(&p);
 	if (p.mat.scatter(ray, &reflect, &p))
 	{
-		c = ray_color(rt, &reflect, --max_depth);
+		c = vec_scale(ray_color(rt, &reflect, --max_depth), rt->intensity);
 		return (vec_add(emission_c, (t_rgb){c.x * p.mat.col.x, c.y * p.mat.col.y, c.z * p.mat.col.z}));
 	}
 	return (emission_c);
