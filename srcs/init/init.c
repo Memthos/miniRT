@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:24:04 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/30 17:13:34 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 17:19:38 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_minirt	*rt_init(t_minirt *rt)
 	rt->sensibility = 0.1;
 	rt->sensibility_rot = 0.005;
 	rt->dimensions = (t_vec2){width, width / rt->aspect_ratio};
-	set_quality(rt);
+	render_set_quality(rt);
 	rt->context = mlx_init();
 	ft_bzero(&info, sizeof(info));
 	info.title = "miniRT";
