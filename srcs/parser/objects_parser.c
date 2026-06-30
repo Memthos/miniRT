@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:51:05 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/29 11:15:52 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 16:34:42 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	rt_parse_point_light(const t_string *line, t_minirt *rt)
 	t_obj			obj;
 	t_string_tab	data;
 	t_string		endptr;
+	double			brightness;
 
 	endptr = NULL;
 	obj = (t_obj){.type = POINT_LIGHT, .hit = &hit_light};
@@ -135,6 +136,7 @@ void	rt_parse_point_light(const t_string *line, t_minirt *rt)
 		ft_putendl_fd("Error\nError in file ambient light line", 2);
 	if (use_status(ERR_GET) != SUCCESS)
 		return ;
-	obj.mat = mat_emission(vec_scale((t_rgb){obj.u_obj.point_light.brightness, obj.u_obj.point_light.brightness, obj.u_obj.point_light.brightness}, 10));
+	brightness = obj.u_obj.point_light.brightness;
+	obj.mat = mat_emission((t_rgb){brightness, brightness, brightness});
 	rt_add_array_slot(&rt->lights, &obj);
 }
