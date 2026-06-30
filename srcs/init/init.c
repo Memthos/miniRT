@@ -6,11 +6,33 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:24:04 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/30 13:36:16 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 16:29:22 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+static void	set_quality(t_minirt *rt)
+{
+	const float	fact = 10;
+
+	rt->max_quality = (t_quality){
+		.ray_depth = 5,
+		.quality = 1,
+		.region = (t_vec2){rt->dimensions.x / fact, rt->dimensions.y / fact},
+		.aa.size = 4,
+	};
+	rt->max_quality.aa.scale = 1 / (double)(
+			rt->max_quality.aa.size * rt->max_quality.aa.size);
+	rt->min_quality = (t_quality){
+		.ray_depth = 2,
+		.quality = 0.1,
+		.region = rt->dimensions,
+		.aa = (t_aa){1, 1}
+	};
+	rt->cur_quality = &rt->max_quality;
+	return ;
+}
 
 t_minirt	*rt_init(t_minirt *rt)
 {
@@ -23,10 +45,7 @@ t_minirt	*rt_init(t_minirt *rt)
 	rt->sensibility = 0.1;
 	rt->sensibility_rot = 0.005;
 	rt->dimensions = (t_vec2){width, width / rt->aspect_ratio};
-	rt->max_quality = (t_quality){100, 1, (t_vec2){width / 10,
-		rt->dimensions.y / 10}, (t_aa){3, 1 / 9.0}};
-	rt->min_quality = (t_quality){2, 0.1, rt->dimensions, (t_aa){1, 1}};
-	rt->cur_quality = &rt->max_quality;
+	set_quality(rt);
 	rt->context = mlx_init();
 	ft_bzero(&info, sizeof(info));
 	info.title = "miniRT";
