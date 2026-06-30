@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:04:09 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/30 17:18:53 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 17:57:31 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	render_set_quality(t_minirt *rt)
 	const float	fact = 0.01;
 
 	rt->max_quality = (t_quality){
-		.ray_depth = 5,
+		.ray_depth = 10,
 		.quality = 1,
 		.region = (t_vec2){rt->dimensions.x * fact, rt->dimensions.y * fact},
-		.aa.size = 5,
+		.aa.size = 25,
 	};
 	rt->max_quality.aa.scale = 1 / (double)(
 			rt->max_quality.aa.size * rt->max_quality.aa.size);
@@ -49,8 +49,8 @@ static t_rgb	get_pixel_color(t_minirt *rt, int x, int y)
 		delta_x = 0;
 		while (delta_x < rt->camera.aa.size)
 		{
-			ray = ray_gen(&rt->camera, (int[2]){x, y},
-				(int[2]){delta_x, delta_y});
+			ray = ray_gen(&rt->camera, (int [2]){x, y},
+					(int [2]){delta_x, delta_y});
 			ray_c = ray_color(rt, &ray, rt->cur_quality->ray_depth);
 			pixel_c = vec_add(pixel_c, ray_c);
 			++delta_x;
@@ -98,8 +98,13 @@ static void	render_region(t_minirt *rt, t_vec2 pos)
 		x = 0;
 		while (x < rt->cur_quality->region.x)
 		{
-			pixel_c = get_pixel_color(rt, x + pos.x * rt->cur_quality->region.x, y + pos.y * rt->cur_quality->region.y);
-			set_pixel_color(rt, x + pos.x * rt->cur_quality->region.x, y + pos.y * rt->cur_quality->region.y, pixel_c);
+			pixel_c = get_pixel_color(rt,
+					x + pos.x * rt->cur_quality->region.x,
+					y + pos.y * rt->cur_quality->region.y);
+			set_pixel_color(rt,
+				x + pos.x * rt->cur_quality->region.x,
+				y + pos.y * rt->cur_quality->region.y,
+				pixel_c);
 			x += 1 / rt->cur_quality->quality;
 		}
 		y += 1 / rt->cur_quality->quality;
