@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/30 17:19:11 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 18:27:09 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ static void	window_hook(int event, void *param)
 	{
 		mlx_loop_end(rt->context);
 		mlx_get_window_size(rt->context, rt->window, &size_x, &size_y);
-		rt->dimensions = (t_vec2) {size_x, size_y};
+		rt->dimensions = (t_vec2){size_x, size_y};
 		mlx_destroy_image(rt->context, rt->render);
-		rt->render = mlx_new_image(rt->context, rt->dimensions.x,
-			rt->dimensions.y);
+		rt->render = mlx_new_image(
+				rt->context,
+				rt->dimensions.x,
+				rt->dimensions.y);
 		render_set_quality(rt);
 		rt->size_changed = true;
 		mlx_loop(rt->context);
@@ -46,14 +48,14 @@ static void	get_hit_obj(t_minirt *rt, t_ray *ray, const t_interval i)
 	index = 0;
 	while (index < rt->geos.size || index < rt->lights.size)
 	{
-		if (index < rt->geos.size &&
-			rt->geos.objs[index].hit(ray, &rt->geos.objs[index], _i, &tmp))
+		if (index < rt->geos.size
+			&& rt->geos.objs[index].hit(ray, &rt->geos.objs[index], _i, &tmp))
 		{
 			_i.max = tmp.t;
 			rt->mv_params.selected = &rt->geos.objs[index];
 		}
-		if (index < rt->lights.size &&
-			rt->lights.objs[index].hit(ray, &rt->lights.objs[index], _i, &tmp))
+		if (index < rt->lights.size && rt->lights.objs[index].hit(
+				ray, &rt->lights.objs[index], _i, &tmp))
 		{
 			_i.max = tmp.t;
 			rt->mv_params.selected = &rt->lights.objs[index];
@@ -62,7 +64,7 @@ static void	get_hit_obj(t_minirt *rt, t_ray *ray, const t_interval i)
 	}
 }
 
-void mousewheel_hook(int key, void *param)
+void	mousewheel_hook(int key, void *param)
 {
 	t_minirt	*rt;
 
@@ -132,8 +134,8 @@ static void	mousedown_hook(int key, void *param)
 	rt->mv_params.last_ms_pos[0] = rt->mv_params.mouse_pressed_pos[0];
 	rt->mv_params.last_ms_pos[1] = rt->mv_params.mouse_pressed_pos[1];
 	rt->mv_params.start_norm_rot = rt->mv_params.selected->u_obj.plane.norm_rot;
-	rt->mv_params.screen_pos = project_to_screen(rt,
-		rt->mv_params.selected->u_obj.plane.position);
+	rt->mv_params.screen_pos = project_to_screen(
+			rt, rt->mv_params.selected->u_obj.plane.position);
 }
 
 void	rt_init_events(t_minirt *rt)
