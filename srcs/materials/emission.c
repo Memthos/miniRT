@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 12:22:05 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/28 11:40:57 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 16:33:41 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ static t_rgb	emission_emit(t_hit_point *p)
 
 t_material	mat_emission(t_rgb col)
 {
+	const float	intensity = 5;
 	t_material	m;
 
-	m.col = col;
+	m.col = vec_scale(col, intensity);
 	m.scatter = &emission_scatter;
 	m.emit = &emission_emit;
 	return (m);
