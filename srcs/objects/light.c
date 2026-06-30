@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 12:26:14 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/30 17:54:00 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 17:54:22 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ bool	hit_light(t_ray *ray, t_obj *light, t_interval i, t_hit_point *p)
 
 	oc = vec_sub(light->u_obj.point_light.position, ray->origin);
 	b = vec_dot(ray->dir, oc);
-	h = 0.25
-		- vec_squared_magnitude(vec_sub(oc, vec_scale(ray->dir, b)));
+	h = 0.25 - vec_squared_magnitude(vec_sub(oc, vec_scale(ray->dir, b)));
 	if (h < 0)
 		return (false);
 	root = 0.0;
