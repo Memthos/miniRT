@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/08 15:36:27 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 13:54:24 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,8 @@ void	rt_loop(void *param)
 				rt->cur_quality = &rt->max_quality;
 				camera_update(&rt->camera, rt->cur_quality->aa, rt->delta_t, rt->dimensions);
 			}
-			rt_render(rt, false);
+			rt_render(rt, rt->size_changed);
 		}
-
 		return ;
 	}
 	rt->cur_quality = &rt->min_quality;

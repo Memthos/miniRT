@@ -6,7 +6,11 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/06/30 13:32:27 by juperrin         ###   ########.fr       */
+=======
+/*   Updated: 2026/06/30 13:43:45 by mperrine         ###   ########.fr       */
+>>>>>>> 4c39250f505f4154cfe0e2d3c5faf6f2b62a2dc6
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +48,8 @@
 typedef struct s_minirt
 {
 	bool			should_render;
+	bool			size_changed;
+	double			aspect_ratio;
 	t_utime			delta_t;
 	float			intensity;
 	double			aspect_ratio;

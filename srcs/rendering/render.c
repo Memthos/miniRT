@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:04:09 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/30 13:51:23 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 16:49:04 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	rt_render(t_minirt *rt, bool restart)
 	{
 		pos.x = 0;
 		pos.y = 0;
+		rt->size_changed = false;
 	}
 	render_region(rt, pos);
 	++pos.x;

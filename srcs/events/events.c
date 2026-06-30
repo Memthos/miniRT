@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/09 11:21:39 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/30 13:44:05 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,28 @@
 
 static void	window_hook(int event, void *param)
 {
-	t_minirt	rt;
+	t_minirt	*rt;
+	int			sizex;
+	int			sizey;
 
-	rt = *(t_minirt *)param;
+	rt = (t_minirt *)param;
 	if (0 == event)
-		mlx_loop_end(rt.context);
+		mlx_loop_end(rt->context);
+	else if (1 == event)
+	{
+		mlx_loop_end(rt->context);
+		mlx_get_window_size(rt->context, rt->window, &sizex, &sizey);
+		rt->dimensions = (t_vec2) {sizex, sizey};
+		mlx_destroy_image(rt->context, rt->render);
+		rt->render = mlx_new_image(rt->context, rt->dimensions.x,
+			rt->dimensions.y);
+		rt->max_quality = (t_quality){100, 1, (t_vec2){rt->dimensions.x / 10,
+			rt->dimensions.y / 10}, (t_aa){3, 1 / 9.0}};
+		rt->min_quality = (t_quality){2, 0.1, rt->dimensions, (t_aa){1, 1}};
+		rt->cur_quality = &rt->min_quality;
+		rt->size_changed = true;
+		mlx_loop(rt->context);
+	}
 	return ;
 }
 
@@ -27,16 +44,22 @@ static void	get_hit_obj(t_minirt *rt, t_ray *ray, const t_interval i)
 	t_interval		_i;
 	t_hit_point		tmp;
 	t_uint			index;
-	const t_array	*objects = &rt->geos;
 
 	_i = i;
 	index = 0;
-	while (index < objects->size)
+	while (index < rt->geos.size || index < rt->lights.size)
 	{
-		if (objects->objs[index].hit(ray, &objects->objs[index], _i, &tmp))
+		if (index < rt->geos.size &&
+			rt->geos.objs[index].hit(ray, &rt->geos.objs[index], _i, &tmp))
 		{
 			_i.max = tmp.t;
-			rt->mv_params.selected = &objects->objs[index];
+			rt->mv_params.selected = &rt->geos.objs[index];
+		}
+		if (index < rt->lights.size &&
+			rt->lights.objs[index].hit(ray, &rt->lights.objs[index], _i, &tmp))
+		{
+			_i.max = tmp.t;
+			rt->mv_params.selected = &rt->lights.objs[index];
 		}
 		++index;
 	}
@@ -84,12 +107,10 @@ static void	mouseup_hook(int key, void *param)
 	}
 	if (key != KEY_LEFT_MOUSE)
 		return ;
-	ft_bzero(&mouse_pos, sizeof(int [2]));
 	mlx_mouse_get_pos(rt->context, &mouse_pos[0], &mouse_pos[1]);
 	pixel_point = vec_add(rt->camera.viewport.nw_pixel,
-			vec_add(vec_scale(rt->camera.viewport.delta_x,
-					(double)mouse_pos[0]),
-				vec_scale(rt->camera.viewport.delta_y, (double)mouse_pos[1])));
+			vec_add(vec_scale(rt->camera.viewport.delta_x, mouse_pos[0]),
+				vec_scale(rt->camera.viewport.delta_y, mouse_pos[1])));
 	ray = (t_ray){rt->camera.pos, vec_sub(pixel_point, rt->camera.pos)};
 	rt->mv_params.selected = NULL;
 	get_hit_obj(rt, &ray, i);

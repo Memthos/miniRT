@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:24:04 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/30 16:29:22 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 16:49:16 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_minirt	*rt_init(t_minirt *rt)
 
 	rt->should_render = true;
 	rt->intensity = 1;
+	rt->size_changed = true;
 	rt->aspect_ratio = 16.0 / 9.0;
 	rt->sensibility = 0.1;
 	rt->sensibility_rot = 0.005;
