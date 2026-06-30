@@ -3,10 +3,10 @@ VPATH:=srcs:srcs/init:srcs/quit:srcs/camera:srcs/interval:srcs/ray:srcs/renderin
 
 SRCS:=	minirt.c init.c quit.c \
 		events.c mouse.c move_events.c\
-		camera.c interval.c\
+		camera.c interval.c \
 		ray.c render.c \
-		lambertian.c \
-		sphere.c cylinder.c plane.c movements.c \
+		lambertian.c emission.c \
+		sphere.c cylinder.c plane.c movements.c light.c \
 		add_array_slot.c \
 		parser.c data_parser.c objects_parser.c \
 		random.c utime.c \
