@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:51:05 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/30 16:34:42 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 18:27:58 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	rt_parse_point_light(const t_string *line, t_minirt *rt)
 	rt_parse_color(&data[2], &obj.mat.col);
 	ft_free_tab(&data);
 	if (use_status(ERR_GET) == FAILURE)
-		ft_putendl_fd("Error\nError in file ambient light line", 2);
+		ft_putendl_fd("Error\nError in file light line", 2);
 	if (use_status(ERR_GET) != SUCCESS)
 		return ;
 	brightness = obj.u_obj.point_light.brightness;
