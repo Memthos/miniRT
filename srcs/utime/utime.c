@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   utime.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:49:10 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/03 12:07:25 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 17:34:28 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_utime	get_utime(void)
 
 	if (SUCCESS != gettimeofday(&t, NULL))
 		return (0);
-	return ((t_utime)t.tv_sec * 1000000 + t.tv_usec);		
+	return ((t_utime)t.tv_sec * 1000000 + t.tv_usec);
 }
 
 t_utime	get_delta_time(void)

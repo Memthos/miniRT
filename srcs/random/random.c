@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 10:51:43 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/08 10:11:25 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 17:39:33 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,34 +28,26 @@ long int	seed(void)
 	return (seed);
 }
 
-int	random_number(void)
+double	random_double(double min, double max)
 {
 	static long int	num = 0;
 	const long int	a = 932784;
 	const long int	c = seed();
 	const int		m = 1000000000;
+	double			r;
 
 	num = (a * num + c) % m;
-	return (num);
-}
-
-double	random_normed_double(void)
-{
-	const double	r = random_number();
-
-	return (r / 1000000000 * 2 - 1);
-}
-
-double	random_double(double min, double max)
-{
-	return (min + (max - min) * random_normed_double());
+	r = num;
+	return (min + (max - min) * (r / (double)(m * 2 - 1)));
 }
 
 t_vec3	random_vec3(double min, double max)
 {
-	return ((t_vec3){random_double(min, max),
-			random_double(min, max),
-			random_double(min, max)});	
+	return ((t_vec3){
+		random_double(min, max),
+		random_double(min, max),
+		random_double(min, max)
+	});
 }
 
 t_vec3	random_unit_vec3(void)

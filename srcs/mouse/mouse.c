@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 10:34:23 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/05 10:49:10 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 17:35:28 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,13 @@ void	mouse_update(t_minirt *rt)
 
 	if (!rt->mouse.rotating)
 		return ;
-	rt->camera.dir = vec_rotate(rt->camera.dir, (t_vec3){0, 1, 0}, delta.x * rt->sensibility * deg_to_rad());
-	rt->camera.dir = vec_rotate(rt->camera.dir, rt->camera.right, delta.y * rt->sensibility * deg_to_rad());
+	rt->camera.dir = vec_rotate(
+			rt->camera.dir,
+			(t_vec3){0, 1, 0},
+			delta.x * rt->sensibility * deg_to_rad());
+	rt->camera.dir = vec_rotate(
+			rt->camera.dir,
+			rt->camera.right,
+			delta.y * rt->sensibility * deg_to_rad());
 	return ;
 }
