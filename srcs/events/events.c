@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/30 13:44:05 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/30 17:19:11 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	window_hook(int event, void *param)
 {
 	t_minirt	*rt;
-	int			sizex;
-	int			sizey;
+	int			size_x;
+	int			size_y;
 
 	rt = (t_minirt *)param;
 	if (0 == event)
@@ -24,15 +24,12 @@ static void	window_hook(int event, void *param)
 	else if (1 == event)
 	{
 		mlx_loop_end(rt->context);
-		mlx_get_window_size(rt->context, rt->window, &sizex, &sizey);
-		rt->dimensions = (t_vec2) {sizex, sizey};
+		mlx_get_window_size(rt->context, rt->window, &size_x, &size_y);
+		rt->dimensions = (t_vec2) {size_x, size_y};
 		mlx_destroy_image(rt->context, rt->render);
 		rt->render = mlx_new_image(rt->context, rt->dimensions.x,
 			rt->dimensions.y);
-		rt->max_quality = (t_quality){100, 1, (t_vec2){rt->dimensions.x / 10,
-			rt->dimensions.y / 10}, (t_aa){3, 1 / 9.0}};
-		rt->min_quality = (t_quality){2, 0.1, rt->dimensions, (t_aa){1, 1}};
-		rt->cur_quality = &rt->min_quality;
+		render_set_quality(rt);
 		rt->size_changed = true;
 		mlx_loop(rt->context);
 	}
