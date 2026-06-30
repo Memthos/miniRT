@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:37:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/30 15:25:46 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 18:08:10 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ t_point3	ray_at(t_ray *ray, double delta)
 	return (point);
 }
 
-static bool	ray_hit_object(t_minirt *rt, t_ray *ray, const t_interval i, t_hit_point *p)
+static bool	ray_hit_object(t_minirt *rt,
+	t_ray *ray,
+	const t_interval i,
+	t_hit_point *p)
 {
 	bool			hit;
 	t_interval		_i;
@@ -57,10 +60,7 @@ static bool	ray_hit_object(t_minirt *rt, t_ray *ray, const t_interval i, t_hit_p
 		++index;
 	}
 	if (rt->lights.objs->hit(ray, rt->lights.objs, _i, p))
-	{
 		hit = true;
-		p->mat = rt->lights.objs->mat;
-	}
 	return (hit);
 }
 
@@ -80,7 +80,11 @@ t_rgb	ray_color(t_minirt *rt, t_ray *ray, t_uint max_depth)
 	if (p.mat.scatter(ray, &reflect, &p))
 	{
 		c = vec_scale(ray_color(rt, &reflect, --max_depth), rt->intensity);
-		return (vec_add(emission_c, (t_rgb){c.x * p.mat.col.x, c.y * p.mat.col.y, c.z * p.mat.col.z}));
+		return (vec_add(emission_c, (t_rgb){
+				c.x * p.mat.col.x,
+				c.y * p.mat.col.y,
+				c.z * p.mat.col.z
+			}));
 	}
 	return (emission_c);
 }
