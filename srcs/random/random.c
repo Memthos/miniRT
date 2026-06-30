@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 10:51:43 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/30 17:39:33 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 18:15:16 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ double	random_double(double min, double max)
 
 	num = (a * num + c) % m;
 	r = num;
-	return (min + (max - min) * (r / (double)(m * 2 - 1)));
+	return (min + (max - min) * (r / m * 2 - 1));
 }
 
 t_vec3	random_vec3(double min, double max)
