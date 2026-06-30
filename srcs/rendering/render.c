@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:04:09 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/28 11:50:19 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 13:30:36 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_rgb	get_pixel_color(t_minirt *rt, int x, int y)
 
 static void	set_pixel_color(t_minirt *rt, int x, int y, t_rgb color)
 {
-	const t_interval	clamp = {0, 255};
+	const t_interval	clamp = {0, 1};
 	int					_y;
 	int					_x;
 
@@ -53,9 +53,9 @@ static void	set_pixel_color(t_minirt *rt, int x, int y, t_rgb color)
 		{
 			mlx_set_image_pixel(rt->context, rt->render, x + _x, y + _y,
 				(mlx_color){
-				.r = interval_clamp(&clamp, 255 * color.x),
-				.g = interval_clamp(&clamp, 255 * color.y),
-				.b = interval_clamp(&clamp, 255 * color.z),
+				.r = 255 * interval_clamp(&clamp, color.x),
+				.g = 255 * interval_clamp(&clamp, color.y),
+				.b = 255 * interval_clamp(&clamp, color.z),
 				.a = 255});
 			++_x;
 		}
