@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:04:09 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/06 13:59:41 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/28 11:50:19 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ static t_rgb	get_pixel_color(t_minirt *rt, int x, int y)
 
 static void	set_pixel_color(t_minirt *rt, int x, int y, t_rgb color)
 {
-	int	_y;
-	int	_x;
+	const t_interval	clamp = {0, 255};
+	int					_y;
+	int					_x;
 
 	_y = 0;
 	while (_y < 1 / rt->cur_quality->quality)
@@ -52,9 +53,9 @@ static void	set_pixel_color(t_minirt *rt, int x, int y, t_rgb color)
 		{
 			mlx_set_image_pixel(rt->context, rt->render, x + _x, y + _y,
 				(mlx_color){
-				.r = 255 * color.x,
-				.g = 255 * color.y,
-				.b = 255 * color.z,
+				.r = interval_clamp(&clamp, 255 * color.x),
+				.g = interval_clamp(&clamp, 255 * color.y),
+				.b = interval_clamp(&clamp, 255 * color.z),
 				.a = 255});
 			++_x;
 		}
@@ -105,8 +106,8 @@ void	rt_render(t_minirt *rt, bool restart)
 		pos.x = 0;
 		pos.y = 0;
 		rt->should_render = false;
-		mlx_clear_window(rt->context, rt->window, (mlx_color){.rgba = 0x000000FF});
-		mlx_put_image_to_window(rt->context, rt->window, rt->render, 0, 0);
 	}
+	mlx_clear_window(rt->context, rt->window, (mlx_color){.rgba = 0x000000FF});
+	mlx_put_image_to_window(rt->context, rt->window, rt->render, 0, 0);
 	return ;
 }
