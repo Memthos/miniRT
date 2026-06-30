@@ -6,11 +6,33 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:04:09 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/30 16:49:04 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 17:18:53 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	render_set_quality(t_minirt *rt)
+{
+	const float	fact = 0.01;
+
+	rt->max_quality = (t_quality){
+		.ray_depth = 5,
+		.quality = 1,
+		.region = (t_vec2){rt->dimensions.x * fact, rt->dimensions.y * fact},
+		.aa.size = 5,
+	};
+	rt->max_quality.aa.scale = 1 / (double)(
+			rt->max_quality.aa.size * rt->max_quality.aa.size);
+	rt->min_quality = (t_quality){
+		.ray_depth = 2,
+		.quality = 0.1,
+		.region = rt->dimensions,
+		.aa = (t_aa){1, 1}
+	};
+	rt->cur_quality = &rt->min_quality;
+	return ;
+}
 
 static t_rgb	get_pixel_color(t_minirt *rt, int x, int y)
 {
