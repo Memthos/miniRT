@@ -6,14 +6,14 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 10:51:41 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/08 10:11:31 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 16:38:42 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RANDOM_H
 # define RANDOM_H
 
-int	random_number(void);
+int		random_number(void);
 
 double	random_normed_double(void);
 
