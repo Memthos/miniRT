@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 13:02:44 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/08 10:51:48 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/12 12:27:17 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_obj_ret
 bool	hit_sphere(t_ray *ray, t_obj *sphere, t_interval i, t_hit_point *p);
 bool	hit_cylinder(t_ray *ray, t_obj *cylinder, t_interval i, t_hit_point *p);
 bool	hit_plane(t_ray *ray, t_obj *plane, t_interval i, t_hit_point *p);
+bool	hit_light(t_ray *ray, t_obj *light, t_interval i, t_hit_point *p);
 
 void	move_object(t_minirt *rt);
 void	rotate_object(t_minirt *rt);
