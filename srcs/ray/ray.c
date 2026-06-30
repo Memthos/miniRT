@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:37:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/30 13:33:31 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 15:25:46 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_rgb	ray_color(t_minirt *rt, t_ray *ray, t_uint max_depth)
 	if (0 == max_depth)
 		return ((t_rgb){0, 0, 0});
 	if (!ray_hit_object(rt, ray, i, &p))
-		return (vec_scale(rt->ambient_light.color, 0));
+		return (rt->ambient_light.color);
 	emission_c = p.mat.emit(&p);
 	if (p.mat.scatter(ray, &reflect, &p))
 	{
