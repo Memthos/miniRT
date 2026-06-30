@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:24:04 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/08 15:41:54 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 13:45:31 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_minirt	*rt_init(t_minirt *rt)
 	mlx_window_create_info	info;
 
 	rt->should_render = true;
+	rt->size_changed = true;
 	rt->aspect_ratio = 16.0 / 9.0;
 	rt->sensibility = 0.1;
 	rt->sensibility_rot = 0.005;

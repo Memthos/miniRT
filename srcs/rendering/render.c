@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:04:09 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/28 11:50:19 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 13:55:46 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	rt_render(t_minirt *rt, bool restart)
 	{
 		pos.x = 0;
 		pos.y = 0;
+		rt->size_changed = false;
 	}
 	render_region(rt, pos);
 	++pos.x;

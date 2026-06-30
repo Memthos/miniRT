@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 11:11:05 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/09 14:18:18 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/30 13:34:32 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	move_object(t_minirt *rt)
 
 	if (rt->mv_params.selected->type != CYLINDER
 		&& rt->mv_params.selected->type != PLANE
-		&& rt->mv_params.selected->type != SPHERE)
+		&& rt->mv_params.selected->type != SPHERE
+		&& rt->mv_params.selected->type != POINT_LIGHT)
 		return ;
 	ft_bzero(&mouse_pos, sizeof(int [2]));
 	mlx_mouse_get_pos(rt->context, &mouse_pos[0], &mouse_pos[1]);
@@ -105,7 +106,6 @@ void	scale_object(t_minirt *rt)
 	double	scale;
 	t_vec2	dist_data;
 
-	ft_bzero(&mouse_pos, sizeof(int [2]));
 	mlx_mouse_get_pos(rt->context, &mouse_pos[0], &mouse_pos[1]);
 	scale = vec_magnitude(vec_sub(rt->mv_params.selected->u_obj.plane.position,
 				rt->camera.pos)) / rt->camera.focal_length;
