@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects_parser.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:51:05 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/09 11:17:06 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/06/29 11:15:52 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	rt_parse_point_light(const t_string *line, t_minirt *rt)
 	t_string		endptr;
 
 	endptr = NULL;
-	obj = (t_obj){.type = POINT_LIGHT};
+	obj = (t_obj){.type = POINT_LIGHT, .hit = &hit_light};
 	data = ft_split(*line + 1, "\t\n\v\f\r ");
 	if (ft_string_tab_len(data) != 3)
 		use_status(FAILURE);
@@ -135,5 +135,6 @@ void	rt_parse_point_light(const t_string *line, t_minirt *rt)
 		ft_putendl_fd("Error\nError in file ambient light line", 2);
 	if (use_status(ERR_GET) != SUCCESS)
 		return ;
+	obj.mat = mat_emission(vec_scale((t_rgb){obj.u_obj.point_light.brightness, obj.u_obj.point_light.brightness, obj.u_obj.point_light.brightness}, 10));
 	rt_add_array_slot(&rt->lights, &obj);
 }
