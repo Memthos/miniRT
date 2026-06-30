@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 12:26:14 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/29 12:05:21 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/30 17:54:00 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ bool	hit_light(t_ray *ray, t_obj *light, t_interval i, t_hit_point *p)
 	double	h;
 	double	root;
 	t_vec3	normal;
-	const double	diameter = 1;
 
 	oc = vec_sub(light->u_obj.point_light.position, ray->origin);
 	b = vec_dot(ray->dir, oc);
-	h = diameter * diameter * 0.25
+	h = 0.25
 		- vec_squared_magnitude(vec_sub(oc, vec_scale(ray->dir, b)));
 	if (h < 0)
 		return (false);
@@ -47,8 +46,7 @@ bool	hit_light(t_ray *ray, t_obj *light, t_interval i, t_hit_point *p)
 		return (false);
 	p->t = root;
 	p->point = ray_at(ray, p->t);
-	normal = vec_scale(vec_sub(p->point, light->u_obj.point_light.position),
-			2.0 / diameter);
+	normal = vec_scale(vec_sub(p->point, light->u_obj.point_light.position), 2);
 	p->front = vec_dot(ray->dir, normal) < 0;
 	if (p->front)
 		p->normal = normal;
