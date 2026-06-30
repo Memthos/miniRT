@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/06 14:34:20 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/08 09:57:45 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/06/29 10:03:31 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,16 @@
 static bool	lambertian_scatter(t_ray *in, t_ray *out, t_hit_point *p)
 {
 	const t_vec3	scatter_dir = random_surface_vec3(p->normal);
-	// const t_vec3	scatter_dir = vec_add(p->normal, random_unit_vec3());
 
 	(void)in;
 	*out = (t_ray){p->point, scatter_dir};
 	return (true);
+}
+
+static t_rgb	lambertian_emit(t_hit_point *p)
+{
+	(void)p;
+	return ((t_rgb){0, 0, 0});
 }
 
 t_material	mat_lambertian(t_rgb col)
@@ -28,5 +33,6 @@ t_material	mat_lambertian(t_rgb col)
 
 	m.col = col;
 	m.scatter = &lambertian_scatter;
+	m.emit = &lambertian_emit;
 	return (m);
 }
