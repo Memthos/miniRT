@@ -6,7 +6,7 @@
 /*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:54 by juperrin          #+#    #+#             */
-/*   Updated: 2026/05/19 15:21:54 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/07/01 13:52:52 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ void	rt_quit(t_minirt *rt)
 	mlx_destroy_image(rt->context, rt->render);
 	mlx_destroy_window(rt->context, rt->window);
 	mlx_destroy_context(rt->context);
-	return ;
+	exit(0);
 }
