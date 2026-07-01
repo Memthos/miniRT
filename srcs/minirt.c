@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/07/01 08:34:14 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/07/01 14:44:00 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,13 @@ t_status	minirt(const t_string file)
 	rt = (t_minirt){0};
 	rt_parser(file, &rt);
 	if (SUCCESS != use_status(ERR_GET))
+	{
+		if (rt.geos.size > 0)
+			free(rt.geos.objs);
+		if (rt.lights.size > 0)
+			free(rt.lights.objs);
 		return (use_status(ERR_GET));
+	}
 	rt_init(&rt);
 	mlx_loop(rt.context);
 	rt_quit(&rt);

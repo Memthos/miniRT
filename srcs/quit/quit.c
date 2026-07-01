@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:54 by juperrin          #+#    #+#             */
-/*   Updated: 2026/07/01 14:32:53 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/07/01 14:41:20 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,9 @@ void	rt_quit(t_minirt *rt)
 		mlx_destroy_window(rt->context, rt->window);
 	if (rt->context)
 		mlx_destroy_context(rt->context);
+	if (rt->geos.size > 0)
+		free(rt->geos.objs);
+	if (rt->lights.size > 0)
+		free(rt->lights.objs);
 	exit(0);
 }
