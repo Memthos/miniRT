@@ -46,4 +46,4 @@ We also used the work of [Sebastian Lague](https://github.com/SebLague), especia
 - https://youtu.be/C1H4zIiCOaI
 - https://youtu.be/wA1KVZ1eOuA
 
-AI was used to see how some mathematical calculations like ray collision with a cylinder or a plane works, and for 3D space rotation and translation, because we didn't wanted to use matrixes and quaternions.
+AI was used to see how some mathematical calculations like ray collision with a cylinder or a plane works, and for 3D space rotation and translation, because we didn't want to use matrixes and quaternions.
