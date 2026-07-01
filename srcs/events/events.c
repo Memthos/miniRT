@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/30 18:27:09 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/07/01 08:34:06 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,43 +25,17 @@ static void	window_hook(int event, void *param)
 	{
 		mlx_loop_end(rt->context);
 		mlx_get_window_size(rt->context, rt->window, &size_x, &size_y);
-		rt->dimensions = (t_vec2){size_x, size_y};
+		rt->dimension = (t_vec2){size_x, size_y};
 		mlx_destroy_image(rt->context, rt->render);
 		rt->render = mlx_new_image(
 				rt->context,
-				rt->dimensions.x,
-				rt->dimensions.y);
+				rt->dimension.x,
+				rt->dimension.y);
 		render_set_quality(rt);
 		rt->size_changed = true;
 		mlx_loop(rt->context);
 	}
 	return ;
-}
-
-static void	get_hit_obj(t_minirt *rt, t_ray *ray, const t_interval i)
-{
-	t_interval		_i;
-	t_hit_point		tmp;
-	t_uint			index;
-
-	_i = i;
-	index = 0;
-	while (index < rt->geos.size || index < rt->lights.size)
-	{
-		if (index < rt->geos.size
-			&& rt->geos.objs[index].hit(ray, &rt->geos.objs[index], _i, &tmp))
-		{
-			_i.max = tmp.t;
-			rt->mv_params.selected = &rt->geos.objs[index];
-		}
-		if (index < rt->lights.size && rt->lights.objs[index].hit(
-				ray, &rt->lights.objs[index], _i, &tmp))
-		{
-			_i.max = tmp.t;
-			rt->mv_params.selected = &rt->lights.objs[index];
-		}
-		++index;
-	}
 }
 
 void	mousewheel_hook(int key, void *param)
@@ -90,7 +64,6 @@ static void	mouseup_hook(int key, void *param)
 	int					mouse_pos[2];
 	const t_interval	i = {0, 100};
 	t_point3			pixel_point;
-	t_ray				ray;
 
 	rt = (t_minirt *)param;
 	if (KEY_MOUSE_WHEEL == key)
@@ -110,9 +83,7 @@ static void	mouseup_hook(int key, void *param)
 	pixel_point = vec_add(rt->camera.viewport.nw_pixel,
 			vec_add(vec_scale(rt->camera.viewport.delta_x, mouse_pos[0]),
 				vec_scale(rt->camera.viewport.delta_y, mouse_pos[1])));
-	ray = (t_ray){rt->camera.pos, vec_sub(pixel_point, rt->camera.pos)};
-	rt->mv_params.selected = NULL;
-	get_hit_obj(rt, &ray, i);
+	get_hit_obj(rt, pixel_point, i);
 }
 
 static void	mousedown_hook(int key, void *param)

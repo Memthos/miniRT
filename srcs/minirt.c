@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:17:41 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/30 13:54:24 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/07/01 08:34:14 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,28 @@ static int	check_file(t_string s)
 	return (use_status(SUCCESS));
 }
 
+void	movement_update(t_minirt *rt)
+{
+	mouse_update(rt);
+	if (!rt->mv_params.moving || !rt->mv_params.selected)
+		return ;
+	else if (MOVE == rt->mv_params.move_mode)
+		move_object(rt);
+	else if (ROTATE == rt->mv_params.move_mode)
+		rotate_object(rt);
+	else if (SCALE == rt->mv_params.move_mode)
+		scale_object(rt);
+}
+
 void	rt_loop(void *param)
 {
 	t_minirt	*rt;
 
 	rt = (t_minirt *)param;
 	rt->delta_t = get_delta_time();
-	mouse_update(rt);
-	if (true == rt->mv_params.moving && NULL != rt->mv_params.selected)
-	{
-		if (MOVE == rt->mv_params.move_mode)
-			move_object(rt);
-		else if (ROTATE == rt->mv_params.move_mode)
-			rotate_object(rt);
-		else if (SCALE == rt->mv_params.move_mode)
-			scale_object(rt);
-	}
-	if (false == camera_is_moving(&rt->camera) && false == rt->mv_params.moving && !rt->mouse.rotating)
+	movement_update(rt);
+	if (!camera_is_moving(&rt->camera) && !rt->mv_params.moving
+		&& !rt->mouse.rotating)
 	{
 		if (rt->cur_quality == &rt->min_quality || rt->should_render)
 		{
@@ -64,14 +69,15 @@ void	rt_loop(void *param)
 			if (rt->cur_quality == &rt->min_quality)
 			{
 				rt->cur_quality = &rt->max_quality;
-				camera_update(&rt->camera, rt->cur_quality->aa, rt->delta_t, rt->dimensions);
+				camera_update(&rt->camera, rt->cur_quality->aa, rt->delta_t,
+					rt->dimension);
 			}
 			rt_render(rt, rt->size_changed);
 		}
 		return ;
 	}
 	rt->cur_quality = &rt->min_quality;
-	camera_update(&rt->camera, rt->cur_quality->aa, rt->delta_t, rt->dimensions);
+	camera_update(&rt->camera, rt->cur_quality->aa, rt->delta_t, rt->dimension);
 	rt_render(rt, true);
 	return ;
 }

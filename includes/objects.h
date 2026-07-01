@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 13:02:44 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/12 12:27:17 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/07/01 08:25:32 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,7 @@ bool	hit_light(t_ray *ray, t_obj *light, t_interval i, t_hit_point *p);
 void	move_object(t_minirt *rt);
 void	rotate_object(t_minirt *rt);
 void	scale_object(t_minirt *rt);
+
+void	get_hit_obj(t_minirt *rt, t_point3 pixel_point, const t_interval i);
 
 #endif

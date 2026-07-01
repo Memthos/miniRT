@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 16:04:09 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/30 17:57:31 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/07/01 08:34:06 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	render_set_quality(t_minirt *rt)
 	rt->max_quality = (t_quality){
 		.ray_depth = 10,
 		.quality = 1,
-		.region = (t_vec2){rt->dimensions.x * fact, rt->dimensions.y * fact},
+		.region = (t_vec2){rt->dimension.x * fact, rt->dimension.y * fact},
 		.aa.size = 25,
 	};
 	rt->max_quality.aa.scale = 1 / (double)(
@@ -27,7 +27,7 @@ void	render_set_quality(t_minirt *rt)
 	rt->min_quality = (t_quality){
 		.ray_depth = 2,
 		.quality = 0.1,
-		.region = rt->dimensions,
+		.region = rt->dimension,
 		.aa = (t_aa){1, 1}
 	};
 	rt->cur_quality = &rt->min_quality;
@@ -124,12 +124,12 @@ void	rt_render(t_minirt *rt, bool restart)
 	}
 	render_region(rt, pos);
 	++pos.x;
-	if (pos.x * rt->cur_quality->region.x >= rt->dimensions.x)
+	if (pos.x * rt->cur_quality->region.x >= rt->dimension.x)
 	{
 		pos.x = 0;
 		++pos.y;
 	}
-	if (pos.y * rt->cur_quality->region.y >= rt->dimensions.y)
+	if (pos.y * rt->cur_quality->region.y >= rt->dimension.y)
 	{
 		pos.x = 0;
 		pos.y = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 10:34:23 by juperrin          #+#    #+#             */
-/*   Updated: 2026/06/30 18:22:49 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/07/01 08:34:06 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ void	mouse_init(t_minirt *rt)
 static bool	mouse_teleport(t_minirt *rt, const t_vec2 border, int x, int y)
 {
 	if (x <= border.x || y <= border.y
-		|| x >= rt->dimensions.x - border.x - 1
-		|| y >= rt->dimensions.y - border.y - 1)
+		|| x >= rt->dimension.x - border.x - 1
+		|| y >= rt->dimension.y - border.y - 1)
 	{
 		if (x <= border.x)
 			mlx_mouse_move(rt->context, rt->window,
-				rt->dimensions.x - border.x - 2, y);
+				rt->dimension.x - border.x - 2, y);
 		if (y <= border.y)
 			mlx_mouse_move(rt->context, rt->window, x,
-				rt->dimensions.y - border.y - 2);
-		if (x >= rt->dimensions.x - border.x - 1)
+				rt->dimension.y - border.y - 2);
+		if (x >= rt->dimension.x - border.x - 1)
 			mlx_mouse_move(rt->context, rt->window, border.x + 1, y);
-		if (y >= rt->dimensions.y - border.y - 1)
+		if (y >= rt->dimension.y - border.y - 1)
 			mlx_mouse_move(rt->context, rt->window, x, border.y + 1);
 		mlx_mouse_get_pos(rt->context, &x, &y);
 		rt->mouse.oldpos.x = x;

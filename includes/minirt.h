@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 22:53:00 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/30 16:50:47 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/07/01 08:34:06 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_minirt
 	double			aspect_ratio;
 	double			sensibility_rot;
 	double			sensibility;
-	t_vec2			dimensions;
+	t_vec2			dimension;
 	t_mouse_state	mouse;
 	t_quality		max_quality;
 	t_quality		min_quality;

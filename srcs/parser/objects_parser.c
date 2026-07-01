@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects_parser.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 13:51:05 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/30 18:27:58 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/07/01 08:41:35 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	rt_parse_cylinder(const t_string *line, t_minirt *rt)
 	rt_parse_color(&data[4], &obj.mat.col);
 	ft_free_tab(&data);
 	if (use_status(ERR_GET) == FAILURE)
-		ft_putendl_fd("Error\nError in file sphere line", 2);
+		ft_putendl_fd("Error\nError in file cylinder line", 2);
 	if (use_status(ERR_GET) != SUCCESS)
 		return ;
 	obj.mat = mat_lambertian(obj.mat.col);
@@ -133,7 +133,7 @@ void	rt_parse_point_light(const t_string *line, t_minirt *rt)
 	rt_parse_color(&data[2], &obj.mat.col);
 	ft_free_tab(&data);
 	if (use_status(ERR_GET) == FAILURE)
-		ft_putendl_fd("Error\nError in file light line", 2);
+		ft_putendl_fd("Error\nError in file point light line", 2);
 	if (use_status(ERR_GET) != SUCCESS)
 		return ;
 	brightness = obj.u_obj.point_light.brightness;

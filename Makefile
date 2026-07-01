@@ -6,7 +6,7 @@ SRCS:=	minirt.c init.c quit.c \
 		camera.c interval.c \
 		ray.c render.c \
 		lambertian.c emission.c \
-		sphere.c cylinder.c plane.c movements.c light.c \
+		sphere.c cylinder.c plane.c movements.c selection.c light.c \
 		add_array_slot.c \
 		parser.c data_parser.c objects_parser.c \
 		random.c utime.c \
