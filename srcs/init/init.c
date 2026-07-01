@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:24:04 by juperrin          #+#    #+#             */
-/*   Updated: 2026/07/01 13:05:30 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/07/01 13:53:59 by juperrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_minirt	*rt_init(t_minirt *rt)
+static void	set_constants(t_minirt *rt)
 {
 	const int				width = 1280;
-	mlx_window_create_info	info;
 
 	rt->should_render = true;
 	rt->intensity = 1;
@@ -25,7 +24,17 @@ t_minirt	*rt_init(t_minirt *rt)
 	rt->sensibility_rot = 0.005;
 	rt->dimension = (t_vec2){width, width / rt->aspect_ratio};
 	render_set_quality(rt);
+	return ;
+}
+
+t_minirt	*rt_init(t_minirt *rt)
+{
+	mlx_window_create_info	info;
+
+	set_constants(rt);
 	rt->context = mlx_init();
+	if (NULL == rt->context)
+		rt_quit(rt);
 	ft_bzero(&info, sizeof(info));
 	info.title = "miniRT";
 	info.width = rt->dimension.x;
@@ -33,6 +42,8 @@ t_minirt	*rt_init(t_minirt *rt)
 	info.is_resizable = true;
 	rt->window = mlx_new_window(rt->context, &info);
 	rt->render = mlx_new_image(rt->context, rt->dimension.x, rt->dimension.y);
+	if (NULL == rt->window || NULL == rt->render)
+		rt_quit(rt);
 	mouse_init(rt);
 	camera_init(&rt->camera, rt->cur_quality->aa, rt->dimension);
 	rt_init_events(rt);
