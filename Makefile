@@ -28,20 +28,11 @@ CFLAGS:=-Werror -Wextra -Wall -I$(INCLUDES) -g
 
 NAME:=miniRT
 
-all: $(OBJSDIR).manda
-bonus: $(OBJSDIR).bonus
+all: $(NAME)
 
-$(OBJSDIR).manda: $(OBJS) | $(LIBTOOL) $(MACROLIBX)
-	@rm -rf $(NAME) $(OBJSDIR).bonus
+$(NAME): $(OBJS) | $(LIBTOOL) $(MACROLIBX)
 	@$(CC) $(CFLAGS) -o $(NAME) $^ $(LIBS)
-	@touch $(OBJSDIR).manda
 	@echo "Finished compiling miniRT"
-
-$(OBJSDIR).bonus: $(OBJS) | $(LIBTOOL) $(MACROLIBX)
-	@rm -rf $(NAME) $(OBJSDIR).manda
-	@$(CC) $(CFLAGS) -o $(NAME) $^ $(LIBS)
-	@touch $(OBJSDIR).bonus
-	@echo "Finished compiling miniRT bonuses"
 
 $(OBJSDIR)%.o: %.c | $(OBJSDIR)
 	@$(CC) $(CFLAGS) -o $@ -c $<
@@ -72,4 +63,4 @@ re: fclean all
 norme:
 	@norminette includes srcs libs/lib_tools | grep -v OK
 
-.PHONY: all bonus clean fclean re norme
+.PHONY: all clean fclean re norme
