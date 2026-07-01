@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juperrin <juperrin@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:54 by juperrin          #+#    #+#             */
-/*   Updated: 2026/07/01 13:52:52 by juperrin         ###   ########.fr       */
+/*   Updated: 2026/07/01 14:32:53 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ void	rt_quit(t_minirt *rt)
 {
 	if (NULL == rt)
 		return ;
-	mlx_destroy_image(rt->context, rt->render);
-	mlx_destroy_window(rt->context, rt->window);
-	mlx_destroy_context(rt->context);
+	if (rt->render)
+		mlx_destroy_image(rt->context, rt->render);
+	if (rt->window)
+		mlx_destroy_window(rt->context, rt->window);
+	if (rt->context)
+		mlx_destroy_context(rt->context);
 	exit(0);
 }

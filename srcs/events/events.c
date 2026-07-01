@@ -6,7 +6,7 @@
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:21:51 by juperrin          #+#    #+#             */
-/*   Updated: 2026/07/01 08:34:06 by mperrine         ###   ########.fr       */
+/*   Updated: 2026/07/01 14:34:06 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	window_hook(int event, void *param)
 				rt->context,
 				rt->dimension.x,
 				rt->dimension.y);
+		if (NULL == rt->render)
+			rt_quit(rt);
 		render_set_quality(rt);
 		rt->size_changed = true;
 		mlx_loop(rt->context);
