@@ -15,7 +15,7 @@
 
 # include "camera.h"
 # include "material.h"
-# include "../libs/lib_tools/includes/math_ops.h"
+# include "math_ops.h"
 
 typedef struct s_vec3	t_point3;
 typedef struct s_vec3	t_rgb;

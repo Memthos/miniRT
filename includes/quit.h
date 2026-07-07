@@ -13,7 +13,7 @@
 #ifndef QUIT_H
 # define QUIT_H
 
-# include "minirt.h"
+typedef struct s_minirt	t_minirt;
 
 /**
  * @brief Destroys allocated ressources in rt.

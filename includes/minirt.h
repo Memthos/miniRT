@@ -40,6 +40,7 @@
 # include "mouse.h"
 # include "random.h"
 # include "utime.h"
+# include "math_ops.h"
 
 typedef struct s_minirt
 {

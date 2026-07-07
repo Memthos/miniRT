@@ -1,5 +1,5 @@
 INCLUDES:=includes
-VPATH:=srcs:srcs/init:srcs/quit:srcs/camera:srcs/interval:srcs/ray:srcs/rendering:srcs/materials:srcs/objects:srcs/events:srcs/mouse:srcs/array:srcs/parser:srcs/random:srcs/utime:srcs/projection
+VPATH:=srcs:srcs/init:srcs/quit:srcs/camera:srcs/interval:srcs/ray:srcs/rendering:srcs/materials:srcs/objects:srcs/events:srcs/mouse:srcs/array:srcs/parser:srcs/random:srcs/utime:srcs/projection:srcs/math_ops
 
 SRCS:=	minirt.c init.c quit.c \
 		events.c mouse.c move_events.c\
@@ -10,7 +10,10 @@ SRCS:=	minirt.c init.c quit.c \
 		add_array_slot.c \
 		parser.c data_parser.c objects_parser.c \
 		random.c utime.c \
-		projection.c
+		projection.c \
+		ft_strtod.c ft_round.c math_utils.c vec_add_sub_scale.c \
+		vec_dot_cross.c vec_magnitude.c vec_min_max.c vec_normalize.c \
+		vec_rotate.c
 
 OBJSDIR:=objs/
 OBJS:=$(addprefix $(OBJSDIR), $(SRCS:.c=.o))

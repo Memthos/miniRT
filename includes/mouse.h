@@ -13,7 +13,7 @@
 #ifndef MOUSE_H
 # define MOUSE_H
 
-# include "../libs/lib_tools/includes/math_ops.h"
+# include "math_ops.h"
 
 typedef struct s_mouse_state
 {

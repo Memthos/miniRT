@@ -13,6 +13,8 @@
 #ifndef RANDOM_H
 # define RANDOM_H
 
+# include "math_ops.h"
+
 double	random_double(double min, double max);
 
 t_vec3	random_vec3(double min, double max);

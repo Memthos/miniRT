@@ -13,7 +13,7 @@
 #ifndef CAMERA_H
 # define CAMERA_H
 
-# include "../libs/lib_tools/includes/math_ops.h"
+# include "math_ops.h"
 # include "utime.h"
 
 typedef struct s_vec3	t_point3;

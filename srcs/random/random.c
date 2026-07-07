@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libs/lib_tools/includes/math_ops.h"
+#include "minirt.h"
 #include <math.h>
 #include <sys/time.h>
 #include <stdio.h>

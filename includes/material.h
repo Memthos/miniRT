@@ -13,7 +13,7 @@
 #ifndef MATERIAL_H
 # define MATERIAL_H
 
-# include "../libs/lib_tools/includes/math_ops.h"
+# include "math_ops.h"
 
 typedef struct s_ray		t_ray;
 typedef struct s_hit_point	t_hit_point;

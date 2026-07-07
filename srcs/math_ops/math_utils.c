@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   projection.h                                       :+:      :+:    :+:   */
+/*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mperrine <mperrine@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/04 09:16:16 by mperrine          #+#    #+#             */
-/*   Updated: 2026/06/04 09:17:02 by mperrine         ###   ########.fr       */
+/*   Created: 2026/05/14 16:19:10 by mperrine          #+#    #+#             */
+/*   Updated: 2026/05/14 16:19:33 by mperrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROJECTION_H
-# define PROJECTION_H
+#include "math_ops.h"
 
-# include "math_ops.h"
-
-typedef struct s_minirt		t_minirt;
-
-t_vec2	project_to_screen(t_minirt *rt, t_vec3 pos);
-
-#endif
+double	deg_to_rad(void)
+{
+	return (M_PI / 180.0);
+}
